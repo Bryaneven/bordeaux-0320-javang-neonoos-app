@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GuideResultsComponent implements OnInit {
 
-  constructor() { }
+  activities: any[] = [];
+
+  constructor(/* private service: Service */) { }
 
   ngOnInit(): void {
+    /*
+    requete.findAll().subscribe(
+      data => this.activities = data;
+    )
+    */
   }
 
 }
