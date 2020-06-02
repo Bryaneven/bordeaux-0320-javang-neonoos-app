@@ -1,0 +1,26 @@
+.overallContainer {
+  width: 90%;
+}
+.resultCard {
+  max-width: 100%;
+  & img {
+    max-width: 150px;
+    border-radius: 15px;
+    margin: 15px;
+  }
+}
+
+.resultHeader {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  & * {
+    margin: 15px;
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
