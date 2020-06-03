@@ -1,3 +1,5 @@
+@import '../../../../assets/scss/variables';
+
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +12,7 @@
   left: 0;
   width: 250px;
   height: 100%;
-  background: #e5e5e5;
+  background: $background-color;
 }
 
 .sideNav ul {
@@ -30,7 +32,7 @@
 
 .sideNav ul li a:hover{
   padding-left: 50px;
-  color: #4880ff;
+  color: $neonoos-color;
 }
 
 .sideNav ul a mat-icon {
