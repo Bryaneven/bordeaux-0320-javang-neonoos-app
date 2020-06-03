@@ -127,6 +127,6 @@
   },
   "defaultProject": "neonoos-app",
   "cli": {
-    "analytics": "33249162-ec6d-4833-8dfc-c094b4f5008b"
+    "analytics": false
   }
 }
