@@ -1,31 +1,17 @@
-<mat-card class="resultCard">
-  <div class="overallContainer">
+<div class="overallContainer">
+  <mat-card class="resultCard">
     <div class="resultHeader">
-      <mat-card-title>Wakeboarding - Canoeing</mat-card-title>
-      <mat-card-subtitle><a href="">Edit</a></mat-card-subtitle>
+      <div class="titles">
+        <mat-card-title class="title">Wakeboarding - Canoeing</mat-card-title>
+        <mat-card-subtitle class="subtitle"><a href="">Edit</a></mat-card-subtitle>
+      </div>
       <div class="buttonContainer">
         <button class="deleteButton" mat-stroked-button color="warn">Delete</button>
       </div>
     </div>
-    <div *ngFor="let activity of activities" class="resultImg">
-      <img mat-card-image src="https://via.placeholder.com/150"> <!-- {{activity.img}} -->
-      <img mat-card-image src="https://via.placeholder.com/150">
-      <img mat-card-image src="https://via.placeholder.com/150">
-      <img mat-card-image src="https://via.placeholder.com/150">
-      <img mat-card-image src="https://via.placeholder.com/150">
-      <img mat-card-image src="https://via.placeholder.com/150">
-      <img mat-card-image src="https://via.placeholder.com/150">
-      <img mat-card-image src="https://via.placeholder.com/150">
-      <img mat-card-image src="https://via.placeholder.com/150">
-      <img mat-card-image src="https://via.placeholder.com/150">
-      <img mat-card-image src="https://via.placeholder.com/150">
-      <img mat-card-image src="https://via.placeholder.com/150">
-      <img mat-card-image src="https://via.placeholder.com/150">
-      <img mat-card-image src="https://via.placeholder.com/150">
-      <img mat-card-image src="https://via.placeholder.com/150">
-      <img mat-card-image src="https://via.placeholder.com/150">
-      <img mat-card-image src="https://via.placeholder.com/150">
-      <img mat-card-image src="https://via.placeholder.com/150">
+    <div class="resultImg">
+      <img *ngFor="let activity of activities" mat-card-image src="{{activity}}">
     </div>
-  </div>
 </mat-card>
+
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivityService } from 'src/app/shared/services/activity.service';
 
 @Component({
   selector: 'neo-guide-results',
@@ -9,14 +10,10 @@ export class GuideResultsComponent implements OnInit {
 
   activities: any[] = [];
 
-  constructor(/* private service: Service */) { }
+  constructor(private activityService: ActivityService) { }
 
   ngOnInit(): void {
-    /*
-    requete.findAll().subscribe(
-      data => this.activities = data;
-    )
-    */
+    this.activities = this.activityService.getImgActivites();
   }
 
 }
