@@ -1,0 +1,49 @@
+
+
+
+#div-header{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    background-color: white;
+}
+
+#div-logo-neonoos {
+    overflow:hidden;
+    width: 150px;
+    height: auto;
+    
+  }
+
+  #div-main-search{
+  
+    overflow:hidden;
+    //padding: 10px;
+    font-size: 17px;
+     
+}
+
+#main-search-bar{
+    background-color: grayscale($color: #D3D3D3);
+}
+
+#div-img-user {
+     
+    overflow:hidden;
+    border-radius:50% ; // rounded image
+    width:90px;
+    height:90px;
+     
+  }
+
+  img, button {
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+  }
+
+  

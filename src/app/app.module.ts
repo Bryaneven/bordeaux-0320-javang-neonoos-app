@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { MatSliderModule } from '@angular/material/slider';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,8 +23,8 @@ import { HeaderComponent } from './shared/components/header/header.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatIconModule,
-    HttpClientModule
+    MatSliderModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
