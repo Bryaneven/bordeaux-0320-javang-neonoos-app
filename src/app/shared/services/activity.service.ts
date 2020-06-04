@@ -6,29 +6,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ActivityService {
 
-  tempDataActivitiesImg: string[] = [
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-  ]
-
   constructor(private httpClient: HttpClient) { }
 
   getImgActivites() {
-    return this.tempDataActivitiesImg;
+    return this.httpClient.get<any>('http://localhost:8080/activities');
   }
 }

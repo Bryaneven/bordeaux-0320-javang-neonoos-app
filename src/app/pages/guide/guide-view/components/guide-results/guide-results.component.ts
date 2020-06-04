@@ -8,12 +8,32 @@ import { ActivityService } from 'src/app/shared/services/activity.service';
 })
 export class GuideResultsComponent implements OnInit {
 
-  activities: any[] = [];
+  activities: any[] = [
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+  ];
 
   constructor(private activityService: ActivityService) { }
 
   ngOnInit(): void {
-    this.activities = this.activityService.getImgActivites();
+    /* this.activityService.getImgActivites().subscribe(
+      data => this.activities = data
+    ); */
   }
 
 }
