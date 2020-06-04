@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivityService } from 'src/app/shared/services/activity.service';
 
 @Component({
   selector: 'neo-guide-results',
@@ -7,9 +8,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GuideResultsComponent implements OnInit {
 
-  constructor() { }
+  activities: any[] = [
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+    ('https://via.placeholder.com/150'),
+  ];
+
+  constructor(private activityService: ActivityService) { }
 
   ngOnInit(): void {
+    /* this.activityService.getImgActivites().subscribe(
+      data => this.activities = data
+    ); */
   }
 
 }

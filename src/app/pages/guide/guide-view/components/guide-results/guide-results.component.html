@@ -1,1 +1,17 @@
-<p>guide-results works!</p>
+<div class="overallContainer">
+  <mat-card class="resultCard">
+    <div class="resultHeader">
+      <div class="titles">
+        <mat-card-title class="title">Wakeboarding - Canoeing</mat-card-title>
+        <mat-card-subtitle class="subtitle"><a href="">Edit</a></mat-card-subtitle>
+      </div>
+      <div class="buttonContainer">
+        <button class="deleteButton" mat-stroked-button color="warn">Delete</button>
+      </div>
+    </div>
+    <div class="resultImg">
+      <img *ngFor="let activity of activities" mat-card-image src="{{activity}}">
+    </div>
+</mat-card>
+
+</div>

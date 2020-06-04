@@ -1,0 +1,48 @@
+@import '../../../../../../assets/scss/variables';
+
+.overallContainer {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.resultCard {
+  max-width: 95%;
+}
+
+.resultHeader {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  & * {
+    margin: 10px;
+  }
+}
+
+.titles {
+  display: contents;
+}
+
+.resultImg {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  & img {
+    max-width: 150px;
+    border-radius: 15px;
+    margin: 10px;
+  }
+  & img:hover {
+    transform: scale(1.15);
+    transition-duration: 0.3s;
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  & button {
+    padding: 0;
+  }
+}
