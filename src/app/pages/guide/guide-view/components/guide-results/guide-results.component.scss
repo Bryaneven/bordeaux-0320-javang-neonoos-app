@@ -30,6 +30,10 @@
     border-radius: 15px;
     margin: 10px;
   }
+  & img:hover {
+    transform: scale(1.15);
+    transition-duration: 0.3s;
+  }
 }
 
 .buttonContainer {
