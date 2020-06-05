@@ -19,11 +19,14 @@ import { HeaderComponent } from './shared/components/header/header.component';
     NavbarComponent,
     HeaderComponent
   ],
+  
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSliderModule
+    MatSliderModule,
+    MatIconModule
+
 
   ],
   providers: [],
