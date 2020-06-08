@@ -14,12 +14,25 @@ import { GuideResultsComponent } from './guide-view/components/guide-results/gui
 import { GuideViewComponent } from './guide-view/guide-view.component';
 import { HeaderComponent } from 'src/app/shared/components/header/header.component';
 import { NavbarComponent } from 'src/app/shared/components/navbar/navbar.component';
-import { GuideEditComponent } from './guide-edit/guide-edit.component';
+import { GuideEditViewComponent } from './guide-edit-view/guide-edit-view.component';
+import { GuideEditComponent } from './guide-edit-view/components/guide-edit/guide-edit.component';
+import { GuideTravelComponent } from './guide-edit-view/components/guide-travel/guide-travel.component';
+import { GuidePoiComponent } from './guide-edit-view/components/guide-poi/guide-poi.component';
 
 
 
 @NgModule({
-  declarations: [GuideFilterComponent, GuideResultsComponent, GuideViewComponent, HeaderComponent, NavbarComponent, GuideEditComponent],
+  declarations: [
+    GuideFilterComponent,
+    GuideResultsComponent,
+    GuideViewComponent,
+    HeaderComponent,
+    NavbarComponent,
+    GuideEditViewComponent,
+    GuideEditComponent,
+    GuideTravelComponent,
+    GuidePoiComponent
+  ],
   imports: [
     CommonModule,
     GuideRoutingModule,
