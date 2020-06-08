@@ -12,11 +12,13 @@ import { GuideRoutingModule } from './guide-routing.module';
 import { GuideFilterComponent } from './guide-view/components/guide-filter/guide-filter.component';
 import { GuideResultsComponent } from './guide-view/components/guide-results/guide-results.component';
 import { GuideViewComponent } from './guide-view/guide-view.component';
+import { HeaderComponent } from 'src/app/shared/components/header/header.component';
+import { NavbarComponent } from 'src/app/shared/components/navbar/navbar.component';
 
 
 
 @NgModule({
-  declarations: [GuideFilterComponent, GuideResultsComponent, GuideViewComponent],
+  declarations: [GuideFilterComponent, GuideResultsComponent, GuideViewComponent, HeaderComponent, NavbarComponent],
   imports: [
     CommonModule,
     GuideRoutingModule,
