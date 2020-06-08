@@ -31,9 +31,6 @@ export class GuideResultsComponent implements OnInit {
   constructor(private activityService: ActivityService) { }
 
   ngOnInit(): void {
-    /* this.activityService.getImgActivites().subscribe(
-      data => this.activities = data
-    ); */
   }
 
 }
