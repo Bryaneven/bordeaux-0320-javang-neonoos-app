@@ -27,10 +27,10 @@
 
   #div-main-search-bar{
     display: block;
-    width: 50%;
+    width: 60%;
     height: 100%;
     overflow:hidden;
-    //font-size: 17px;
+    padding:0.2%;
   }
 
     form{  
@@ -39,15 +39,17 @@
     }
 
       #main-search-bar{
-        width: 100%;
+        width: 90%;
         height: 50%;
         margin-top:1%;
-        padding-left: 3%;
+        padding-left: 2%;
         background-color: grayscale($color: #e5e5e5);
         background-image: url('src/assets/img/Icons/search--v1.png');
         background-size: 2%;
         background-repeat: no-repeat;
         background-position: left;
+        border-radius: 5px;
+        outline: none;
       }
 
 
