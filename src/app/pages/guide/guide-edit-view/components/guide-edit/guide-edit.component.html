@@ -1,1 +1,50 @@
-<p>guide-edit works!</p>
+<div class="guide-header">
+  <div class="guide-left">
+    <div class="guide-title">
+      <h2>Guide Surf</h2>
+      <button mat-button>Editer</button>
+    </div>
+    <h3>sections du guide</h3>
+    <div class="guide-section">
+      <mat-chip-list>
+        <mat-chip>test</mat-chip>
+      </mat-chip-list>
+    </div>
+    <h3>tags</h3>
+    <div class="guide-tags">
+      <mat-chip-list>
+        <mat-chip>#test</mat-chip>
+      </mat-chip-list>
+    </div>
+  </div>
+  <div class="guide-right">
+    <div class="guide-right-header">
+      <span>Supprimer la section</span>
+      <button mat-button>Cancel</button>
+      <button mat-stroked-button>Terminé</button>
+    </div>
+    <h3>
+      guide picture
+    </h3>
+    <img src="https://picsum.photos/300/150" alt="">
+  </div>
+</div>
+
+
+
+
+<!-- Form-->
+<div class="forms">
+  <h3>short description</h3>
+  <mat-form-field>
+    <mat-label></mat-label>
+    <input matInput #input maxlength="140">
+    <mat-hint align="end">{{input.value?.length || 0}}/140</mat-hint>
+  </mat-form-field>
+  <h3>long description</h3>
+  <mat-form-field appearance="fill">
+    <mat-label></mat-label>
+    <textarea matInput></textarea>
+  </mat-form-field>
+</div>
+
