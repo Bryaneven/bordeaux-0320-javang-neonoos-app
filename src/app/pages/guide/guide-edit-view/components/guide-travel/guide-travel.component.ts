@@ -7,6 +7,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GuideTravelComponent implements OnInit {
 
+  trips: any[] = [
+    {id: 1, country: "Maroc"},
+    {id: 2, country: "France"}
+  ]
+
+  /** toggle start discover **/
+
+  // step = 0;
+
+  // setStep(index: number) {
+  //   this.step = index;
+  // }
+
+  // nextStep() {
+  //   this.step++;
+  // }
+
+  // prevStep() {
+  //   this.step--;
+  // }
+
   constructor() { }
 
   ngOnInit(): void {

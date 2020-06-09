@@ -8,6 +8,11 @@ import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDividerModule} from '@angular/material/divider';
+
 
 import { GuideRoutingModule } from './guide-routing.module';
 import { GuideFilterComponent } from './guide-view/components/guide-filter/guide-filter.component';
@@ -42,7 +47,11 @@ import { GuidePoiComponent } from './guide-edit-view/components/guide-poi/guide-
     MatIconModule,
     MatInputModule,
     MatChipsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatSlideToggleModule,
+    MatExpansionModule,
+    MatSelectModule,
+    MatDividerModule
   ]
 })
 export class GuideModule { }
