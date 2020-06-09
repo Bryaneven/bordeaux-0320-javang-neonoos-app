@@ -6,7 +6,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-
+import {MatChipsModule} from '@angular/material/chips';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { GuideRoutingModule } from './guide-routing.module';
 import { GuideFilterComponent } from './guide-view/components/guide-filter/guide-filter.component';
@@ -39,7 +40,9 @@ import { GuidePoiComponent } from './guide-edit-view/components/guide-poi/guide-
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    MatChipsModule,
+    MatFormFieldModule
   ]
 })
 export class GuideModule { }
