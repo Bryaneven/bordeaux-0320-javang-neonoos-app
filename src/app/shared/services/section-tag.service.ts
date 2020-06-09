@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class SectionTagService {
 
   // tslint:disable-next-line: ban-types
-  tmpDataSectionsTag: Object = {
+  tmpDataSectionsTag = {
     1: 'Water Sking',
     2: 'Wakeboarding-Canoeing'
 
