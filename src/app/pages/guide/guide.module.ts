@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { GoogleMapsModule } from '@angular/google-maps'
 
 // Material
 import {MatCardModule} from '@angular/material/card';
@@ -51,7 +52,8 @@ import { GuidePoiComponent } from './guide-edit-view/components/guide-poi/guide-
     MatSlideToggleModule,
     MatExpansionModule,
     MatSelectModule,
-    MatDividerModule
+    MatDividerModule,
+    GoogleMapsModule
   ]
 })
 export class GuideModule { }
