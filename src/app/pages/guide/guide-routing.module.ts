@@ -14,7 +14,11 @@ const routes: Routes = [
     component: GuideViewComponent
   },
   {
-    path: 'edit',
+    path: 'new',
+    component: GuideEditViewComponent
+  },
+  {
+    path: 'edit/:id',
     component: GuideEditViewComponent
   }
 ];
