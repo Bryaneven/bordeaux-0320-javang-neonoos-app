@@ -25,6 +25,7 @@ import { GuideEditViewComponent } from './guide-edit-view/guide-edit-view.compon
 import { GuideEditComponent } from './guide-edit-view/components/guide-edit/guide-edit.component';
 import { GuideTravelComponent } from './guide-edit-view/components/guide-travel/guide-travel.component';
 import { GuidePoiComponent } from './guide-edit-view/components/guide-poi/guide-poi.component';
+import { GuidePoiSearchSectionComponent } from './guide-edit-view/components/guide-poi-search-section/guide-poi-search-section.component';
 
 
 
@@ -38,7 +39,8 @@ import { GuidePoiComponent } from './guide-edit-view/components/guide-poi/guide-
     GuideEditViewComponent,
     GuideEditComponent,
     GuideTravelComponent,
-    GuidePoiComponent
+    GuidePoiComponent,
+    GuidePoiSearchSectionComponent
   ],
   imports: [
     CommonModule,
