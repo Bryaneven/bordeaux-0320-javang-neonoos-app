@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  APIURI:"https://bordeaux-java-0320-pj3-neonoos-api.javarover.wilders.dev/"
+  // APIURI:"https://bordeaux-java-0320-pj3-neonoos-api.javarover.wilders.dev/",
+  APIURI:"http://localhost:8080/"
 };
 
 /*
@@ -15,3 +16,4 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+
