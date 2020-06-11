@@ -46,7 +46,11 @@
     <div class="guide-right-header">
       <span>Supprimer la section</span>
       <button mat-button>Cancel</button>
+<<<<<<< HEAD
       <button mat-stroked-button (click)="save()">Terminé</button>
+=======
+      <button mat-stroked-button>Terminé</button>
+>>>>>>> a6bef49f9417c3b2b575c3e6eaa0527ae0e436b7
     </div>
     <h3>
       guide picture
@@ -63,13 +67,21 @@
   <h3>short description</h3>
   <mat-form-field>
     <mat-label></mat-label>
+<<<<<<< HEAD
     <input matInput #input maxlength="140" [(ngModel)]="guide.short_description">
+=======
+    <input matInput #input maxlength="140">
+>>>>>>> a6bef49f9417c3b2b575c3e6eaa0527ae0e436b7
     <mat-hint align="end">{{input.value?.length || 0}}/140</mat-hint>
   </mat-form-field>
   <h3>long description</h3>
   <mat-form-field appearance="fill">
     <mat-label></mat-label>
+<<<<<<< HEAD
     <textarea matInput [(ngModel)]="guide.description"></textarea>
+=======
+    <textarea matInput></textarea>
+>>>>>>> a6bef49f9417c3b2b575c3e6eaa0527ae0e436b7
   </mat-form-field>
 </div>
 
