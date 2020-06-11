@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  APIURI:"https://bordeaux-java-0320-pj3-neonoos-api.javarover.wilders.dev/"
 };
 
 /*
