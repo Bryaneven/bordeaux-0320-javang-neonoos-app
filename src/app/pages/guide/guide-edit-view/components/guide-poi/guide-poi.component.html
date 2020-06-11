@@ -1,0 +1,35 @@
+<div class="poi">
+  <div class="poi-detail">
+    <h2>Points du guide</h2>
+    <div class="flex">
+      <div class="poi-image">
+        <img src="https://picsum.photos/75/75" alt="">
+      </div>
+      <div class="poi-content">
+        <h4>Aguas Calientes</h4>
+        <h5>Pérou, Amérique du sud</h5>
+      </div>
+      <div class="toggle">
+        <mat-slide-toggle>Ajouté</mat-slide-toggle>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+  <div class="map">
+    <google-map width=100%></google-map>
+  </div>
+</div>
+
+
+<mat-accordion>
+  <!-- <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)"> -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <span class="panel-title">Section recherche</span>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-divider></mat-divider>
+    <neo-guide-poi-search-section></neo-guide-poi-search-section>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { GuideViewComponent } from './guide-view/guide-view.component';
+import { GuideEditViewComponent } from './guide-edit-view/guide-edit-view.component';
 
 
 const routes: Routes = [
@@ -11,6 +12,14 @@ const routes: Routes = [
   {
     path: 'view',
     component: GuideViewComponent
+  },
+  {
+    path: 'new',
+    component: GuideEditViewComponent
+  },
+  {
+    path: 'edit/:id',
+    component: GuideEditViewComponent
   }
 ];
 

@@ -1,0 +1,87 @@
+<div class="guide-header">
+  <div class="guide-left">
+    <div class="guide-title">
+      <h2 *ngIf= "show">{{guide.title}}</h2>
+      <mat-form-field *ngIf= "!show">
+        <input matInput type="text" [(ngModel)]="guide.title">
+      </mat-form-field>
+      <button (click)="show = !show" mat-button>Editer</button>
+    </div>
+    <h3>sections du guide</h3>
+    <div class="guide-section">
+      <mat-form-field>
+        <mat-chip-list #chipList>
+          <mat-chip
+            *ngFor="let hashtag of guide.hashtags"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="remove(hashtag)">
+            {{hashtag.name}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            #hashtagInput
+            [formControl]="hashtagCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList">
+        </mat-chip-list>
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="selected($event)">
+          <mat-option
+            *ngFor="let hashtag of filteredHashtags | async" [value]="hashtag">
+            {{hashtag.name}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    <h3>tags</h3>
+    <div class="guide-tags">
+      <mat-chip-list>
+        <mat-chip>#test</mat-chip>
+      </mat-chip-list>
+    </div>
+  </div>
+  <div class="guide-right">
+    <div class="guide-right-header">
+      <span>Supprimer la section</span>
+      <button mat-button>Cancel</button>
+<<<<<<< HEAD
+      <button mat-stroked-button (click)="save()">Terminé</button>
+=======
+      <button mat-stroked-button>Terminé</button>
+>>>>>>> a6bef49f9417c3b2b575c3e6eaa0527ae0e436b7
+    </div>
+    <h3>
+      guide picture
+    </h3>
+    <img src="https://picsum.photos/300/150" alt="">
+  </div>
+</div>
+
+
+
+
+<!-- Form-->
+<div class="forms">
+  <h3>short description</h3>
+  <mat-form-field>
+    <mat-label></mat-label>
+<<<<<<< HEAD
+    <input matInput #input maxlength="140" [(ngModel)]="guide.short_description">
+=======
+    <input matInput #input maxlength="140">
+>>>>>>> a6bef49f9417c3b2b575c3e6eaa0527ae0e436b7
+    <mat-hint align="end">{{input.value?.length || 0}}/140</mat-hint>
+  </mat-form-field>
+  <h3>long description</h3>
+  <mat-form-field appearance="fill">
+    <mat-label></mat-label>
+<<<<<<< HEAD
+    <textarea matInput [(ngModel)]="guide.description"></textarea>
+=======
+    <textarea matInput></textarea>
+>>>>>>> a6bef49f9417c3b2b575c3e6eaa0527ae0e436b7
+  </mat-form-field>
+</div>
+
