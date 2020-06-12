@@ -77,9 +77,10 @@ export class GuideEditComponent implements OnInit {
 
   // Mat-chips method
   selected(event: MatAutocompleteSelectedEvent): void {
+    console.log(this.guide);
     this.guide.hashtags.push({
       id: event.option.value.id,
-      name: event.option.value.name
+      name: event.option.value.name,
     });
     this.hashtagInput.nativeElement.value = '';
     this.hashtagCtrl.setValue(null);
@@ -88,17 +89,18 @@ export class GuideEditComponent implements OnInit {
   }
 
   remove(hashtag: Hashtag) : void {
-    let deletedHashtagIntoGuide: Guide;
     for (let i=0; i<this.guide.hashtags.length; i++) {
+      console.log(this.guide.hashtags[i].id);
+      console.log(hashtag.id);
       if (this.guide.hashtags[i].id === hashtag.id) {
-        deletedHashtagIntoGuide.hashtags = this.guide.hashtags.splice(i,1);
+        this.guide.hashtags.splice(i,1);
         break;
       }
     }
+    console.log(this.guide);
   }
 
   listenChanges() {
-
     this.filteredHashtags = this.hashtagCtrl.valueChanges.pipe(
       startWith(null),
       map(hashtag => {
@@ -120,6 +122,7 @@ export class GuideEditComponent implements OnInit {
   //Persistence
   save() {
     this.guideService.patch(this.guide, this.guideId).subscribe()
+
   }
 
 
