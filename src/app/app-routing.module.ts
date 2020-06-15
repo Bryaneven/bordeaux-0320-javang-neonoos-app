@@ -15,6 +15,12 @@ const routes: Routes = [
     )
   },
   {
+    path: 'place',
+    loadChildren: () => import('../app/pages/place/place.module').then(
+      m => m.PlaceModule
+    )
+  },
+  {
     path: '**',
     redirectTo: 'home'
   }
