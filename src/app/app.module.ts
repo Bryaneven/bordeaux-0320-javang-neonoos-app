@@ -5,15 +5,21 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { HeaderComponent } from './shared/components/header/header.component';
 
 // Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
+import {MatInputModule} from '@angular/material/input';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
+    NavbarComponent,
+    HeaderComponent,
   ],
 
   imports: [
@@ -22,9 +28,9 @@ import { MatSliderModule } from '@angular/material/slider';
     BrowserAnimationsModule,
     HttpClientModule,
     MatSliderModule,
-    MatIconModule
-
-
+    MatIconModule,
+    MatInputModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

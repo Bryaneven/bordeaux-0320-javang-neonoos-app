@@ -21,8 +21,6 @@ import { GuideRoutingModule } from './guide-routing.module';
 import { GuideFilterComponent } from './guide-view/components/guide-filter/guide-filter.component';
 import { GuideResultsComponent } from './guide-view/components/guide-results/guide-results.component';
 import { GuideViewComponent } from './guide-view/guide-view.component';
-import { HeaderComponent } from 'src/app/shared/components/header/header.component';
-import { NavbarComponent } from 'src/app/shared/components/navbar/navbar.component';
 import { GuideEditViewComponent } from './guide-edit-view/guide-edit-view.component';
 import { GuideEditComponent } from './guide-edit-view/components/guide-edit/guide-edit.component';
 import { GuideTravelComponent } from './guide-edit-view/components/guide-travel/guide-travel.component';
@@ -36,8 +34,6 @@ import { GuidePoiSearchSectionComponent } from './guide-edit-view/components/gui
     GuideFilterComponent,
     GuideResultsComponent,
     GuideViewComponent,
-    HeaderComponent,
-    NavbarComponent,
     GuideEditViewComponent,
     GuideEditComponent,
     GuideTravelComponent,
