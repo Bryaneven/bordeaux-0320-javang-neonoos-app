@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GoogleMapsModule } from '@angular/google-maps';
+ 
 import { ReactiveFormsModule } from '@angular/forms';
 
 // Material
@@ -59,8 +59,8 @@ import { GuidePoiSearchSectionComponent } from './guide-edit-view/components/gui
     MatDividerModule,
     FormsModule,
     MatAutocompleteModule,
-    ReactiveFormsModule,
-    GoogleMapsModule
+    ReactiveFormsModule
+   
   ]
 })
 export class GuideModule { }
