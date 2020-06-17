@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // APIURI:"https://bordeaux-java-0320-pj3-neonoos-api.javarover.wilders.dev/",
-  APIURI:"http://localhost:8080/"
+  APIURI:"http://localhost:8080/api/v1/"
 };
 
 /*
