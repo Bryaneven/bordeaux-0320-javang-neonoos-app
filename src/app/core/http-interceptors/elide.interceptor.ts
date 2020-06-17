@@ -12,20 +12,20 @@ export class ElideInterceptor implements HttpInterceptor {
     const modified = req.clone({setHeaders: { "Content-Type": "application/vnd.api+json" }});
 
     return next.handle(modified)
-    .pipe(
-      map((event: HttpEvent<any>) => {
-        if (event instanceof HttpResponse) {
-          return event.clone({
-            body: this.elideFormat(event.body)
-          });
-        }
-        return event
-      })
-    );
+    // .pipe(
+    //   map((event: HttpEvent<any>) => {
+    //     if (event instanceof HttpResponse) {
+    //       return event.clone({
+    //         body: this.elideFormat(event.body)
+    //       });
+    //     }
+    //     return event
+    //   })
+    // );
   }
 
-  private elideFormat(body: Elide) {
-    const newBody = body.data.attributes;
-    return newBody;
-  }
+  // private elideFormat(body: Elide) {
+  //   const newBody = body.data.attributes;
+  //   return newBody;
+  // }
 }
