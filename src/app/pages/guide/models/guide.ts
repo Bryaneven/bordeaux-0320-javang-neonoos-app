@@ -1,5 +1,4 @@
-import { Trip } from './trip';
-import { Hashtag } from './hashtag';
+
 
 export class Guide {
     created: string;
