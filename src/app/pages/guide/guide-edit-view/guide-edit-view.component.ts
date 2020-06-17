@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GuideService } from '../services/guide/guide.service';
 
 @Component({
   selector: 'neo-guide-edit-view',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GuideEditViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private guideService: GuideService) { }
 
   ngOnInit(): void {
   }

@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
-import { Guide } from 'src/app/shared/models/guide';
-import { GuideService } from 'src/app/shared/services/guide.service';
+import { Guide } from 'src/app/pages/guide/models/guide';
+import { GuideService } from 'src/app/pages/guide/services/guide/guide.service';
 import { SectionTagService } from 'src/app/shared/services/section-tag.service';
 import { Hashtag } from 'src/app/shared/models/hashtag';
 import { FormControl } from '@angular/forms';
@@ -42,7 +42,7 @@ export class GuideEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRouteParam();
-    this.getHashtags();
+    // this.getHashtags();
   }
 
   getRouteParam() {
@@ -63,61 +63,59 @@ export class GuideEditComponent implements OnInit {
     this.subscription.add(getOneGuideSubscription);
   }
 
-  getHashtags() {
-    const getHashtagsSubscription = this.sectionTagService.getAll().subscribe((hashtags: Hashtag[]) => {
-      if (hashtags) this.allHashtags = hashtags;
-      this.hashtagCtrl.setValue(null);
+  // getHashtags() {
+  //   const getHashtagsSubscription = this.sectionTagService.getAll().subscribe((hashtags: Hashtag[]) => {
+  //     if (hashtags) this.allHashtags = hashtags;
+  //     this.hashtagCtrl.setValue(null);
 
-      if (!this.filteredHashtags) {
-        this.listenChanges();
-      }
-    });
-    this.subscription.add(getHashtagsSubscription);
-  }
+  //     if (!this.filteredHashtags) {
+  //       this.listenChanges();
+  //     }
+  //   });
+  //   this.subscription.add(getHashtagsSubscription);
+  // }
 
-  // Mat-chips method
-  selected(event: MatAutocompleteSelectedEvent): void {
-    console.log(this.guide);
-    this.guide.hashtags.push({
-      id: event.option.value.id,
-      name: event.option.value.name,
-    });
-    this.hashtagInput.nativeElement.value = '';
-    this.hashtagCtrl.setValue(null);
-    console.log(this.guide);
+  // // Mat-chips method
+  // selected(event: MatAutocompleteSelectedEvent): void {
+  //   this.guide.hashtags.push({
+  //     id: event.option.value.id,
+  //     name: event.option.value.name
+  //   });
+  //   this.hashtagInput.nativeElement.value = '';
+  //   this.hashtagCtrl.setValue(null);
+  //   console.log(this.guide);
 
-  }
+  // }
 
-  remove(hashtag: Hashtag) : void {
-    for (let i=0; i<this.guide.hashtags.length; i++) {
-      console.log(this.guide.hashtags[i].id);
-      console.log(hashtag.id);
-      if (this.guide.hashtags[i].id === hashtag.id) {
-        this.guide.hashtags.splice(i,1);
-        break;
-      }
-    }
-    console.log(this.guide);
-  }
+  // remove(hashtag: Hashtag) : void {
+  //   let deletedHashtagIntoGuide: Guide;
+  //   for (let i=0; i<this.guide.hashtags.length; i++) {
+  //     if (this.guide.hashtags[i].id === hashtag.id) {
+  //       deletedHashtagIntoGuide.hashtags = this.guide.hashtags.splice(i,1);
+  //       break;
+  //     }
+  //   }
+  // }
 
-  listenChanges() {
-    this.filteredHashtags = this.hashtagCtrl.valueChanges.pipe(
-      startWith(null),
-      map(hashtag => {
-        if (hashtag && typeof hashtag === 'string') {
-          return this._filter(hashtag);
-        }
-        if (this.allHashtags && this.allHashtags.length > 0) {
-          return this.allHashtags.slice();
-        }
-      })
-    );
-  }
+  // listenChanges() {
 
-  _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.allHashtags.filter(hashtag => hashtag.name.toLowerCase().indexOf(filterValue) === 0);
-  }
+  //   this.filteredHashtags = this.hashtagCtrl.valueChanges.pipe(
+  //     startWith(null),
+  //     map(hashtag => {
+  //       if (hashtag && typeof hashtag === 'string') {
+  //         return this._filter(hashtag);
+  //       }
+  //       if (this.allHashtags && this.allHashtags.length > 0) {
+  //         return this.allHashtags.slice();
+  //       }
+  //     })
+  //   );
+  // }
+
+  // _filter(value: string): string[] {
+  //   const filterValue = value.toLowerCase();
+  //   return this.allHashtags.filter(hashtag => hashtag.name.toLowerCase().indexOf(filterValue) === 0);
+  // }
 
   //Persistence
   save() {

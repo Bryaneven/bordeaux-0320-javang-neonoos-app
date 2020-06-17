@@ -1,19 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { HeaderComponent } from './shared/components/header/header.component';
 
 // Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
+import {MatInputModule} from '@angular/material/input';
+import {FormsModule} from '@angular/forms';
+import { ElideInterceptor } from './core/http-interceptors/elide.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
+    NavbarComponent,
+    HeaderComponent,
   ],
 
   imports: [
@@ -22,11 +29,17 @@ import { MatSliderModule } from '@angular/material/slider';
     BrowserAnimationsModule,
     HttpClientModule,
     MatSliderModule,
-    MatIconModule
-
-
+    MatIconModule,
+    MatInputModule,
+    FormsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ElideInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
