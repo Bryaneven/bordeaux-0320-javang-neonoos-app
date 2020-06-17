@@ -1,5 +1,3 @@
-
-
 export class Guide {
     created: string;
     description: string;

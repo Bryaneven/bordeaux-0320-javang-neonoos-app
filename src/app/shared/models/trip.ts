@@ -1,4 +1,4 @@
-import { Guide } from './guide';
+import { Guide } from '../../pages/guide/models/guide';
 
 export class Trip {
   id: number;
