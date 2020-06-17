@@ -58,7 +58,9 @@ export class GuideEditComponent implements OnInit {
 
   getOneGuide(id: number) {
     const getOneGuideSubscription = this.guideService.getById(id).subscribe((guide: Guide) => {
-      if (guide) this.guide = guide;
+      if (guide) {
+       this.guide = guide;
+      }
     });
     this.subscription.add(getOneGuideSubscription);
   }
