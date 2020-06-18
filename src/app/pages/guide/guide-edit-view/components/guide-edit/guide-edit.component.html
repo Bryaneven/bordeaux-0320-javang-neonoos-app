@@ -1,7 +1,7 @@
 <div class="guide-header">
   <div class="guide-left">
     <div class="guide-title">
-      <h2 *ngIf= "show">{{guide.data.attributes.title}}</h2>
+      <h2 *ngIf= "show && guide">{{guide.data.attributes.title}}</h2>
       <mat-form-field *ngIf= "!show">
         <input matInput type="text" [(ngModel)]="guide.data.attributes.title">
       </mat-form-field>
@@ -61,13 +61,13 @@
 <!-- Form-->
 <div class="forms">
   <h3>short description</h3>
-  <mat-form-field>
+  <mat-form-field *ngIf="guide">
     <mat-label></mat-label>
-    <input matInput #input maxlength="140" [(ngModel)]="guide.data.attributes.short_description">
+    <input  matInput #input maxlength="140" [(ngModel)]="guide.data.attributes.short_description">
     <mat-hint align="end">{{input.value?.length || 0}}/140</mat-hint>
   </mat-form-field>
   <h3>long description</h3>
-  <mat-form-field appearance="fill">
+  <mat-form-field *ngIf="guide" appearance="fill">
     <mat-label></mat-label>
     <textarea matInput [(ngModel)]="guide.data.attributes.description"></textarea>
   </mat-form-field>
