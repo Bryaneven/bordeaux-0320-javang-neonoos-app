@@ -41,7 +41,6 @@ export class Guide {
           weight: 1,
         }
       }
-    }
   }
 
 }
