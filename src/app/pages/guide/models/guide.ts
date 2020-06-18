@@ -25,7 +25,7 @@ export class Guide {
 
 
   constructor(guide?: Guide){
-    Object.assign(this, guide)
+    Object.assign(this, guide);
   }
 
 }
