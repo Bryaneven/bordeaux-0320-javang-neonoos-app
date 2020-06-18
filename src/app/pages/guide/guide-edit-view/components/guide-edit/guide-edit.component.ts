@@ -21,6 +21,7 @@ export class GuideEditComponent implements OnInit {
   show: boolean = true;
   guideId: number;
   @Input() guide: Guide;
+  @Input() newGuide = new Guide();
 
   //Mat-chips
   visible = true;
@@ -51,6 +52,8 @@ export class GuideEditComponent implements OnInit {
         const routeGuideId = Number(params.get('id'));
         this.guideId = routeGuideId;
         this.getOneGuide(this.guideId);
+      } else {
+        this.guide = this.newGuide;
       }
     });
     this.subscription.add(routerSubscription);
@@ -121,7 +124,11 @@ export class GuideEditComponent implements OnInit {
 
   //Persistence
   save() {
-    this.guideService.patch(this.guide, this.guideId).subscribe()
+    if (this.guideId) {
+      this.guideService.patch(this.guide, this.guideId).subscribe()
+    } else {
+      this.guideService.post(this.guide).subscribe()
+    }
   }
 
 
