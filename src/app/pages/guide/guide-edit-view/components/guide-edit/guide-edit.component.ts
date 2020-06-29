@@ -9,6 +9,7 @@ import { FormControl } from '@angular/forms';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { startWith, map } from 'rxjs/operators';
+import { RootObject } from 'src/app/shared/models/root-object.model';
 
 @Component({
   selector: 'neo-guide-edit',
@@ -18,10 +19,10 @@ import { startWith, map } from 'rxjs/operators';
 export class GuideEditComponent implements OnInit {
 
   subscription = new Subscription();
-  show: boolean = true;
+  show = true;
   guideId: number;
-  @Input() guide: Guide;
-  @Input() newGuide = new Guide();
+  @Input() guide?: RootObject<Guide> = new RootObject<Guide>(Guide);
+
 
   //Mat-chips
   visible = true;
@@ -43,7 +44,10 @@ export class GuideEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRouteParam();
+
     // this.getHashtags();
+
+
   }
 
   getRouteParam() {
@@ -53,20 +57,27 @@ export class GuideEditComponent implements OnInit {
         this.guideId = routeGuideId;
         this.getOneGuide(this.guideId);
       } else {
-        this.guide = this.newGuide;
+        // this.guide = this.newGuide;
       }
     });
     this.subscription.add(routerSubscription);
   }
 
   getOneGuide(id: number) {
-    const getOneGuideSubscription = this.guideService.getById(id).subscribe((guide: Guide) => {
+    const getOneGuideSubscription = this.guideService.getById(id).subscribe((guide: RootObject<Guide>) => {
       if (guide) {
        this.guide = guide;
+       console.log(this.guide);
+
       }
     });
     this.subscription.add(getOneGuideSubscription);
+
+
+
   }
+
+
 
   // getHashtags() {
   //   const getHashtagsSubscription = this.sectionTagService.getAll().subscribe((hashtags: Hashtag[]) => {
@@ -125,9 +136,9 @@ export class GuideEditComponent implements OnInit {
   //Persistence
   save() {
     if (this.guideId) {
-      this.guideService.patch(this.guide, this.guideId).subscribe()
+      this.guideService.patch(this.guide, this.guideId).subscribe();
     } else {
-      this.guideService.post(this.guide).subscribe()
+      this.guideService.post(this.guide).subscribe();
     }
   }
 
