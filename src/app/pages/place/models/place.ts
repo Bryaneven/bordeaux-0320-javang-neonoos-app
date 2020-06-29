@@ -1,7 +1,3 @@
-import { CreateTracingOptions } from 'trace_events';
-import { Hashtag } from 'src/app/shared/models/hashtag';
-import { Guide } from '../../guide/models/guide';
-
 export class Place {
   id: number;
   name: string;
@@ -30,11 +26,11 @@ export class Place {
   updated?: Date;
   searchables?: string;
   barometer?: number;
-  hashtags: Hashtag[];
+  // hashtags: Hashtag[];
   'area_level'?: number;
   'base_rating'?: string;
   weight: number;
-  guides: Guide[];
+  // guides: Guide[];
   'total_stars': number;
 
   constructor(place: Place) {
