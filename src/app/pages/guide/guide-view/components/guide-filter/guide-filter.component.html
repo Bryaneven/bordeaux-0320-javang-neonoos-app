@@ -17,41 +17,15 @@
     </div>
 
     <div class="block-2">
-
       <div class="title">LISTE DES SECTIONS</div>
-
-      <div class="checkbox">
-
-          <div>
-              <input id="toggle1" type="checkbox">
-              <label for="toggle1">Water Sking</label>
+        <div *ngIf="hashtags" class="checkbox">
+          <div *ngFor="let tag of hashtags.data">
+            <div>
+              <input id="{{tag.attributes.name }}" type="checkbox">
+              <label for="{{tag.attributes.name}}">{{tag.attributes.name}}</label>
           </div>
-
-          <div>
-              <input id="toggle3" type="checkbox">
-              <label for="toggle3">Walkeboarding - Canoeing</label>
           </div>
-
-          <div>
-            <input id="toggle4" type="checkbox">
-            <label for="toggle4">Climbing</label>
-          </div>
-
-          <div>
-            <input id="toggle5" type="checkbox">
-            <label for="toggle5">Country Sports</label>
-          </div>
-
-          <div>
-            <input id="toggle6" type="checkbox">
-            <label for="toggle6">Kayaking - Caving</label>
-          </div>
-
-          <div>
-            <input id="toggle7" type="checkbox">
-            <label for="toggle7">Toggle me!</label>
-          </div>
-      </div>
+        </div>
     </div>
 
   </div>
