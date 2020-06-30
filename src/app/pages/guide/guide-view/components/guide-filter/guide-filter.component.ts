@@ -20,23 +20,23 @@ export class GuideFilterComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.hashtagservice.getAll().subscribe( (hashtags) => {
-      this.hashtags = hashtags;
-      console.log(hashtags);
-    });
-
-    this.hashtagservice.getById().subscribe((hashtag: RootObject<Hashtag>) => {
-      this.hashtag = hashtag;
-      console.log(hashtag);
-    });
   }
 
   onSearchChange(searchValue: string): void {
-    console.log(searchValue);
-
     this.hashtagservice.getByName(searchValue).subscribe( (hashtags) => {
       this.hashtags = hashtags;
-      console.log(hashtags);
      });
+  }
+
+  getHashtags() {
+    this.hashtagservice.getAll().subscribe( (hashtags) => {
+      this.hashtags = hashtags;
+    });
+  }
+
+  getOneHashtag() {
+    this.hashtagservice.getById().subscribe((hashtag: RootObject<Hashtag>) => {
+      this.hashtag = hashtag;
+    });
   }
 }
