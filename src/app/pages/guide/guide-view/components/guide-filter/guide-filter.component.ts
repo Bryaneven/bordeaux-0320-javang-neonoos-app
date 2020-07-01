@@ -11,12 +11,14 @@ import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
 })
 export class GuideFilterComponent implements OnInit {
 
+
+  constructor(private hashtagservice: HashtagService) { }
+
   @Input() hashtag?: RootObject<Hashtag> = new RootObject<Hashtag>(Hashtag);
   hashtags: RootObjectList<Hashtag>;
   hashtagsSearch: RootObjectList<Hashtag>;
 
-
-  constructor(private hashtagservice: HashtagService) { }
+  arrayHashtags = [];
 
   ngOnInit(): void {
 
@@ -38,5 +40,25 @@ export class GuideFilterComponent implements OnInit {
     this.hashtagservice.getById().subscribe((hashtag: RootObject<Hashtag>) => {
       this.hashtag = hashtag;
     });
+  }
+
+  checkbox($event: any) {
+
+    if ($event.target.checked === true) {
+        this.arrayHashtags.push([$event.target.value]);
+        console.log(this.arrayHashtags);
+    }
+
+    if ($event.target.checked === false) {
+      console.log($event.target.value);
+
+      for ( let i = 0; i < this.arrayHashtags.length; ++i ) {
+
+        console.log(this.arrayHashtags[i]);
+
+        console.log(this.arrayHashtags.indexOf(this.arrayHashtags[i]));
+
+      }
+    }
   }
 }

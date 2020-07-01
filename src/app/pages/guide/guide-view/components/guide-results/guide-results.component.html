@@ -15,3 +15,22 @@
 </mat-card>
 
 </div>
+
+
+<div class="overallContainer">
+  <mat-card class="resultCard">
+    <div class="resultHeader">
+      <div class="titles">
+        <mat-card-title>Wakeboarding - Canoeing</mat-card-title>
+      </div>
+      <div class="buttonContainer">
+        <button class="editButton" mat-stroked-button>Editer</button>
+        <button class="deleteButton" mat-stroked-button color="warn">Supprimer</button>
+      </div>
+    </div>
+    <div class="resultImg">
+      <img *ngFor="let activity of activities" mat-card-image src="{{activity}}">
+    </div>
+</mat-card>
+
+</div>

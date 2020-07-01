@@ -12,25 +12,9 @@ export class GuideResultsComponent implements OnInit {
     ('https://via.placeholder.com/150'),
     ('https://via.placeholder.com/150'),
     ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
   ];
 
   constructor(private activityService: ActivityService) { }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void { }
 }
