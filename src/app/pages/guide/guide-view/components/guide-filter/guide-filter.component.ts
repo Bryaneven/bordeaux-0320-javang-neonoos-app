@@ -14,7 +14,7 @@ export class GuideFilterComponent implements OnInit {
 
   constructor(private hashtagservice: HashtagService) { }
 
-  @Input() hashtag?: RootObject<Hashtag> = new RootObject<Hashtag>(Hashtag);
+  // @Input() hashtag?: RootObject<Hashtag> = new RootObject<Hashtag>(Hashtag);
   hashtags: RootObjectList<Hashtag>;
   hashtagsSearch: RootObjectList<Hashtag>;
 
@@ -25,39 +25,38 @@ export class GuideFilterComponent implements OnInit {
   }
 
   onSearchChange(searchValue: string): void {
-    this.hashtagservice.getByName(searchValue).subscribe( (hashtags) => {
+    this.hashtagservice.getByName(searchValue).subscribe((hashtags) => {
       this.hashtags = hashtags;
-     });
+    });
   }
 
   getHashtags() {
-    this.hashtagservice.getAll().subscribe( (hashtags) => {
+    this.hashtagservice.getAll().subscribe((hashtags) => {
       this.hashtags = hashtags;
     });
   }
 
-  getOneHashtag() {
+  /* getOneHashtag() {
     this.hashtagservice.getById().subscribe((hashtag: RootObject<Hashtag>) => {
       this.hashtag = hashtag;
     });
-  }
+  } */
 
   checkbox($event: any) {
 
     if ($event.target.checked === true) {
-        this.arrayHashtags.push([$event.target.value]);
-        console.log(this.arrayHashtags);
+      this.arrayHashtags.push($event.target.value);
+      console.log(this.arrayHashtags);
     }
 
     if ($event.target.checked === false) {
-      console.log($event.target.value);
 
-      for ( let i = 0; i < this.arrayHashtags.length; ++i ) {
+      for (let i = 0; i < this.arrayHashtags.length; i++) {
 
-        console.log(this.arrayHashtags[i]);
-
-        console.log(this.arrayHashtags.indexOf(this.arrayHashtags[i]));
-
+        if (this.arrayHashtags[i] === $event.target.value) {
+          this.arrayHashtags.splice(i, 1);
+          console.log(this.arrayHashtags);
+        }
       }
     }
   }
