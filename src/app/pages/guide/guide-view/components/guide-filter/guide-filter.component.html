@@ -21,7 +21,7 @@
         <div *ngIf="hashtags" class="checkbox">
           <div *ngFor="let tag of hashtags.data">
             <div>
-              <input id="{{tag.attributes.name }}" value="{{tag.attributes.name}}, {{tag.id}}" type="checkbox" (change)="checkbox($event)">
+              <input id="{{tag.attributes.name }}" type="checkbox" (change)="checkbox($event, tag)">
               <label for="{{tag.attributes.name}}">{{tag.attributes.name}}</label>
           </div>
           </div>

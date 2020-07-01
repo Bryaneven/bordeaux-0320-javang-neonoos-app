@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HashtagService } from '../../../services/hashtag/hashtag.service';
 import { Hashtag } from 'src/app/shared/models/hashtag';
-import { RootObject } from 'src/app/shared/models/root-object.model';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
 
 @Component({
@@ -9,12 +8,13 @@ import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
   templateUrl: './guide-filter.component.html',
   styleUrls: ['./guide-filter.component.scss']
 })
+
 export class GuideFilterComponent implements OnInit {
 
+  @Output() checkboxEvent = new EventEmitter();
 
   constructor(private hashtagservice: HashtagService) { }
 
-  // @Input() hashtag?: RootObject<Hashtag> = new RootObject<Hashtag>(Hashtag);
   hashtags: RootObjectList<Hashtag>;
   hashtagsSearch: RootObjectList<Hashtag>;
 
@@ -36,28 +36,20 @@ export class GuideFilterComponent implements OnInit {
     });
   }
 
-  /* getOneHashtag() {
-    this.hashtagservice.getById().subscribe((hashtag: RootObject<Hashtag>) => {
-      this.hashtag = hashtag;
-    });
-  } */
-
-  checkbox($event: any) {
+  checkbox($event: any, tag: Hashtag) {
 
     if ($event.target.checked === true) {
-      this.arrayHashtags.push($event.target.value);
-      console.log(this.arrayHashtags);
+      this.arrayHashtags.push(tag);
     }
 
     if ($event.target.checked === false) {
-
-      for (let i = 0; i < this.arrayHashtags.length; i++) {
-
-        if (this.arrayHashtags[i] === $event.target.value) {
-          this.arrayHashtags.splice(i, 1);
-          console.log(this.arrayHashtags);
-        }
-      }
+      const index = this.arrayHashtags.indexOf((h) => h.id === tag.id);
+      this.arrayHashtags.splice(index, 1);
     }
+
+    // inisialise un nouveau tableau:
+    this.arrayHashtags = [...this.arrayHashtags];
+    // Send CheckboxEvent
+    this.checkboxEvent.emit(this.arrayHashtags);
   }
 }
