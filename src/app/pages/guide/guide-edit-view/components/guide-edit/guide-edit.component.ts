@@ -46,8 +46,6 @@ export class GuideEditComponent implements OnInit {
     this.getRouteParam();
 
     // this.getHashtags();
-
-
   }
 
   getRouteParam() {
@@ -68,7 +66,6 @@ export class GuideEditComponent implements OnInit {
       if (guide) {
        this.guide = guide;
        console.log(this.guide);
-
       }
     });
     this.subscription.add(getOneGuideSubscription);
