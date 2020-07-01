@@ -12,7 +12,9 @@
       </div>
     </div>
     <div class="resultImg">
-      <img *ngFor="let activity of activities" mat-card-image src="{{activity}}">
+      <div *ngFor="let activity of activities">
+        <img  mat-card-image src="{{activity}}">
+      </div>
     </div>
   </mat-card>
 
