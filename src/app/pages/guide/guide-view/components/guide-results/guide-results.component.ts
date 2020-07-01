@@ -9,11 +9,10 @@ import { Hashtag } from 'src/app/shared/models/hashtag';
 })
 export class GuideResultsComponent implements OnInit {
 
-  private _hashtags: Hashtag[] = [];
+  _hashtags: Hashtag[] = [];
 
   @Input()
   set hashtags(hashtags: Hashtag[]) {
-    console.log(hashtags);
     this._hashtags = hashtags;
   }
 

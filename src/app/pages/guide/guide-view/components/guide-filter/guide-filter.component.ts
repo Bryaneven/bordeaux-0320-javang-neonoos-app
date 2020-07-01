@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { HashtagService } from '../../../services/hashtag/hashtag.service';
 import { Hashtag } from 'src/app/shared/models/hashtag';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
@@ -20,9 +20,7 @@ export class GuideFilterComponent implements OnInit {
 
   arrayHashtags = [];
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
   onSearchChange(searchValue: string): void {
     this.hashtagservice.getByName(searchValue).subscribe((hashtags) => {
@@ -38,16 +36,20 @@ export class GuideFilterComponent implements OnInit {
 
   checkbox($event: any, tag: Hashtag) {
 
+
     if ($event.target.checked === true) {
       this.arrayHashtags.push(tag);
     }
 
     if ($event.target.checked === false) {
-      const index = this.arrayHashtags.indexOf((h) => h.id === tag.id);
-      this.arrayHashtags.splice(index, 1);
+      for (let i = 0; i < this.arrayHashtags.length; i++) {
+        if (this.arrayHashtags[i].id === tag.id) {
+          this.arrayHashtags.splice(i, 1);
+        }
+      }
     }
 
-    // inisialise un nouveau tableau:
+    // inisialise un nouveau tableau depuis tableau exitant :
     this.arrayHashtags = [...this.arrayHashtags];
     // Send CheckboxEvent
     this.checkboxEvent.emit(this.arrayHashtags);
