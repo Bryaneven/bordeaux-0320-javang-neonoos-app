@@ -2,6 +2,7 @@ export class Data<T> {
   type: string;
   id: number;
   attributes: T;
+  relationships: {};
 
   constructor(constructor: new (input?: T)  => T, data?: Data<T>) {
     if (data) {
