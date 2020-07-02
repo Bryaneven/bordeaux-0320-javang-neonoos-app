@@ -11,6 +11,7 @@ import { startWith, map } from 'rxjs/operators';
 import { RootObject } from 'src/app/shared/models/root-object.model';
 import { HashtagService } from '../../../services/hashtag/hashtag.service';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
+import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'neo-guide-edit',
@@ -31,6 +32,7 @@ export class GuideEditComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   hashtagCtrl = new FormControl();
   allHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag);
+  guideHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag);
   filteredHashtags: Observable<any[]>;
 
   @ViewChild('hashtagInput') hashtagInput: ElementRef<HTMLInputElement>;
@@ -45,6 +47,7 @@ export class GuideEditComponent implements OnInit {
   ngOnInit(): void {
     this.getRouteParam();
     this.getHashtags();
+    this.getGuideHastags();
   }
 
   getRouteParam() {
@@ -86,17 +89,28 @@ export class GuideEditComponent implements OnInit {
     this.subscription.add(getHashtagsSubscription);
   }
 
-  // Mat-chips method
-  selected(event: MatAutocompleteSelectedEvent): void {
-    this.guide.data.relationships.hashtags.push({
-      id: event.option.value.id,
-      name: event.option.value.name
-    });
-    this.hashtagInput.nativeElement.value = '';
-    this.hashtagCtrl.setValue(null);
-    console.log(this.guide);
+  getGuideHastags() {
+    const getGuideHastagsSubscription = this.guideService.getHashtagsByGuide(this.guideId).subscribe((data: RootObjectList<Hashtag>) => {
+      if (data) {
+        this.guideHashtags = data;
+        console.log(this.guideHashtags);
 
+      }
+    });
+    this.subscription.add(getGuideHastagsSubscription);
   }
+
+  // Mat-chips method
+  // selected(event: MatAutocompleteSelectedEvent): void {
+  //   this.guideHashtags.data.push({
+  //     id: event.option.value.id,
+  //     name: event.option.value.name
+  //   });
+  //   this.hashtagInput.nativeElement.value = '';
+  //   this.hashtagCtrl.setValue(null);
+  //   console.log(this.guide);
+
+  // }
 
   // remove(hashtag: Hashtag) : void {
   //   let deletedHashtagIntoGuide: Guide;
@@ -129,7 +143,7 @@ export class GuideEditComponent implements OnInit {
     return this.allHashtags.data.filter(hashtag => hashtag.attributes.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  //Persistence
+  // Persistence
   save() {
     if (this.guideId) {
       this.guideService.patch(this.guide, this.guideId).subscribe();
