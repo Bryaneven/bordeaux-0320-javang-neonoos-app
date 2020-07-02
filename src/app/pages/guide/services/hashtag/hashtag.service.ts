@@ -29,10 +29,10 @@ export class HashtagService {
   }
 
   post(hashtag: RootObject<Hashtag>): Observable<RootObject<Hashtag>> {
-    return this.httpClient.post<RootObject<Hashtag>>(`${environment.APIURI}hashtag`, hashtag);
+    return this.httpClient.post<RootObject<Hashtag>>(`${environment.APIURI}hashtags`, hashtag);
   }
 
   createInstance(hashtag: RootObject<Hashtag>){
-    return new RootObject<Hashtag>(Hashtag, hashtag);
+    return new RootObject<Hashtag>(Hashtag, 'hashtags', hashtag);
   }
 }

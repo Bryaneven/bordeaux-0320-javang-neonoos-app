@@ -11,7 +11,7 @@ import { RootObject } from 'src/app/shared/models/root-object.model';
 })
 export class DialogBodyComponent implements OnInit {
 
-  @Input() hashtag?: RootObject<Hashtag> = new RootObject<Hashtag>(Hashtag);
+  hashtag?: RootObject<Hashtag> = new RootObject<Hashtag>(Hashtag, 'hashtags');
 
   constructor( public dialogRef: MatDialogRef<DialogBodyComponent>, private hashtagService: HashtagService ) { }
 
@@ -19,6 +19,7 @@ export class DialogBodyComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.hashtag);
     this.hashtagService.post(this.hashtag).subscribe();
   }
 
