@@ -28,6 +28,10 @@ export class HashtagService {
     .map((hashtag) => this.createInstance(hashtag)))); */
   }
 
+  post(hashtag: RootObject<Hashtag>): Observable<RootObject<Hashtag>> {
+    return this.httpClient.post<RootObject<Hashtag>>(`${environment.APIURI}hashtag`, hashtag);
+  }
+
   createInstance(hashtag: RootObject<Hashtag>){
     return new RootObject<Hashtag>(Hashtag, hashtag);
   }
