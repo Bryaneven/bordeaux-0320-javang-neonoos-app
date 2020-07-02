@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
- 
+
 import { ReactiveFormsModule } from '@angular/forms';
 
 // Material
@@ -56,7 +56,7 @@ import { GuidePoiSearchSectionComponent } from './guide-edit-view/components/gui
     FormsModule,
     MatAutocompleteModule,
     ReactiveFormsModule
-   
+
   ]
 })
 export class GuideModule { }
