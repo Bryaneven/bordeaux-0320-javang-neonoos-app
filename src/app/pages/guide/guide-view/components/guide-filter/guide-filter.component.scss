@@ -66,6 +66,7 @@
     text-decoration: none;
     border-radius: 30px;
     padding: 12px 53px 12px 23px;
+    margin-right: 10px ;
     color: #fff;
     text-transform: uppercase;
     font-family: sans-serif;
@@ -117,10 +118,17 @@
 }
 
 .btn-section {
-  background-color:$neonoos-color;
+  background-color:#FF346b;
 }
 .btn-section .round {
-  background-color: rgb(46, 78, 136);
+  background-color:#CD0F3B;
+}
+
+.btn-new-guide {
+  background-color:#3ACA60;
+}
+.btn-new-guide .round {
+  background-color: #08AA33;
 }
 
 .checkbox {
