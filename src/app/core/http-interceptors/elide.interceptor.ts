@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Elide } from 'src/app/shared/models/elide'
 
 @Injectable()
 export class ElideInterceptor implements HttpInterceptor {

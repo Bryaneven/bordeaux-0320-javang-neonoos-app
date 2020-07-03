@@ -12,6 +12,7 @@ import { RootObject } from 'src/app/shared/models/root-object.model';
 import { HashtagService } from '../../../services/hashtag/hashtag.service';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
 import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
+import { Data } from 'src/app/shared/models/data.model';
 
 @Component({
   selector: 'neo-guide-edit',
@@ -101,26 +102,23 @@ export class GuideEditComponent implements OnInit {
   }
 
   // Mat-chips method
-  // selected(event: MatAutocompleteSelectedEvent): void {
-  //   this.guideHashtags.data.push({
-  //     id: event.option.value.id,
-  //     name: event.option.value.name
-  //   });
-  //   this.hashtagInput.nativeElement.value = '';
-  //   this.hashtagCtrl.setValue(null);
-  //   console.log(this.guide);
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.guideHashtags.data.push(event.option.value);
+    this.hashtagInput.nativeElement.value = '';
+    this.hashtagCtrl.setValue(null);
+    console.log(this.guide);
 
-  // }
+  }
 
-  // remove(hashtag: Hashtag) : void {
-  //   let deletedHashtagIntoGuide: Guide;
-  //   for (let i=0; i<this.guide.hashtags.length; i++) {
-  //     if (this.guide.hashtags[i].id === hashtag.id) {
-  //       deletedHashtagIntoGuide.hashtags = this.guide.hashtags.splice(i,1);
-  //       break;
-  //     }
-  //   }
-  // }
+  remove(hashtag: Hashtag): void {
+    // let deletedHashtagIntoGuide: Guide;
+    for (let i = 0; i < this.guideHashtags.data.length; i++) {
+      if (this.guideHashtags.data[i].id === hashtag.id) {
+        this.guideHashtags.data.splice(i , 1);
+        break;
+      }
+    }
+  }
 
   listenChanges() {
 
@@ -147,6 +145,7 @@ export class GuideEditComponent implements OnInit {
   save() {
     if (this.guideId) {
       this.guideService.patch(this.guide, this.guideId).subscribe();
+      console.log(this.guide);
     } else {
       this.guideService.post(this.guide).subscribe();
     }

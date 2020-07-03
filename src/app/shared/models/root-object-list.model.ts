@@ -9,6 +9,8 @@ export class RootObjectList<T> {
       for ( let data of this.data){
         data = new Data<T>(constructor, data);
       }
+    } else {
+      this.data = [ new Data<T>(constructor) ];
     }
   }
 }
