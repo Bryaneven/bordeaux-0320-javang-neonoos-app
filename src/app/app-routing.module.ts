@@ -20,6 +20,7 @@ const routes: Routes = [
       m => m.PlaceModule
     )
   },
+  { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule) },
   {
     path: '**',
     redirectTo: 'home'
