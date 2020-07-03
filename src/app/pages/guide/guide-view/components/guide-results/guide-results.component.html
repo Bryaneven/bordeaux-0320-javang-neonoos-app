@@ -1,8 +1,10 @@
-<div class="overallContainer">
-  <mat-card class="resultCard">
+<!-- <div class="overallContainer"> -->
+<div *ngFor="let hashtag of _hashtags" class="guide-result">
+  <!-- <mat-card class="resultCard"> -->
+  <mat-card class="block">
     <div class="resultHeader">
       <div class="titles">
-        <mat-card-title>Wakeboarding - Canoeing</mat-card-title>
+        <mat-card-title>{{ hashtag.attributes.name }}</mat-card-title>
       </div>
       <div class="buttonContainer">
         <button class="editButton" mat-stroked-button>Editer</button>
@@ -12,6 +14,6 @@
     <div class="resultImg">
       <img *ngFor="let activity of activities" mat-card-image src="{{activity}}">
     </div>
-</mat-card>
+  </mat-card>
 
 </div>

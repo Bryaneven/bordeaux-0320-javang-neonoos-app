@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivityService } from 'src/app/shared/services/activity.service';
+import { Hashtag } from 'src/app/shared/models/hashtag';
 
 @Component({
   selector: 'neo-guide-results',
@@ -8,21 +9,14 @@ import { ActivityService } from 'src/app/shared/services/activity.service';
 })
 export class GuideResultsComponent implements OnInit {
 
+  _hashtags: Hashtag[] = [];
+
+  @Input()
+  set hashtags(hashtags: Hashtag[]) {
+    this._hashtags = hashtags;
+  }
+
   activities: any[] = [
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
     ('https://via.placeholder.com/150'),
     ('https://via.placeholder.com/150'),
     ('https://via.placeholder.com/150'),
@@ -30,7 +24,5 @@ export class GuideResultsComponent implements OnInit {
 
   constructor(private activityService: ActivityService) { }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void { }
 }
