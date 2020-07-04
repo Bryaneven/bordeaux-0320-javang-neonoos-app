@@ -3,6 +3,7 @@
   <img src="assets/img/Logo/Logo_neonoos.png" alt="logo de Neonoos">
 
   <form class="loginForm">
+
     <mat-form-field class="loginFormWidth">
       <mat-label>Email</mat-label>
       <input matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher" placeholder="Ex. pat@example.com">
@@ -13,6 +14,7 @@
         Email is <strong>required</strong>
       </mat-error>
     </mat-form-field>
+
     <mat-form-field class="loginFormWidth">
       <mat-label>Password</mat-label>
       <input matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher" placeholder="Ex. Password1">
@@ -23,7 +25,10 @@
         Password is <strong>required</strong>
       </mat-error>
     </mat-form-field>
-    <button type="submit" [disabled]="!emailFormControl.valid || !passwordFormControl.valid" mat-raised-button color="primary" (click)="OnSubmit(emailFormControl.value, passwordFormControl.value)">Login !</button>
+
+    <button type="submit" [disabled]="!emailFormControl.valid || !passwordFormControl.valid" mat-raised-button
+      color="primary" (click)="OnSubmit(emailFormControl.value, passwordFormControl.value)">Login !</button>
+
   </form>
 
 </div>
