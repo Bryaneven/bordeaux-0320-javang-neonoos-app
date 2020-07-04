@@ -1,4 +1,4 @@
-<neo-header></neo-header>
-<neo-navbar></neo-navbar>
+<neo-header *ngIf="route.url != '/login'"></neo-header>
+<neo-navbar *ngIf="route.url != '/login'"></neo-navbar>
 
 <router-outlet></router-outlet>
