@@ -17,7 +17,7 @@
 
     <mat-form-field class="loginFormWidth">
       <mat-label>Password</mat-label>
-      <input matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher" placeholder="Ex. Password1">
+      <input type="password" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher" placeholder="Ex. Password1">
       <mat-error *ngIf="passwordFormControl.hasError('password') && !passwordFormControl.hasError('required')">
         Please try again
       </mat-error>
@@ -27,7 +27,7 @@
     </mat-form-field>
 
     <button type="submit" [disabled]="!emailFormControl.valid || !passwordFormControl.valid" mat-raised-button
-      color="primary" (click)="OnSubmit(emailFormControl.value, passwordFormControl.value)">Login !</button>
+      color="primary" (click)="OnSubmit(emailFormControl.value, passwordFormControl.value)">Login</button>
 
   </form>
 
