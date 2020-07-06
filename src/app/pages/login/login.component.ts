@@ -5,6 +5,7 @@ import { AuthService } from './services/auth.service';
 import { User } from './models/user';
 import { RootObject } from 'src/app/shared/models/root-object.model';
 import { Router } from '@angular/router';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -43,11 +44,11 @@ export class LoginComponent implements OnInit {
 
   /* submit du formulaire */
   OnSubmit(email: string, password: string) {
+
     if (email && password) {
       this.authService.loginUser(email, password).subscribe(
-        () => {
-          console.log('pouet');
-          this.router.navigate(['/home']);
+        data => {
+          this.router.navigate(['/guide']);
         }
       );
     }
