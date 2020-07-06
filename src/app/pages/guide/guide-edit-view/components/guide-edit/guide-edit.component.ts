@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 import { Guide } from 'src/app/pages/guide/models/guide';
 import { GuideService } from 'src/app/pages/guide/services/guide/guide.service';
@@ -42,6 +42,7 @@ export class GuideEditComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private guideService: GuideService,
     private hashtagService: HashtagService
     ) { }
@@ -67,8 +68,6 @@ export class GuideEditComponent implements OnInit {
     const getOneGuideSubscription = this.guideService.getById(id).subscribe((guide: RootObject<Guide>) => {
       if (guide) {
        this.guide = guide;
-       console.log(this.guide);
-
       }
     });
     this.subscription.add(getOneGuideSubscription);
@@ -79,8 +78,6 @@ export class GuideEditComponent implements OnInit {
     const getHashtagsSubscription = this.hashtagService.getAll().subscribe((hashtags: RootObjectList<Hashtag>) => {
       if (hashtags) {
         this.allHashtags = hashtags;
-        console.log(this.allHashtags);
-
       }
       this.hashtagCtrl.setValue(null);
 
@@ -155,6 +152,8 @@ export class GuideEditComponent implements OnInit {
       this.guideService.patchHashtagsByGuide(this.guideId, this.guideHashtags).subscribe();
       console.log(this.guideHashtags);
     }
+
+    this.router.navigate(['/guide/view']);
   }
 
 
