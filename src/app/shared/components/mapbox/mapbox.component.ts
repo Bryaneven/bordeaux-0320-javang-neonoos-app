@@ -10,7 +10,7 @@ import * as mapboxgl from 'mapbox-gl/dist/mapbox-gl';
 })
 export class MapboxComponent implements OnInit, OnChanges {
   map: mapboxgl.Map;
-  @Input() places : RootObjectList<Place>;
+  @Input() places: RootObjectList<Place>;
   markers = [];
   constructor() { }
 
