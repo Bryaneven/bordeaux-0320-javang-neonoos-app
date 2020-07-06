@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 import { Guide } from 'src/app/pages/guide/models/guide';
 import { GuideService } from 'src/app/pages/guide/services/guide/guide.service';
@@ -11,8 +11,6 @@ import { startWith, map } from 'rxjs/operators';
 import { RootObject } from 'src/app/shared/models/root-object.model';
 import { HashtagService } from '../../../services/hashtag/hashtag.service';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
-import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
-import { Data } from 'src/app/shared/models/data.model';
 
 @Component({
   selector: 'neo-guide-edit',
@@ -34,44 +32,22 @@ export class GuideEditComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   hashtagCtrl = new FormControl();
   allHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag, 'hashtags');
-  @Input() guideHashtags: RootObjectList<Hashtag>;
+  guideHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag, 'hashtags');
   filteredHashtags: Observable<any[]>;
 
   @ViewChild('hashtagInput') hashtagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private guideService: GuideService,
     private hashtagService: HashtagService
     ) { }
 
   ngOnInit(): void {
-    // this.getRouteParam();
     this.getHashtags();
-    // this.getGuideHastags();
+    this.getGuideHastags();
   }
-
-  // getRouteParam() {
-  //   const routerSubscription = this.route.paramMap.subscribe(params => {
-  //     if (params && params.get('id')) {
-  //       const routeGuideId = Number(params.get('id'));
-  //       this.guideId = routeGuideId;
-  //       this.getOneGuide(this.guideId);
-  //     }
-  //   });
-  //   this.subscription.add(routerSubscription);
-  // }
-
-  // getOneGuide(id: number) {
-  //   const getOneGuideSubscription = this.guideService.getById(id).subscribe((guide: RootObject<Guide>) => {
-  //     if (guide) {
-  //      this.guide = guide;
-  //     }
-  //   });
-  //   this.subscription.add(getOneGuideSubscription);
-  // }
 
 
   getHashtags() {
@@ -92,8 +68,6 @@ export class GuideEditComponent implements OnInit {
     const getGuideHastagsSubscription = this.guideService.getHashtagsByGuide(this.guideId).subscribe((data: RootObjectList<Hashtag>) => {
       if (data) {
         this.guideHashtags = data;
-        console.log(this.guideHashtags);
-
       }
     });
     this.subscription.add(getGuideHastagsSubscription);
@@ -115,8 +89,6 @@ export class GuideEditComponent implements OnInit {
       }
     }
     this.updated = true;
-
-
   }
 
   listenChanges() {
