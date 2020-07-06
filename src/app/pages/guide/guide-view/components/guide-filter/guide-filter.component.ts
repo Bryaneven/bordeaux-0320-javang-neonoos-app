@@ -22,28 +22,39 @@ export class GuideFilterComponent implements OnInit {
   hashtagsSearch: RootObjectList<Hashtag>;
 
   arrayHashtags = [];
+  message: string;
+  showTitleHashtags = 'Tout voir';
 
   ngOnInit(): void { }
 
   onSearchChange(searchValue: string): void {
+
     this.hashtagservice.getByName(searchValue).subscribe((hashtags) => {
-      this.hashtags = hashtags;
+      if (hashtags.data.length != 0 ) {
+        this.hashtags = hashtags;
+      } else {
+        this.hashtags = null;
+        this.message = "Aucun Résultat";
+      }
     });
   }
 
-  getHashtags() {
-    this.hashtagservice.getAll().subscribe((hashtags) => {
-      this.hashtags = hashtags;
-    });
+  showHashtags() {
+    if (this.showTitleHashtags === 'Tout voir') {
+       this.showTitleHashtags = 'Reset';
+       this.hashtagservice.getAll().subscribe((hashtags) => {
+         this.hashtags = hashtags;
+     });
+    } else {
+      this.showTitleHashtags = 'Tout voir';
+      this.hashtags = null;
+    }
   }
 
   checkbox($event: any, tag: Hashtag) {
-
-
     if ($event.target.checked === true) {
       this.arrayHashtags.push(tag);
     }
-
     if ($event.target.checked === false) {
       for (let i = 0; i < this.arrayHashtags.length; i++) {
         if (this.arrayHashtags[i].id === tag.id) {
@@ -51,7 +62,6 @@ export class GuideFilterComponent implements OnInit {
         }
       }
     }
-
     // inisialise un nouveau tableau depuis tableau exitant :
     this.arrayHashtags = [...this.arrayHashtags];
     // Send CheckboxEvent
