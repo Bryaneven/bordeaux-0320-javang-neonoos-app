@@ -33,8 +33,8 @@ export class GuideEditComponent implements OnInit {
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   hashtagCtrl = new FormControl();
-  allHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag);
-  guideHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag);
+  allHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag, 'hashtags');
+  guideHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag, 'hastags');
   filteredHashtags: Observable<any[]>;
 
   @ViewChild('hashtagInput') hashtagInput: ElementRef<HTMLInputElement>;

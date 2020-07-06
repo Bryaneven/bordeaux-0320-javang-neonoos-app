@@ -10,7 +10,7 @@ export class RootObjectList<T> {
         data = new Data<T>(constructor, type, data);
       }
     } else {
-      this.data = [ new Data<T>(constructor) ];
+      this.data = [ new Data<T>(constructor, type) ];
     }
   }
 }
