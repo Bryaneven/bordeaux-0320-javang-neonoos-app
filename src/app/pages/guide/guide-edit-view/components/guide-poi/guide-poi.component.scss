@@ -1,6 +1,16 @@
+.mat-divider{
+  width: 50%;
+}
+
 .poi {
   display: flex;
   justify-content: space-between;
+  height: 600px;
+
+  neo-mapbox{
+      height: 90%;
+      width: 45%;
+  }
 
   .poi-detail {
     width: 40%;

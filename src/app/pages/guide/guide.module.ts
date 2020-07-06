@@ -1,3 +1,4 @@
+import { MapboxComponent } from './../../shared/components/mapbox/mapbox.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -31,6 +32,7 @@ import { DialogBodyComponent } from './guide-view/components/dialog-body/dialog-
 
 @NgModule({
   declarations: [
+    MapboxComponent,
     GuideFilterComponent,
     GuideResultsComponent,
     GuideViewComponent,
