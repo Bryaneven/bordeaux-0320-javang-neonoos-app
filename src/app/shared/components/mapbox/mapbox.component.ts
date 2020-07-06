@@ -1,3 +1,4 @@
+import { Data } from 'src/app/shared/models/data.model';
 import { Place } from 'src/app/shared/models/place.model';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
@@ -17,17 +18,26 @@ export class MapboxComponent implements OnInit, OnChanges {
   ngOnInit(): void {
 
     mapboxgl.accessToken = 'pk.eyJ1IjoicHJhbGluZTQwIiwiYSI6ImNrYmh5aTNqOTBhM2Yyem81NnI3a2hyMzAifQ.-Jq7YUy1fTIbegOvvl-4sA';
-    this.map = new mapboxgl.Map({
-      container: 'mapbox',
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: [this.places.data[0].attributes.lng, this.places.data[0].attributes.lat],
-      zoom: 8
-    });
+    if (this.places.data[0].attributes.lat){
+      this.initMap(this.places.data[0].attributes.lng, this.places.data[0].attributes.lat);
+      this.places.data.map((place) => {
+        this.addMarker(place.attributes.lng, place.attributes.lat, place.attributes.name, place.attributes.description);
+        });
+    } else {
+      this.initMap(40, 50);
+    }
 
-    this.places.data.map((place) => {
-      this.addMarker(place.attributes.lng, place.attributes.lat, place.attributes.name, place.attributes.description);
+  }
+
+
+    initMap(lng, lat){
+      this.map = new mapboxgl.Map({
+        container: 'mapbox',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [lng, lat],
+        zoom: 7
       });
-     }
+    }
 
   addMarker(lng: number, lat: number, name, description){
     const popup = new mapboxgl.Popup({ offset: 25 })
@@ -42,11 +52,14 @@ export class MapboxComponent implements OnInit, OnChanges {
     this.markers.push(marker);
   }
   ngOnChanges() {
+    if (this.markers.length < 0){
     this.markers.map((marker) => marker.remove());
     this.places.data.map((place) => {
       this.addMarker(place.attributes.lng, place.attributes.lat, place.attributes.name, place.attributes.description);
     });
+  }
     }
+
 
   }
 

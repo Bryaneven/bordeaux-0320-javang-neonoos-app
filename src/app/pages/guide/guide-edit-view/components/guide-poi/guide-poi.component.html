@@ -1,6 +1,7 @@
 <div class="poi">
   <div class="poi-detail" *ngIf="places">
     <h2>Points du guide</h2>
+    <div *ngIf="places.data[0].id">
     <div class="flex" *ngFor="let place of places.data">
       <div class="poi-image">
         <img src="https://picsum.photos/75/75" alt="">
@@ -14,6 +15,7 @@
       </div>
     </div>
     <mat-divider></mat-divider>
+  </div>
   </div>
   <neo-mapbox [places]="places"></neo-mapbox>
 </div>
