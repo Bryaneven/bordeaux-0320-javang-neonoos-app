@@ -48,6 +48,7 @@ export class GuideFilterComponent implements OnInit {
     } else {
       this.showTitleHashtags = 'Tout voir';
       this.hashtags = null;
+      this.arrayHashtags.length = 0;
     }
   }
 

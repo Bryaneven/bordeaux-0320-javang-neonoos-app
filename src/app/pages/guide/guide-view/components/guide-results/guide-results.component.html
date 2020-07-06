@@ -1,20 +1,20 @@
 <!-- <div class="overallContainer"> -->
-<div *ngFor="let hashtag of _hashtags" class="guide-result">
+<div *ngFor="let itemHashtag of _hashtags" class="guide-result">
   <!-- <mat-card class="resultCard"> -->
   <mat-card class="block">
     <div class="resultHeader">
-      <div class="titles">
-        <mat-card-title>{{ hashtag.attributes.name }}</mat-card-title>
-      </div>
-      <div class="buttonContainer">
-        <button class="editButton" mat-stroked-button>Editer</button>
-      </div>
+      <form class="hearder-title" (ngSubmit)="updateHashtagName(itemHashtag.id, itemHashtag.attributes.name)" #myForm="ngForm">
+        <h2 *ngIf= "show">{{ itemHashtag.attributes.name }}</h2>
+        <div *ngIf= "!show">
+          <input name="hashtagName" type="text" [(ngModel)]="itemHashtag.attributes.name" #hashtagName="ngModel"/>
+        </div>
+        <button type="submit" mat-button>{{ titleHashtag }}</button>
+      </form>
     </div>
     <div class="resultImg">
-      <div *ngFor="let activity of activities">
-        <img  mat-card-image src="{{activity}}">
+      <div *ngFor="let guide of itemHashtag.relationships.guides.data">
+        <img  mat-card-image src="https://via.placeholder.com/150">
       </div>
     </div>
   </mat-card>
-
 </div>
