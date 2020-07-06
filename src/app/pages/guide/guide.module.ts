@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
- 
 import { ReactiveFormsModule } from '@angular/forms';
 
 // Material
@@ -26,7 +25,8 @@ import { GuideEditComponent } from './guide-edit-view/components/guide-edit/guid
 import { GuideTravelComponent } from './guide-edit-view/components/guide-travel/guide-travel.component';
 import { GuidePoiComponent } from './guide-edit-view/components/guide-poi/guide-poi.component';
 import { GuidePoiSearchSectionComponent } from './guide-edit-view/components/guide-poi-search-section/guide-poi-search-section.component';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogBodyComponent } from './guide-view/components/dialog-body/dialog-body.component';
 
 
 @NgModule({
@@ -38,7 +38,8 @@ import { GuidePoiSearchSectionComponent } from './guide-edit-view/components/gui
     GuideEditComponent,
     GuideTravelComponent,
     GuidePoiComponent,
-    GuidePoiSearchSectionComponent
+    GuidePoiSearchSectionComponent,
+    DialogBodyComponent
   ],
   imports: [
     CommonModule,
@@ -55,8 +56,8 @@ import { GuidePoiSearchSectionComponent } from './guide-edit-view/components/gui
     MatDividerModule,
     FormsModule,
     MatAutocompleteModule,
-    ReactiveFormsModule
-   
+    ReactiveFormsModule,
+    MatDialogModule,
   ]
 })
 export class GuideModule { }

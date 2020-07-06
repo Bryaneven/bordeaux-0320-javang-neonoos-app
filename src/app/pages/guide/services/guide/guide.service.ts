@@ -47,6 +47,6 @@ export class GuideService {
   }
 
   createInstance(guide: RootObject<Guide>){
-    return new RootObject<Guide>(Guide, guide);
+    return new RootObject<Guide>(Guide, 'guides', guide);
   }
 }
