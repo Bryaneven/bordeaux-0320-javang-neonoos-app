@@ -7,16 +7,18 @@
       </mat-form-field>
       <button (click)="show = !show" mat-button>Editer</button>
     </div>
+
+    <!-- Sections -->
     <h3>sections du guide</h3>
     <div class="guide-section">
-      <!-- <mat-form-field>
+      <mat-form-field>
         <mat-chip-list #chipList>
           <mat-chip
-            *ngFor="let hashtag of guide.hashtags"
+            *ngFor="let hashtag of guideHashtags.data"
             [selectable]="selectable"
             [removable]="removable"
             (removed)="remove(hashtag)">
-            {{hashtag.name}}
+            {{hashtag.attributes.name}}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
           <input
@@ -30,10 +32,10 @@
           (optionSelected)="selected($event)">
           <mat-option
             *ngFor="let hashtag of filteredHashtags | async" [value]="hashtag">
-            {{hashtag.name}}
+            {{hashtag.attributes.name}}
           </mat-option>
         </mat-autocomplete>
-      </mat-form-field> -->
+      </mat-form-field>
     </div>
     <h3>tags</h3>
     <div class="guide-tags">
@@ -44,8 +46,8 @@
   </div>
   <div class="guide-right">
     <div class="guide-right-header">
-      <span>Supprimer la section</span>
-      <button mat-button>Cancel</button>
+      <!-- <span>Supprimer la section</span>
+      <button mat-button>Cancel</button> -->
       <button mat-stroked-button (click)="save()">Terminé</button>
     </div>
     <h3>

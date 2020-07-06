@@ -9,7 +9,7 @@ export class Data<T> {
     if (data) {
       Object.assign(this, data);
       this.attributes = new constructor(this.attributes);
-    }else {
+    } else {
       this.type = type;
       this.attributes = new constructor();
     }
