@@ -25,6 +25,7 @@ export class GuideEditComponent implements OnInit {
   show = true;
   guideId: number;
   @Input() guide?: RootObject<Guide> = new RootObject<Guide>(Guide);
+  updated = false;
 
   // Mat-chips
   visible = true;
@@ -106,22 +107,22 @@ export class GuideEditComponent implements OnInit {
     this.guideHashtags.data.push(event.option.value);
     this.hashtagInput.nativeElement.value = '';
     this.hashtagCtrl.setValue(null);
-    console.log(this.guide);
-
+    this.updated = true;
   }
 
   remove(hashtag: Hashtag): void {
-    // let deletedHashtagIntoGuide: Guide;
     for (let i = 0; i < this.guideHashtags.data.length; i++) {
       if (this.guideHashtags.data[i].id === hashtag.id) {
         this.guideHashtags.data.splice(i , 1);
         break;
       }
     }
+    this.updated = true;
+
+
   }
 
   listenChanges() {
-
     this.filteredHashtags = this.hashtagCtrl.valueChanges.pipe(
       // tslint:disable-next-line: deprecation
       startWith(null),
@@ -148,6 +149,11 @@ export class GuideEditComponent implements OnInit {
       console.log(this.guide);
     } else {
       this.guideService.post(this.guide).subscribe();
+    }
+
+    if (this.updated) {
+      this.guideService.patchHashtagsByGuide(this.guideId, this.guideHashtags).subscribe();
+      console.log(this.guideHashtags);
     }
   }
 

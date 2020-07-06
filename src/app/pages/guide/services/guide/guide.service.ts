@@ -28,6 +28,10 @@ export class GuideService {
     return this.http.get<RootObjectList<Hashtag>>(`${environment.APIURI}guides/${id}/hashtags`);
   }
 
+  patchHashtagsByGuide(id: number, hashtag: RootObjectList<Hashtag>): Observable<RootObjectList<Hashtag>> {
+    return this.http.patch<RootObjectList<Hashtag>>(`${environment.APIURI}guides/${id}/relationships/hashtags`, hashtag);
+  }
+
   post(guide: RootObject<Guide>): Observable<RootObject<Guide>>{
     return this.http.post<RootObject<Guide>>(`${environment.APIURI}guides`, guide)
       .pipe(map((guidefrmsrv) => this.createInstance(guidefrmsrv)));
