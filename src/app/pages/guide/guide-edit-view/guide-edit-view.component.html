@@ -5,7 +5,7 @@
   </div>
 
   <mat-card>
-    <neo-guide-edit [guide]="guide" [guideHashtags]="guideHashtags" [guideId]="guideId"></neo-guide-edit>
+    <neo-guide-edit [guide]="guide"  [guideId]="guideId" *ngIf="places"></neo-guide-edit>
   </mat-card>
 
   <mat-card>
@@ -13,7 +13,7 @@
   </mat-card>
 
   <mat-card>
-    <neo-guide-poi></neo-guide-poi>
+    <neo-guide-poi [guide]='guide' [guideId]="guideId" [places]='places' *ngIf="places"(deletePlacesGuide)="deletePlacesGuide($event)"></neo-guide-poi>
   </mat-card>
 </div>
 

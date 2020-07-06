@@ -1,23 +1,23 @@
 <div class="poi">
-  <div class="poi-detail">
+  <div class="poi-detail" *ngIf="places">
     <h2>Points du guide</h2>
-    <div class="flex">
+    <div *ngIf="places.data[0].id">
+    <div class="flex" *ngFor="let place of places.data">
       <div class="poi-image">
         <img src="https://picsum.photos/75/75" alt="">
       </div>
       <div class="poi-content">
-        <h4>Aguas Calientes</h4>
-        <h5>Pérou, Amérique du sud</h5>
+        <h4>{{place.attributes.name}}</h4>
+        <h5>{{place.attributes.city}}</h5>
       </div>
       <div class="toggle">
-        <mat-slide-toggle>Ajouté</mat-slide-toggle>
+        <mat-slide-toggle [checked]=true (change)="DeletePlacesGuide(place)">Supprimer</mat-slide-toggle>
       </div>
     </div>
     <mat-divider></mat-divider>
   </div>
-  <div class="map">
-    <div id='mapbox'></div>
   </div>
+  <neo-mapbox [places]="places"></neo-mapbox>
 </div>
 
 

@@ -31,3 +31,13 @@ $neonoos-app-theme: mat-light-theme($neonoos-app-primary, $neonoos-app-accent, $
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background: $background-color; }
+
+.mapboxgl-popup {
+  max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+
+}
+
