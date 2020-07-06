@@ -18,8 +18,8 @@ export class GuideEditViewComponent implements OnInit {
   subscription = new Subscription();
   guideId: number;
   guide?: RootObject<Guide> = new RootObject<Guide>(Guide, 'guides');
-  // allHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag, 'hashtags');
-  guideHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag, 'hastags');
+  allHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag, 'hashtags');
+  guideHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag, 'hashtags');
   filteredHashtags: Observable<any[]>;
 
   constructor(
@@ -51,31 +51,6 @@ export class GuideEditViewComponent implements OnInit {
       }
     });
     this.subscription.add(getOneGuideSubscription);
-  }
-
-  // getHashtags() {
-  //   const getHashtagsSubscription = this.hashtagService.getAll().subscribe((hashtags: RootObjectList<Hashtag>) => {
-  //     if (hashtags) {
-  //       this.allHashtags = hashtags;
-  //     }
-  //     this.hashtagCtrl.setValue(null);
-
-  //     if (!this.filteredHashtags) {
-  //       this.listenChanges();
-  //     }
-  //   });
-  //   this.subscription.add(getHashtagsSubscription);
-  // }
-
-  getGuideHastags() {
-    const getGuideHastagsSubscription = this.guideService.getHashtagsByGuide(this.guideId).subscribe((data: RootObjectList<Hashtag>) => {
-      if (data) {
-        this.guideHashtags = data;
-        console.log(this.guideHashtags);
-
-      }
-    });
-    this.subscription.add(getGuideHastagsSubscription);
   }
 
 }
