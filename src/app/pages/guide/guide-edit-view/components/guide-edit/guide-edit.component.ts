@@ -23,9 +23,9 @@ export class GuideEditComponent implements OnInit {
 
   subscription = new Subscription();
   show = true;
-  guideId: number;
+  @Input() guideId: number;
   updated = false;
-  @Input() guide?: RootObject<Guide> = new RootObject<Guide>(Guide, 'guides');
+  @Input() guide?: RootObject<Guide>;
 
   // Mat-chips
   visible = true;
@@ -34,7 +34,7 @@ export class GuideEditComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   hashtagCtrl = new FormControl();
   allHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag, 'hashtags');
-  guideHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag, 'hastags');
+  @Input() guideHashtags: RootObjectList<Hashtag>;
   filteredHashtags: Observable<any[]>;
 
   @ViewChild('hashtagInput') hashtagInput: ElementRef<HTMLInputElement>;
@@ -48,30 +48,30 @@ export class GuideEditComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.getRouteParam();
+    // this.getRouteParam();
     this.getHashtags();
-    this.getGuideHastags();
+    // this.getGuideHastags();
   }
 
-  getRouteParam() {
-    const routerSubscription = this.route.paramMap.subscribe(params => {
-      if (params && params.get('id')) {
-        const routeGuideId = Number(params.get('id'));
-        this.guideId = routeGuideId;
-        this.getOneGuide(this.guideId);
-      }
-    });
-    this.subscription.add(routerSubscription);
-  }
+  // getRouteParam() {
+  //   const routerSubscription = this.route.paramMap.subscribe(params => {
+  //     if (params && params.get('id')) {
+  //       const routeGuideId = Number(params.get('id'));
+  //       this.guideId = routeGuideId;
+  //       this.getOneGuide(this.guideId);
+  //     }
+  //   });
+  //   this.subscription.add(routerSubscription);
+  // }
 
-  getOneGuide(id: number) {
-    const getOneGuideSubscription = this.guideService.getById(id).subscribe((guide: RootObject<Guide>) => {
-      if (guide) {
-       this.guide = guide;
-      }
-    });
-    this.subscription.add(getOneGuideSubscription);
-  }
+  // getOneGuide(id: number) {
+  //   const getOneGuideSubscription = this.guideService.getById(id).subscribe((guide: RootObject<Guide>) => {
+  //     if (guide) {
+  //      this.guide = guide;
+  //     }
+  //   });
+  //   this.subscription.add(getOneGuideSubscription);
+  // }
 
 
   getHashtags() {
@@ -153,7 +153,7 @@ export class GuideEditComponent implements OnInit {
       console.log(this.guideHashtags);
     }
 
-    this.router.navigate(['/guide/view']);
+    // this.router.navigate(['/guide/view']);
   }
 
 
