@@ -21,7 +21,10 @@
     </div>
 
     <div class="block-2">
-      <div class="title">LISTE DES SECTIONS</div> <div class="smallTitle" (click)="getHashtags()"> Tout voir</div>
+      <div class="header-title">
+        <div class="title">LISTE DES SECTIONS</div>
+        <div class="smallTitle" (click)="getHashtags()"> Tout voir</div>
+      </div>
         <div *ngIf="hashtags" class="checkbox">
           <div *ngFor="let tag of hashtags.data">
             <div>
