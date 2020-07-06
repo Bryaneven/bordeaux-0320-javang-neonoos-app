@@ -11,7 +11,7 @@ export class ElideInterceptor implements HttpInterceptor {
     const modified = req.clone({
       headers: new HttpHeaders({
         'Content-Type': 'application/vnd.api+json',
-        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5NDczMDkwMn0.le_DqzsoK1QgmRTSPEls9cyRpg7XNSbTURHbdNtazDnIich6G-zwq1darmF8va38mlNvQAPuDZUmdW9dXrmSUQ'
+        // 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5NDczMDkwMn0.le_DqzsoK1QgmRTSPEls9cyRpg7XNSbTURHbdNtazDnIich6G-zwq1darmF8va38mlNvQAPuDZUmdW9dXrmSUQ'
       })
     });
     return next.handle(modified);
