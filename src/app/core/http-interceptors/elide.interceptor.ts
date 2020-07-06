@@ -18,5 +18,4 @@ export class ElideInterceptor implements HttpInterceptor {
 
   }
 
-
 }
