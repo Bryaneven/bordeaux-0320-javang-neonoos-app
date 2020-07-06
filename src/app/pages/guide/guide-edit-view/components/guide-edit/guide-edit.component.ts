@@ -21,7 +21,7 @@ export class GuideEditComponent implements OnInit {
   subscription = new Subscription();
   show = true;
   guideId: number;
-  @Input() guide?: RootObject<Guide> = new RootObject<Guide>(Guide);
+  @Input() guide?: RootObject<Guide> = new RootObject<Guide>(Guide, 'guides');
 
 
   //Mat-chips
