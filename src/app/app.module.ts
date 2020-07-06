@@ -40,6 +40,6 @@ import { ElideInterceptor } from './core/http-interceptors/elide.interceptor';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

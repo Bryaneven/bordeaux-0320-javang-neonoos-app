@@ -7,6 +7,7 @@ import { Subscription, Observable } from 'rxjs';
 import { Guide } from '../models/guide';
 import { Hashtag } from 'src/app/shared/models/hashtag';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
+import { Place } from 'src/app/shared/models/place.model';
 
 @Component({
   selector: 'neo-guide-edit-view',
@@ -17,11 +18,11 @@ export class GuideEditViewComponent implements OnInit {
 
   subscription = new Subscription();
   guideId: number;
-  guide?: RootObject<Guide> = new RootObject<Guide>(Guide, 'guides');
-  allHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag, 'hashtags');
-  guideHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag, 'hashtags');
+  guide?: RootObject<Guide>;
+  // allHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag, 'hashtags');
+  guideHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag, 'hastags');
   filteredHashtags: Observable<any[]>;
-
+ places: RootObjectList<Place>;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -39,6 +40,9 @@ export class GuideEditViewComponent implements OnInit {
         const routeGuideId = Number(params.get('id'));
         this.guideId = routeGuideId;
         this.getOneGuide(this.guideId);
+      }else{
+       this.guide = new RootObject<Guide>(Guide, 'guides');
+       this.places = new RootObjectList<Place>(Place, 'places');
       }
     });
     this.subscription.add(routerSubscription);
@@ -48,9 +52,56 @@ export class GuideEditViewComponent implements OnInit {
     const getOneGuideSubscription = this.guideService.getById(id).subscribe((guide: RootObject<Guide>) => {
       if (guide) {
        this.guide = guide;
+       this.getGuidePlaces();
+      } else {
+        this.guide = new RootObject<Guide>(Guide, 'guides');
       }
     });
     this.subscription.add(getOneGuideSubscription);
   }
 
+  // getHashtags() {
+  //   const getHashtagsSubscription = this.hashtagService.getAll().subscribe((hashtags: RootObjectList<Hashtag>) => {
+  //     if (hashtags) {
+  //       this.allHashtags = hashtags;
+  //     }
+  //     this.hashtagCtrl.setValue(null);
+
+  //     if (!this.filteredHashtags) {
+  //       this.listenChanges();
+  //     }
+  //   });
+  //   this.subscription.add(getHashtagsSubscription);
+  // }
+
+  getGuideHastags() {
+    const getGuideHastagsSubscription = this.guideService.getHashtagsByGuide(this.guideId).subscribe((data: RootObjectList<Hashtag>) => {
+      if (data) {
+        this.guideHashtags = data;
+        console.log(this.guideHashtags);
+
+      }
+    });
+    this.subscription.add(getGuideHastagsSubscription);
+  }
+
+  getGuidePlaces(){
+   this.guideService.getPlacesByGuide(this.guideId).subscribe((places: RootObjectList<Place>) => {
+     if (places) {
+       this.places = places;
+       console.log(this.places);
+
+     } else {
+      this.places = new RootObjectList<Place>(Place, 'places');
+     }
+   });
+  }
+  deletePlacesGuide(place){
+  this.places.data = this.places.data.filter((placeTofind) => place.id !== placeTofind.id );
+  console.log(this.guide);
+
+  this.guideService.patchPlacesByGuide(this.guideId, this.places).subscribe(() => {
+  this.getOneGuide(this.guideId);
+  });
+  }
 }
