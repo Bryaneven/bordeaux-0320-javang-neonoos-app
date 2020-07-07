@@ -21,6 +21,8 @@ export class GuideFilterComponent implements OnInit {
   hashtags: RootObjectList<Hashtag>;
   hashtagsSearch: RootObjectList<Hashtag>;
 
+  searchValue: string;
+
   arrayHashtags = [];
   message: string;
   showTitleHashtags = 'Tout voir';
@@ -30,25 +32,33 @@ export class GuideFilterComponent implements OnInit {
   onSearchChange(searchValue: string): void {
 
     this.hashtagservice.getByName(searchValue).subscribe((hashtags) => {
+
+      this.hashtags = null;
+      this.arrayHashtags.length = 0;
+
       if (hashtags.data.length != 0 ) {
         this.hashtags = hashtags;
       } else {
         this.hashtags = null;
         this.message = "Aucun Résultat";
       }
+
+      this.showTitleHashtags = 'Réinitialiser ';
     });
   }
 
   showHashtags() {
     if (this.showTitleHashtags === 'Tout voir') {
-       this.showTitleHashtags = 'Reset';
+       this.showTitleHashtags = 'Réinitialiser ';
        this.hashtagservice.getAll().subscribe((hashtags) => {
          this.hashtags = hashtags;
-     });
+      });
     } else {
       this.showTitleHashtags = 'Tout voir';
       this.hashtags = null;
       this.arrayHashtags.length = 0;
+      this.searchValue = '';
+      this.message = '';
     }
   }
 
