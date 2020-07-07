@@ -14,12 +14,12 @@ export class ElideInterceptor implements HttpInterceptor {
       headers = new HttpHeaders({
         'Content-Type': 'application/vnd.api+json',
         'Authorization': localStorage.getItem('token')
-      })
+      });
 
     } else {
       headers = new HttpHeaders({
         'Content-Type': 'application/vnd.api+json'
-      })
+      });
     }
     const modified = req.clone({
       headers
