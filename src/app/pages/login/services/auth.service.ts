@@ -13,7 +13,7 @@ export class AuthService {
   constructor(private httpClient: HttpClient) { }
 
   loginUser(email: string, password: string): Observable<HttpResponse<RootObject<User>>> {
-    return this.httpClient.post<RootObject<User>>('http://localhost:8080/login',
+    return this.httpClient.post<RootObject<User>>('http://localhost:8080/login', // mettre la bonne URL
       { email, password },
       { observe: 'response' }
     ).pipe(tap(
