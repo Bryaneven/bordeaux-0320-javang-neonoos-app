@@ -52,7 +52,7 @@ export class MapboxComponent implements OnInit, OnChanges {
     this.markers.push(marker);
   }
   ngOnChanges() {
-    if (this.markers.length < 0){
+    if (this.markers.length > 0){
     this.markers.map((marker) => marker.remove());
     this.places.data.map((place) => {
       this.addMarker(place.attributes.lng, place.attributes.lat, place.attributes.name, place.attributes.description);
