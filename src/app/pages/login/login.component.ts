@@ -47,13 +47,13 @@ export class LoginComponent implements OnInit {
 
     if (email && password) {
       this.authService.loginUser(email, password).subscribe(
-        data => {
+        () => {
           this.router.navigate(['/guide']);
+        }, () => {
+          alert('Bad Login / Password');
         }
       );
     }
-
-    // store dans le local storage le token si il y est
   }
 
 }
