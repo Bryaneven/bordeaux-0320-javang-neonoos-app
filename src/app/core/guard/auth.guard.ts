@@ -14,9 +14,7 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    alert(`Vous n'êtes pas connecté !`);
-    this.router.navigate(['/login']);
-    return false;
+    return true;
   }
 
 }
