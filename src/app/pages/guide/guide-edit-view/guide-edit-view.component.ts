@@ -22,7 +22,7 @@ export class GuideEditViewComponent implements OnInit {
   // allHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag, 'hashtags');
   guideHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag, 'hastags');
   filteredHashtags: Observable<any[]>;
- places: RootObjectList<Place>;
+  places: RootObjectList<Place>;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -40,9 +40,9 @@ export class GuideEditViewComponent implements OnInit {
         const routeGuideId = Number(params.get('id'));
         this.guideId = routeGuideId;
         this.getOneGuide(this.guideId);
-      }else{
-       this.guide = new RootObject<Guide>(Guide, 'guides');
-       this.places = new RootObjectList<Place>(Place, 'places');
+      } else {
+        this.guide = new RootObject<Guide>(Guide, 'guides');
+        this.places = new RootObjectList<Place>(Place, 'places');
       }
     });
     this.subscription.add(routerSubscription);
@@ -51,8 +51,8 @@ export class GuideEditViewComponent implements OnInit {
   getOneGuide(id: number) {
     const getOneGuideSubscription = this.guideService.getById(id).subscribe((guide: RootObject<Guide>) => {
       if (guide) {
-       this.guide = guide;
-       this.getGuidePlaces();
+        this.guide = guide;
+        this.getGuidePlaces();
       } else {
         this.guide = new RootObject<Guide>(Guide, 'guides');
       }
@@ -85,23 +85,23 @@ export class GuideEditViewComponent implements OnInit {
     this.subscription.add(getGuideHastagsSubscription);
   }
 
-  getGuidePlaces(){
-   this.guideService.getPlacesByGuide(this.guideId).subscribe((places: RootObjectList<Place>) => {
-     if (places) {
-       this.places = places;
-       console.log(this.places);
+  getGuidePlaces() {
+    this.guideService.getPlacesByGuide(this.guideId).subscribe((places: RootObjectList<Place>) => {
+      if (places) {
+        this.places = places;
+        console.log(this.places);
 
-     } else {
-      this.places = new RootObjectList<Place>(Place, 'places');
-     }
-   });
+      } else {
+        this.places = new RootObjectList<Place>(Place, 'places');
+      }
+    });
   }
-  deletePlacesGuide(place){
-  this.places.data = this.places.data.filter((placeTofind) => place.id !== placeTofind.id );
-  console.log(this.guide);
+  deletePlacesGuide(place) {
+    this.places.data = this.places.data.filter((placeTofind) => place.id !== placeTofind.id);
+    console.log(this.guide);
 
-  this.guideService.patchPlacesByGuide(this.guideId, this.places).subscribe(() => {
-  this.getOneGuide(this.guideId);
-  });
+    this.guideService.patchPlacesByGuide(this.guideId, this.places).subscribe(() => {
+      this.getOneGuide(this.guideId);
+    });
   }
 }
