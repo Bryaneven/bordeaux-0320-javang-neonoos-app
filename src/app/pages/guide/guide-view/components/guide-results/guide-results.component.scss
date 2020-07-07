@@ -65,3 +65,21 @@
     padding: 0;
   }
 }
+
+.hearder-title {
+  display: flex;
+  align-items: baseline;
+
+  h2 {
+    margin-right: 1rem;
+  }
+
+  button {
+    color: grey;
+  }
+}
+
+.title-card-section {
+  color: #67758D;
+  font-size: 20px;
+}
