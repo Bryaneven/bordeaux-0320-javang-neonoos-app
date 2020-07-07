@@ -4,7 +4,7 @@
   <mat-card class="block">
     <div class="resultHeader">
       <form class="hearder-title" (ngSubmit)="updateHashtagName(itemHashtag.id, itemHashtag.attributes.name)" #myForm="ngForm">
-        <h2 *ngIf= "show">{{ itemHashtag.attributes.name }}</h2>
+        <h2 class="title-card-section" *ngIf= "show">{{ itemHashtag.attributes.name }}</h2>
         <div *ngIf= "!show">
           <input name="hashtagName" type="text" [(ngModel)]="itemHashtag.attributes.name" #hashtagName="ngModel"/>
         </div>
@@ -13,8 +13,11 @@
     </div>
     <div class="resultImg">
       <div *ngFor="let guide of itemHashtag.relationships.guides.data">
-        <img  mat-card-image src="https://via.placeholder.com/150">
+         <a [routerLink]="['/guide/edit/', guide.id]">
+            <img  mat-card-image src="https://picsum.photos/150">
+          </a>
       </div>
     </div>
   </mat-card>
 </div>
+
