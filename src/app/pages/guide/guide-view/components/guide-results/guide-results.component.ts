@@ -14,6 +14,7 @@ hashtag?: RootObject<Hashtag> = new RootObject<Hashtag>(Hashtag, 'hashtags');
 _hashtags: Hashtag[] = [];
 show = true;
 titleHashtag = 'Edite';
+hashtagId: number;
 
   @Input()
   set hashtags(hashtags: Hashtag[]) {
@@ -28,15 +29,22 @@ titleHashtag = 'Edite';
 
     if (this.show === true ) {
       this.show = false;
-      this.titleHashtag = 'Valider';
+      this.hashtagId = id;
     } else {
-      this.hashtagService.getById(id).subscribe((hashtag) => {
+
+      if (this.hashtagId === id) {
+        this.hashtagService.getById(id).subscribe((hashtag) => {
           this.hashtag = hashtag;
-          this.hashtag.data.attributes.name = name;
-          this.hashtagService.patch(hashtag, id).subscribe();
-          this.show = true;
-          this.titleHashtag = 'Edite';
-      });
+          if ( this.hashtag.data.id === this.hashtagId) {
+            this.hashtag.data.attributes.name = name;
+            this.hashtagService.patch(hashtag, id).subscribe();
+            this.show = true;
+            this.hashtagId = null;
+          }
+        });
+      } else {
+        this.hashtagId = id;
+      }
     }
   }
 }
