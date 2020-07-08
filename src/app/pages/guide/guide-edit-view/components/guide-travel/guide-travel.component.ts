@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
+import { TripService } from '../../../services/trip/trip.service';
+import { Country } from 'src/app/shared/models/country';
+import { CountryService } from 'src/app/shared/services/country.service';
+import { Trip } from 'src/app/shared/models/trip';
 
 @Component({
   selector: 'neo-guide-travel',
@@ -7,30 +12,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GuideTravelComponent implements OnInit {
 
-  trips: any[] = [
-    {id: 1, country: "Maroc"},
-    {id: 2, country: "France"}
-  ]
+  currentTrips: RootObjectList<Trip> = new RootObjectList<Trip>(Trip, 'trips');
+  trips: RootObjectList<Trip> = new RootObjectList<Trip>(Trip, 'trips');
+  country: Country;
+  countryId: number;
 
-  /** toggle start discover **/
+  @Input() guideId: number;
+  @Input() countries: RootObjectList<Country>;
 
-  // step = 0;
+  constructor(private tripService: TripService, private countryService: CountryService) {
 
-  // setStep(index: number) {
-  //   this.step = index;
-  // }
-
-  // nextStep() {
-  //   this.step++;
-  // }
-
-  // prevStep() {
-  //   this.step--;
-  // }
-
-  constructor() { }
+  }
 
   ngOnInit(): void {
+    this.trips.data = [];
+    this.tripService.getTripsByGuideId(this.guideId).subscribe(
+      guideTrips => {
+        this.currentTrips = guideTrips;
+      }
+    );
+  }
+
+
+  onSubmit() {
+    this.tripService.getTripsByCountryId(this.countryId).subscribe(
+      tripsByCountry => {
+        this.trips = tripsByCountry;
+      }
+    );
   }
 
 }
