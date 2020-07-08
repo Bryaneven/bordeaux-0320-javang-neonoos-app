@@ -1,4 +1,5 @@
-import { Guide } from './guide';
+import { Guide } from 'src/app/pages/guide/models/guide';
+
 
 export class Trip {
   id: number;
