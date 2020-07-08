@@ -1,76 +1,73 @@
 
 <div class="place-filter">
     <div class="block">
-            <form class="form">
-                <!-- Pays, Place, ville-->
-                <div id='form-line1' class="form-line">
-                    
-                    <!--
-                    <mat-form-field class="form-full-width">
-                        <mat-label>Pays: </mat-label>
-                        <mat-select multiple formControlName="countrySelection">
-                        <mat-option *ngFor="let country of countries" [value]="selectedCountry">
-                            {{country.name}}
-                        </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="countrySelect.hasError('required')">
-                        Country is required.
-                        </mat-error>
-                    </mat-form-field>
-                    -->
-                    <mat-form-field>
-                        <mat-label>Pays:</mat-label>
-                        <mat-select [(ngModel)]="selectedCountry">
-                          <mat-option value="Maroc">Maroc</mat-option>
-                          <mat-option value="Tunisie">Tunisie</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                      
-                    <div>{{selectedCountry}}</div> 
-
-                    <mat-form-field class="form-full-width">
-                        <mat-icon matPrefix>search</mat-icon>
-                        <input type="text" matInput placeholder="Rechercher une place" (input)="onSearchPlaceChange($event.target.value)">
-                    </mat-form-field>
+        <!-- Pays, Place, ville-->
+        <div id='line1' class="line">
+            
+            <!--
+            <mat-form-field class="form-full-width">
+                <mat-label>Pays: </mat-label>
+                <mat-select multiple formControlName="countrySelection">
+                <mat-option *ngFor="let country of countries" [value]="selectedCountry">
+                    {{country.name}}
+                </mat-option>
+                </mat-select>
+                <mat-error *ngIf="countrySelect.hasError('required')">
+                Country is required.
+                </mat-error>
+            </mat-form-field>
+            -->
+            <mat-form-field>
+                <mat-label>Pays:</mat-label>
+                <mat-select [(ngModel)]="selectedCountry">
+                    <mat-option value="Maroc">Maroc</mat-option>
+                    <mat-option value="Tunisie">Tunisie</mat-option>
+                </mat-select>
+            </mat-form-field>
                 
-                    <mat-form-field class="form-full-width">
-                        <mat-icon matPrefix>place</mat-icon>
-                        <input type="text" matInput placeholder="Saisissez une ville" (input)="onSearchTownChange($event.target.value)">
-                    </mat-form-field>
-                </div>
-                <!-- Stars et Rayon-->
-                <div id='form-line2' class="form-line">
-                    <mat-form-field id= 'stars-rating' class="form-full-width">
+            <div>{{selectedCountry}}</div> 
 
-                            <div id=three_stars class='star-rating-brick'>
-                                <div id='three_stars_1' class='star-rating-sub-brick'>
-                                    <mat-icon>star</mat-icon> 
-                                </div>
-                                <div id='three_stars_2' class='star-rating-sub-brick'>
-                                    <mat-icon>star</mat-icon> 
-                                    <mat-icon>star</mat-icon>
-                                </div>
-                            </div>
-                            <div id='two_stars' class='star-rating-brick'>
-                                <mat-icon>star</mat-icon> 
-                                <mat-icon>star</mat-icon> 
-                            </div>
-                            <div id='one_star' class='star-rating-brick'>
-                                <mat-icon>star</mat-icon> 
-                            </div>
-                            <div id='zero_star' class='star-rating-brick'>
-                                <mat-icon>radio_button_unchecked</mat-icon> 
-                            </div>
-                         
-                    </mat-form-field>
-                    
-                    <mat-form-field class="form-full-width">
-                        <mat-label>Rayon: </mat-label>
-                        <mat-slider min="1" max="500" step="1" value="200"></mat-slider>
-                    </mat-form-field>
-
+            <mat-form-field>
+                <mat-icon matPrefix>search</mat-icon>
+                <input type="text" matInput placeholder="Rechercher une place" (input)="onSearchPlaceChange($event.target.value)">
+            </mat-form-field>
+        
+            <mat-form-field>
+                <mat-icon matPrefix>place</mat-icon>
+                <input type="text" matInput placeholder="Saisissez une ville" (input)="onSearchTownChange($event.target.value)">
+            </mat-form-field>
+        </div>
+        <!-- Stars et Rayon-->
+        <div id='line2' class="line">
+            <mat-form-field>
+                <div id=three_stars class='star-rating-brick'>
+                    <div id='three_stars_1' class='star-rating-sub-brick'>
+                        <mat-icon>star</mat-icon> 
+                    </div>
+                    <div id='three_stars_2' class='star-rating-sub-brick'>
+                        <mat-icon>star</mat-icon> 
+                        <mat-icon>star</mat-icon>
+                    </div>
                 </div>
-            </form>
+                <div id='two_stars' class='star-rating-brick'>
+                    <mat-icon>star</mat-icon> 
+                    <mat-icon>star</mat-icon> 
+                </div>
+                <div id='one_star' class='star-rating-brick'>
+                    <mat-icon>star</mat-icon> 
+                </div>
+                <div id='zero_star' class='star-rating-brick'>
+                    <mat-icon>radio_button_unchecked</mat-icon> 
+                </div>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <mat-label>Rayon: </mat-label>
+                <mat-slider min="1" max="500" step="1" value="200"></mat-slider>
+            </mat-form-field>
+
+        </div>
+           
             
          
         
