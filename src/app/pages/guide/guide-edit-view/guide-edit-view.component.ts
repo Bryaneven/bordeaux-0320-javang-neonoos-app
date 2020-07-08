@@ -25,7 +25,6 @@ export class GuideEditViewComponent implements OnInit {
   guide?: RootObject<Guide>;
 
   countries?: RootObjectList<Country> = new RootObjectList<Country>(Country, 'countries');
-  trips?: RootObjectList<Trip> = new RootObjectList<Trip>(Trip, 'trips');
 
   // allHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag, 'hashtags');
   guideHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag, 'hastags');
@@ -57,9 +56,6 @@ export class GuideEditViewComponent implements OnInit {
       }
     });
     this.subscription.add(routerSubscription);
-  }
-
-  getGuideTrips() {
   }
 
   getCountries() {
