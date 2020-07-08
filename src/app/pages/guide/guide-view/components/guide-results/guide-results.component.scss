@@ -35,6 +35,24 @@
   & * {
     margin: 10px;
   }
+
+  input {
+    border: 1px solid #dbd9d9 !important;
+    border-radius: 10px;
+    height: 30px;
+    color: grey;
+    padding-left: 20px;
+  }
+
+  input:focus {
+    border: 1px solid #9b9b9b !important;
+    box-shadow: 0 0 3px #9b9b9b !important;
+  }
+
+  input:focus {
+    outline-offset: 0px !important;
+    outline: none !important;
+  }
 }
 
 .mat-card-title {
