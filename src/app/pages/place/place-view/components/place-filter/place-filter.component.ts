@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlaceFilterComponent implements OnInit {
 
+  selectedCountry: String; 
+  
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onSearchPlaceChange(searchValue: string): void {
+
+     
+  }
+
+  onSearchTownChange(searchValue: string): void {
+
+     
   }
 
 }

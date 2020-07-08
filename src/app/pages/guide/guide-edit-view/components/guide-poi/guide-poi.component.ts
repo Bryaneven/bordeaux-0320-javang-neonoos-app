@@ -16,9 +16,7 @@ export class GuidePoiComponent implements OnInit {
   @Input() places: RootObjectList<Place>;
   @Output() deletePlacesGuide = new EventEmitter();
   constructor() { }
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
  DeletePlacesGuide(place){
    console.log(place);

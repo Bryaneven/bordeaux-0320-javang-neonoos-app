@@ -1,0 +1,27 @@
+.place-filter{
+    margin-left: 250px;
+  }
+  
+.stars-rating{
+    color: blue;
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+}
+
+ 
+
+.star-rating-brick{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  border:1px solid grey;
+  width: 25%;
+}
+
+.star-rating-sub-brick{
+  justify-items: center;
+  align-content: center;
+  justify-content: center;
+
+}
