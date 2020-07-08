@@ -1,7 +1,7 @@
 <div class="poi">
   <div class="poi-detail" *ngIf="places">
     <h2>Points du guide</h2>
-    <div >
+    <div *ngIf="places.data.length>0">
     <div class="flex" *ngFor="let place of places.data">
       <div class="poi-image">
         <img src="https://picsum.photos/75/75" alt="">

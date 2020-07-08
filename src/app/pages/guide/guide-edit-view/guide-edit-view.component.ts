@@ -43,6 +43,8 @@ export class GuideEditViewComponent implements OnInit {
       }else{
        this.guide = new RootObject<Guide>(Guide, 'guides');
        this.places = new RootObjectList<Place>(Place, 'places');
+       this.places.data = [];
+
       }
     });
     this.subscription.add(routerSubscription);
