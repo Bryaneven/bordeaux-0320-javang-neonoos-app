@@ -7,6 +7,7 @@ import { Trip } from 'src/app/shared/models/trip';
 import { GuideService } from '../../../services/guide/guide.service';
 import { RootObject } from 'src/app/shared/models/root-object.model';
 import { Guide } from '../../../models/guide';
+import { Data } from '@angular/router';
 
 @Component({
   selector: 'neo-guide-travel',
@@ -18,7 +19,7 @@ export class GuideTravelComponent implements OnInit {
 
   // POURQUOI 3 LISTES DE TRIPS ?!?!
   currentTrips: RootObjectList<Trip> = new RootObjectList<Trip>(Trip, 'trips');
-  trips: RootObjectList<Trip> = new RootObjectList<Trip>(Trip, 'trips');
+  trips?: RootObjectList<Trip>;
   guideTrips: RootObjectList<Trip> = new RootObjectList<Trip>(Trip, 'trips');
   country: Country;
   countryId: number;
@@ -37,14 +38,9 @@ export class GuideTravelComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.trips.data = [];
-    this.tripService.getTripsByGuideId(this.guideId).subscribe(
-      guideTrips => {
-        this.currentTrips = guideTrips;
-      }
-    );
-  }
 
+    this.getTripsByGuide();
+  }
 
   onSubmit() {
     this.tripService.getTripsByCountryId(this.countryId).subscribe(
@@ -54,25 +50,20 @@ export class GuideTravelComponent implements OnInit {
     );
   }
 
+  getTripsByGuide() {
+    this.tripService.getTripsByGuideId(this.guideId).subscribe((guideTrips: RootObjectList<Trip>) => {
+      if (guideTrips) {
+        this.guideTrips = guideTrips;
+      }
+    });
+  }
+
   checkboxTrip(trip) {
 
-    console.log(this.guideTrips);
+    this.guideTrips.data.push(trip);
 
-/*     this.guideService.patchTripsByGuide(this.guideId, this.guideTrips).subscribe();
-    console.log(this.guideTrips); */
-
-
-
-    /* console.log(trip);
-    this.checkTrip = trip;
-    console.log(this.checkTrip);
-    console.log(this.guideId);
-
-
-
-    this.guideService.patchTripsByGuide(this.guideId, this.checkTrip).subscribe((trip) => {
-      return true;
-    }
-    ); */
+    this.guideService.patchTripsByGuide(this.guideId, this.guideTrips).subscribe(() => {
+      this.currentTrips = this.guideTrips;
+    });
   }
 }
