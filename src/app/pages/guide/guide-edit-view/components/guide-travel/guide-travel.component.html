@@ -67,7 +67,7 @@
           <div class="trip-content">
             <h4>{{trip.attributes.title}}</h4>
             <h5>Ajouter au guide</h5>
-            <mat-slide-toggle>Ajouter</mat-slide-toggle>
+            <mat-slide-toggle (click)="checkboxTrip(trip)">Ajouter</mat-slide-toggle>
           </div>
         </div>
       </div>
