@@ -78,8 +78,6 @@ export class GuideEditViewComponent implements OnInit {
     const getGuideHastagsSubscription = this.guideService.getHashtagsByGuide(this.guideId).subscribe((data: RootObjectList<Hashtag>) => {
       if (data) {
         this.guideHashtags = data;
-        console.log(this.guideHashtags);
-
       }
     });
     this.subscription.add(getGuideHastagsSubscription);
@@ -89,8 +87,6 @@ export class GuideEditViewComponent implements OnInit {
    this.guideService.getPlacesByGuide(this.guideId).subscribe((places: RootObjectList<Place>) => {
      if (places) {
        this.places = places;
-       console.log(this.places);
-
      } else {
       this.places = new RootObjectList<Place>(Place, 'places');
      }
@@ -98,7 +94,6 @@ export class GuideEditViewComponent implements OnInit {
   }
   deletePlacesGuide(place){
   this.places.data = this.places.data.filter((placeTofind) => place.id !== placeTofind.id );
-  console.log(this.guide);
 
   this.guideService.patchPlacesByGuide(this.guideId, this.places).subscribe(() => {
   this.getOneGuide(this.guideId);
