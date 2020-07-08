@@ -15,4 +15,12 @@ export class TripService {
   getTrips(): Observable<RootObjectList<Trip>> {
     return this.httpClient.get<RootObjectList<Trip>>(`${environment.APIURI}trips`);
   }
+
+  getTripsByCountryId(countryId: number) {
+    return this.httpClient.get<RootObjectList<Trip>>(`${environment.APIURI}countries/${countryId}/trips`);
+  }
+
+  getTripsByGuideId(guideId: number) {
+    return this.httpClient.get<RootObjectList<Trip>>(`${environment.APIURI}guides/${guideId}/trips`);
+  }
 }
