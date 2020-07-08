@@ -38,7 +38,6 @@ export class GuideTravelComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.getTripsByGuide();
   }
 
@@ -58,10 +57,22 @@ export class GuideTravelComponent implements OnInit {
     });
   }
 
-  checkboxTrip(trip) {
-
+  addTrip(trip) {
     this.guideTrips.data.push(trip);
+    this.ckeckTrips();
+  }
 
+  removeTrip(trip: Trip): void {
+    for (let i = 0; i < this.guideTrips.data.length; i++) {
+      if (this.guideTrips.data[i].id === trip.id) {
+        this.guideTrips.data.splice(i , 1);
+        this.ckeckTrips();
+        break;
+      }
+    }
+  }
+
+  ckeckTrips() {
     this.guideService.patchTripsByGuide(this.guideId, this.guideTrips).subscribe(() => {
       this.currentTrips = this.guideTrips;
     });
