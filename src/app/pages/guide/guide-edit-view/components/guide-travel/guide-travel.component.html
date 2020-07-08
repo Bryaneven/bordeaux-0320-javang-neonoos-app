@@ -27,8 +27,8 @@
         <h3>Pays</h3>
         <mat-form-field>
           <mat-select>
-            <mat-option *ngFor="let trip of trips" [value]="trip.country">
-              {{trip.country}}
+            <mat-option *ngFor="let country of countries.data" [value]="countrySelected">
+              {{country.attributes.name}}
             </mat-option>
           </mat-select>
         </mat-form-field>
