@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription, Observable, concat, of } from 'rxjs';
 import { Guide } from 'src/app/pages/guide/models/guide';
 import { GuideService } from 'src/app/pages/guide/services/guide/guide.service';
 import { Hashtag } from 'src/app/shared/models/hashtag';
@@ -47,6 +47,7 @@ export class GuideEditComponent implements OnInit {
   ngOnInit(): void {
     this.getHashtags();
     this.getGuideHastags();
+    this.guideHashtags.data.shift();
   }
 
 
@@ -65,12 +66,14 @@ export class GuideEditComponent implements OnInit {
   }
 
   getGuideHastags() {
-    const getGuideHastagsSubscription = this.guideService.getHashtagsByGuide(this.guideId).subscribe((data: RootObjectList<Hashtag>) => {
-      if (data) {
-        this.guideHashtags = data;
-      }
-    });
-    this.subscription.add(getGuideHastagsSubscription);
+    if (this.guideId) {
+      const getGuideHastagsSubscription = this.guideService.getHashtagsByGuide(this.guideId).subscribe((data: RootObjectList<Hashtag>) => {
+        if (data) {
+          this.guideHashtags = data;
+        }
+      });
+      this.subscription.add(getGuideHastagsSubscription);
+    }
   }
 
   // Mat-chips method
@@ -79,6 +82,8 @@ export class GuideEditComponent implements OnInit {
     this.hashtagInput.nativeElement.value = '';
     this.hashtagCtrl.setValue(null);
     this.updated = true;
+    console.log(this.guideHashtags);
+
   }
 
   remove(hashtag: Hashtag): void {
@@ -113,14 +118,20 @@ export class GuideEditComponent implements OnInit {
 
   // Persistence
   save() {
+
     if (this.guideId) {
       this.guideService.patch(this.guide, this.guideId).subscribe();
       console.log(this.guide);
     } else {
-      this.guideService.post(this.guide).subscribe();
+      this.guideService.post(this.guide).subscribe(response => {
+        this.guide = response;
+        if (this.guide.data.id) {
+          this.guideService.patchHashtagsByGuide(this.guide.data.id, this.guideHashtags).subscribe();
+        }
+      });
     }
 
-    if (this.updated) {
+    if (this.updated && this.guideId) {
       this.guideService.patchHashtagsByGuide(this.guideId, this.guideHashtags).subscribe();
       console.log(this.guideHashtags);
     }
