@@ -13,14 +13,16 @@
     <div class="guide-section">
       <mat-form-field>
         <mat-chip-list #chipList>
-          <mat-chip
-            *ngFor="let hashtag of guideHashtags.data"
-            [selectable]="selectable"
-            [removable]="removable"
-            (removed)="remove(hashtag)">
-            {{hashtag.attributes.name}}
-            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-          </mat-chip>
+         <!-- <ng-container *ngIf="updated"> -->
+            <mat-chip
+              *ngFor="let hashtag of guideHashtags.data"
+              [selectable]="selectable"
+              [removable]="removable"
+              (removed)="remove(hashtag)">
+              {{hashtag.attributes.name}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+         <!-- </ng-container> -->
           <input
             #hashtagInput
             [formControl]="hashtagCtrl"
