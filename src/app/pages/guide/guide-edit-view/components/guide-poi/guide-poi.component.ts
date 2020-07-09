@@ -12,7 +12,6 @@ import { Place } from 'src/app/shared/models/place.model';
 })
 export class GuidePoiComponent implements OnInit {
   @Input() guide: RootObject<Guide>;
-  @Input() guideId: number;
   @Input() places: RootObjectList<Place>;
   @Output() deletePlacesGuide = new EventEmitter();
   constructor() { }

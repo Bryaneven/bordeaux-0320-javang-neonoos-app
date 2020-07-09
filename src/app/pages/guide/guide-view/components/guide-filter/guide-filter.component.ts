@@ -36,7 +36,7 @@ export class GuideFilterComponent implements OnInit {
       this.hashtags = null;
       this.arrayHashtags.length = 0;
 
-      if (hashtags.data.length != 0 ) {
+      if (hashtags.data.length !== 0 ) {
         this.hashtags = hashtags;
       } else {
         this.hashtags = null;
