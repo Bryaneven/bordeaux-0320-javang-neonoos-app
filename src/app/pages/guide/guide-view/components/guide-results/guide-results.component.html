@@ -1,15 +1,15 @@
 <!-- <div class="overallContainer"> -->
-<div *ngFor="let guides2 of guideSections$ | async; let i=index" class="guide-result">
+<div *ngFor="let guides2 of guideSections; let i=index;" class="guide-result">
   <!-- <mat-card class="resultCard"> -->
-  <mat-card class="block"  >
+  <mat-card class="block" *ngIf="i < _hashtags.length" >
     <div class="resultHeader">
       <form class="hearder-title" (ngSubmit)="updateHashtagName(_hashtags[i].id, _hashtags[i].attributes.name)" #myForm="ngForm">
-        <h2 class="title-card-section" *ngIf= "show || hashtagId != _hashtags[i].id">{{ _hashtags[i].attributes.name }}</h2>
-        <div *ngIf= "!show && hashtagId === _hashtags[i].id">
+        <h2 class="title-card-section" *ngIf= "_hashtags[i] && show || hashtagId != _hashtags[i].id">{{ _hashtags[i].attributes.name }}</h2>
+        <div *ngIf= "_hashtags[i] && !show && hashtagId === _hashtags[i].id">
           <input name="hashtagName" type="text" [(ngModel)]="_hashtags[i].attributes.name" #hashtagName="ngModel"/>
         </div>
-        <button *ngIf= "hashtagId != _hashtags[i].id" type="submit" mat-button>Editer</button>
-        <button *ngIf= "!show && hashtagId === _hashtags[i].id" type="submit" mat-button>Valider</button>
+        <button *ngIf= "_hashtags[i] && hashtagId != _hashtags[i].id" type="submit" mat-button>Editer</button>
+        <button *ngIf= "!show && _hashtags[i] && hashtagId === _hashtags[i].id" type="submit" mat-button>Valider</button>
       </form>
     </div>
       <div  class="resultImg" >

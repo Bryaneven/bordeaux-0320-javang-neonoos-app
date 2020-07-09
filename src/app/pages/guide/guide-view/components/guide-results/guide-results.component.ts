@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Hashtag } from '../../../models/hashtag';
 import { HashtagService } from '../../../services/hashtag/hashtag.service';
 import { RootObject } from 'src/app/shared/models/root-object.model';
 import { Guide } from '../../../models/guide';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
 import { forkJoin, Observable } from 'rxjs';
+import { Hashtag } from 'src/app/shared/models/hashtag';
+import { Data } from 'src/app/shared/models/data.model';
 
 @Component({
   selector: 'neo-guide-results',
@@ -18,19 +19,18 @@ guides: RootObjectList<Guide>;
 guideSections: RootObjectList<Guide>[] = [];
 
 guideSections$: Observable<RootObjectList<Guide>[]>;
-_hashtags: Hashtag[] = [];
+_hashtags: Data<Hashtag>[] = [];
 show = true;
 titleHashtag = 'Edite';
 hashtagId: number;
 
-arrayGuides: any[] = [];
-
   @Input()
-  set hashtags(hashtags: Hashtag[]) {
-    this._hashtags = hashtags;
-
-    if (this._hashtags.length > 0) {
-      this.guideSections$ = this.forkGuide(this._hashtags);
+  set hashtags(hashtags: Data<Hashtag>[]) {
+    if (hashtags.length > 0) {
+      this.forkGuide(hashtags).subscribe((results: RootObjectList<Guide>[]) => {
+        this.guideSections = results;
+        this._hashtags = hashtags;
+      });
     }
   }
 
@@ -38,12 +38,9 @@ arrayGuides: any[] = [];
 
   ngOnInit(): void {  }
 
-  forkGuide(hashtags: Hashtag[]){
+  forkGuide(hashtags: Data<Hashtag>[]){
 
     const getGuides$ = hashtags.map((h) => this.hashtagService.getGuidesByHashtag(h['id']));
-    forkJoin(getGuides$).subscribe((results: RootObjectList<Guide>[]) => {
-      this.guideSections = results;
-    });
 
     return forkJoin(getGuides$);
   }
