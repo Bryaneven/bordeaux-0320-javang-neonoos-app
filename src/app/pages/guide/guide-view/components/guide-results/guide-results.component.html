@@ -1,24 +1,28 @@
 <!-- <div class="overallContainer"> -->
-<div *ngFor="let hashtag of _hashtags" class="guide-result">
+<div *ngFor="let guides2 of guideSections$ | async; let i=index" class="guide-result">
   <!-- <mat-card class="resultCard"> -->
-  <mat-card class="block">
+  <mat-card class="block"  >
     <div class="resultHeader">
-      <form class="hearder-title" (ngSubmit)="updateHashtagName(hashtag.id, hashtag.attributes.name)" #myForm="ngForm">
-        <h2 class="title-card-section" *ngIf= "show || hashtagId != hashtag.id">{{ hashtag.attributes.name }}</h2>
-        <div *ngIf= "!show && hashtagId === hashtag.id">
-          <input name="hashtagName" type="text" [(ngModel)]="hashtag.attributes.name" #hashtagName="ngModel"/>
+      <form class="hearder-title" (ngSubmit)="updateHashtagName(_hashtags[i].id, _hashtags[i].attributes.name)" #myForm="ngForm">
+        <h2 class="title-card-section" *ngIf= "show || hashtagId != _hashtags[i].id">{{ _hashtags[i].attributes.name }}</h2>
+        <div *ngIf= "!show && hashtagId === _hashtags[i].id">
+          <input name="hashtagName" type="text" [(ngModel)]="_hashtags[i].attributes.name" #hashtagName="ngModel"/>
         </div>
-        <button *ngIf= "hashtagId != hashtag.id" type="submit" mat-button>Editer</button>
-        <button *ngIf= "!show && hashtagId === hashtag.id" type="submit" mat-button>Valider</button>
+        <button *ngIf= "hashtagId != _hashtags[i].id" type="submit" mat-button>Editer</button>
+        <button *ngIf= "!show && hashtagId === _hashtags[i].id" type="submit" mat-button>Valider</button>
       </form>
     </div>
-    <div class="resultImg">
-      <div *ngFor="let guide of hashtag.relationships.guides.data">
-         <a [routerLink]="['/guide/edit/', guide.id]">
-            <img  mat-card-image src="https://picsum.photos/150">
-          </a>
+      <div  class="resultImg" >
+        <div *ngFor="let guide of guides2.data">
+          <div class="overlay-image">
+            <a [routerLink]="['/guide/edit/', guide.id]">
+              <img class="image" mat-card-image src="https://picsum.photos/150">
+              <div class="text">{{ guide.attributes.title}}</div>
+            </a>
+          </div>
       </div>
     </div>
   </mat-card>
 </div>
+
 
