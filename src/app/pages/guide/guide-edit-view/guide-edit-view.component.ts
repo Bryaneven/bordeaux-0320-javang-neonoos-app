@@ -43,6 +43,8 @@ export class GuideEditViewComponent implements OnInit {
       }else{
        this.guide = new RootObject<Guide>(Guide, 'guides');
        this.places = new RootObjectList<Place>(Place, 'places');
+       this.places.data = [];
+
       }
     });
     this.subscription.add(routerSubscription);
@@ -59,20 +61,6 @@ export class GuideEditViewComponent implements OnInit {
     });
     this.subscription.add(getOneGuideSubscription);
   }
-
-  // getHashtags() {
-  //   const getHashtagsSubscription = this.hashtagService.getAll().subscribe((hashtags: RootObjectList<Hashtag>) => {
-  //     if (hashtags) {
-  //       this.allHashtags = hashtags;
-  //     }
-  //     this.hashtagCtrl.setValue(null);
-
-  //     if (!this.filteredHashtags) {
-  //       this.listenChanges();
-  //     }
-  //   });
-  //   this.subscription.add(getHashtagsSubscription);
-  // }
 
   getGuideHastags() {
     const getGuideHastagsSubscription = this.guideService.getHashtagsByGuide(this.guideId).subscribe((data: RootObjectList<Hashtag>) => {
