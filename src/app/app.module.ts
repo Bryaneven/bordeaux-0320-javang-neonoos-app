@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import { QuillModule } from 'ngx-quill';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,6 +32,7 @@ import { ElideInterceptor } from './core/http-interceptors/elide.interceptor';
     MatIconModule,
     MatInputModule,
     FormsModule,
+    QuillModule.forRoot()
   ],
   providers: [
     {

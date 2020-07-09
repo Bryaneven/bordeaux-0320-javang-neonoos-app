@@ -11,7 +11,7 @@ import { startWith, map } from 'rxjs/operators';
 import { RootObject } from 'src/app/shared/models/root-object.model';
 import { HashtagService } from '../../../services/hashtag/hashtag.service';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
-
+import 'quill-emoji/dist/quill-emoji.js';
 @Component({
   selector: 'neo-guide-edit',
   templateUrl: './guide-edit.component.html',
@@ -138,6 +138,7 @@ export class GuideEditComponent implements OnInit {
 
     // this.router.navigate(['/guide/view']);
   }
+
 
 
 }

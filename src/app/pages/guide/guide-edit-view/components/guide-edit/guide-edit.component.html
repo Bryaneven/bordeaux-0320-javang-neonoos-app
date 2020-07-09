@@ -64,16 +64,14 @@
 
 <!-- Form-->
 <div class="forms">
-  <h3>short description</h3>
-  <mat-form-field *ngIf="guide">
-    <mat-label></mat-label>
-    <input  matInput #input maxlength="140" [(ngModel)]="guide.data.attributes.short_description">
-    <mat-hint align="end">{{input.value?.length || 0}}/140</mat-hint>
-  </mat-form-field>
-  <h3>long description</h3>
-  <mat-form-field *ngIf="guide" appearance="fill">
-    <mat-label></mat-label>
-    <textarea matInput [(ngModel)]="guide.data.attributes.description"></textarea>
-  </mat-form-field>
+  <h3>Description</h3>
+  <br>
+
+  <quill-editor *ngIf="guide"
+                [styles]="{height: '200px'}"
+                [(ngModel)]="guide.data.attributes.description">
+  </quill-editor>
 </div>
+
+
 
