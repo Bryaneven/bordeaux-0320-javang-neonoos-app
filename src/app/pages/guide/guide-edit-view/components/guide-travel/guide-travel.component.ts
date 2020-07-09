@@ -7,7 +7,6 @@ import { Trip } from 'src/app/shared/models/trip';
 import { GuideService } from '../../../services/guide/guide.service';
 import { RootObject } from 'src/app/shared/models/root-object.model';
 import { Guide } from '../../../models/guide';
-import { Data } from '@angular/router';
 
 @Component({
   selector: 'neo-guide-travel',
@@ -23,7 +22,6 @@ export class GuideTravelComponent implements OnInit {
   guideTrips: RootObjectList<Trip> = new RootObjectList<Trip>(Trip, 'trips');
   country: Country;
   countryId: number;
-  updated = false;
 
   @Input() guide: RootObject<Guide>;
   @Input() guideId: number;
@@ -57,19 +55,19 @@ export class GuideTravelComponent implements OnInit {
     });
   }
 
-  addTrip(trip) {
-    this.guideTrips.data.push(trip);
-    this.ckeckTrips();
-  }
+  toggleTrip(trip, event) {
+    const isChecked = event.checked;
 
-  removeTrip(trip: Trip): void {
-    for (let i = 0; i < this.guideTrips.data.length; i++) {
-      if (this.guideTrips.data[i].id === trip.id) {
-        this.guideTrips.data.splice(i , 1);
-        this.ckeckTrips();
-        break;
-      }
+    if (isChecked) {
+      this.guideTrips.data.push(trip);
+    } else {
+      const index = this.guideTrips.data.findIndex(
+        (value) => trip.id === value.id
+      );
+      this.guideTrips.data.splice(index, 1);
     }
+
+    this.ckeckTrips();
   }
 
   ckeckTrips() {
