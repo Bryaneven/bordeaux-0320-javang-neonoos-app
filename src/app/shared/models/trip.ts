@@ -26,6 +26,7 @@ export class Trip {
   stepList: any[];
   guides: Guide[];
   hashtags: any[];
+  isChecked: boolean;
 
   constructor(trip?: Trip){
     Object.assign(this, trip);
