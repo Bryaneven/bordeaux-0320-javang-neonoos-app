@@ -1,0 +1,30 @@
+@import 'src/assets/scss/_variables.scss';
+
+.overallContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+}
+
+img {
+  position: absolute;
+  top: 10vh;
+}
+
+.loginForm {
+  min-width: 150px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.loginFormWidth {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+mat-label {
+  color: $neonoos-color;
+}

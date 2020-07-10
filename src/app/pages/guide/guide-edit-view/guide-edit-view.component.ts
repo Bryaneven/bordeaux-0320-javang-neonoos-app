@@ -50,10 +50,10 @@ export class GuideEditViewComponent implements OnInit {
         const routeGuideId = Number(params.get('id'));
         this.guideId = routeGuideId;
         this.getOneGuide(this.guideId);
-      }else{
-       this.guide = new RootObject<Guide>(Guide, 'guides');
-       this.places = new RootObjectList<Place>(Place, 'places');
-       this.places.data = [];
+      } else {
+        this.guide = new RootObject<Guide>(Guide, 'guides');
+        this.places = new RootObjectList<Place>(Place, 'places');
+        this.places.data = [];
 
       }
     });
