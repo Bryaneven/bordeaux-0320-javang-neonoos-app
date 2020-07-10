@@ -3,12 +3,11 @@
 <div *ngFor="let trip of guideTrips.data">
   <div class="trip-header">
     <div class="trip-image">
-      <img src="https://picsum.photos/125/75" alt="">
+      <img [src]="trip.attributes.picture" alt="">
     </div>
     <div class="trip-content">
       <h4>{{trip.attributes.title}}</h4>
-      <h5>Supprimer du guide</h5>
-      <mat-slide-toggle [checked]=true (change)="toggleTrip(trip, $event)">Supprimer</mat-slide-toggle>
+      <mat-slide-toggle [checked]="trip.attributes.isChecked" (change)="toggleTrip(trip)">Supprimer</mat-slide-toggle>
     </div>
   </div>
 </div>
@@ -60,12 +59,11 @@
       <div *ngFor="let trip of trips.data">
         <div class="trip-header">
           <div class="trip-image">
-            <img src="https://picsum.photos/125/75" alt="">
+            <img [src]="trip.attributes.picture" alt="">
           </div>
           <div class="trip-content">
             <h4>{{trip.attributes.title}}</h4>
-            <h5>Ajouter au guide</h5>
-            <mat-slide-toggle [checked]="false"  (change)="toggleTrip(trip, $event)">Ajouter</mat-slide-toggle>
+            <mat-slide-toggle [checked]="trip.attributes.isChecked"  (change)="toggleTrip(trip)">Ajouter</mat-slide-toggle>
           </div>
         </div>
       </div>
