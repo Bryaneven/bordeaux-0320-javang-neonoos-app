@@ -13,7 +13,7 @@ export class AuthService {
   constructor(private httpClient: HttpClient) { }
 
   loginUser(email: string, password: string): Observable<HttpResponse<RootObject<User>>> {
-    return this.httpClient.post<RootObject<User>>('http://localhost:8080/login', // mettre la bonne URL
+    return this.httpClient.post<RootObject<User>>('https://bordeaux-java-0320-pj3-neonoos-api.javarover.wilders.dev/login',
       { email, password },
       { observe: 'response' }
     ).pipe(tap(
