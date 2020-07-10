@@ -1,19 +1,19 @@
 <h2>Voyages du guide</h2>
 
-<div class="trip-header">
-  <div class="trip-image">
-    <img src="https://picsum.photos/125/75" alt="">
-  </div>
-  <div class="trip-content">
-    <h4>Titre du voyage</h4>
-    <h5>Ajouter au guide</h5>
-    <mat-slide-toggle>Ajouté</mat-slide-toggle>
+<div *ngFor="let trip of guideTrips.data">
+  <div class="trip-header">
+    <div class="trip-image">
+      <img src="https://picsum.photos/125/75" alt="">
+    </div>
+    <div class="trip-content">
+      <h4>{{trip.attributes.title}}</h4>
+      <h5>Supprimer du guide</h5>
+      <mat-slide-toggle [checked]=true (change)="toggleTrip(trip, $event)">Supprimer</mat-slide-toggle>
+    </div>
   </div>
 </div>
 
-
 <mat-accordion>
-  <!-- <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)"> -->
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -23,12 +23,13 @@
     <mat-divider></mat-divider>
     <h3 class="filter-title">Ajouter un voyage</h3>
     <div class="filter-bar">
+
       <div class="filter-country">
         <h3>Pays</h3>
         <mat-form-field>
-          <mat-select>
-            <mat-option *ngFor="let trip of trips" [value]="trip.country">
-              {{trip.country}}
+          <mat-select [(value)]="countryId">
+            <mat-option *ngFor="let country of countries.data" value="{{country.id}}">
+              {{country.attributes.name}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -37,20 +38,37 @@
       <div>
         <mat-form-field class="full-width">
           <mat-label>Search a place</mat-label>
-          <span matPrefix><mat-icon>search</mat-icon></span>
+          <span matPrefix>
+            <mat-icon>search</mat-icon>
+          </span>
           <input matInput>
         </mat-form-field>
       </div>
 
 
       <div>
-        <button mat-stroked-button>actualiser la liste</button>
+        <button mat-stroked-button (click)="onSubmit()">actualiser la liste</button>
       </div>
+
     </div>
 
     <mat-divider></mat-divider>
 
     <h3 class="title-result">Résultats</h3>
 
+    <div *ngIf="trips?.data.length > 0">
+      <div *ngFor="let trip of trips.data">
+        <div class="trip-header">
+          <div class="trip-image">
+            <img src="https://picsum.photos/125/75" alt="">
+          </div>
+          <div class="trip-content">
+            <h4>{{trip.attributes.title}}</h4>
+            <h5>Ajouter au guide</h5>
+            <mat-slide-toggle [checked]="false"  (change)="toggleTrip(trip, $event)">Ajouter</mat-slide-toggle>
+          </div>
+        </div>
+      </div>
+    </div>
   </mat-expansion-panel>
 </mat-accordion>
