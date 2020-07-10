@@ -20,6 +20,8 @@ h3 {
     justify-content: space-between;
 
     img {
+      width: 180px;
+      height: 140px;
       border-radius: 10px;
     }
 
@@ -30,7 +32,7 @@ h3 {
     margin: 0 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
 
     h4 {
       margin: 0;
