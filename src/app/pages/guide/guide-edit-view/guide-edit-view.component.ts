@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { GuideService } from '../services/guide/guide.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HashtagService } from '../services/hashtag/hashtag.service';
@@ -8,6 +8,10 @@ import { Guide } from '../models/guide';
 import { Hashtag } from 'src/app/shared/models/hashtag';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
 import { Place } from 'src/app/shared/models/place.model';
+import { Country } from 'src/app/shared/models/country';
+import { Trip } from 'src/app/shared/models/trip';
+import { TripService } from '../services/trip/trip.service';
+import { CountryService } from 'src/app/shared/services/country.service';
 
 @Component({
   selector: 'neo-guide-edit-view',
@@ -19,6 +23,9 @@ export class GuideEditViewComponent implements OnInit {
   subscription = new Subscription();
   guideId: number;
   guide?: RootObject<Guide>;
+
+  countries?: RootObjectList<Country> = new RootObjectList<Country>(Country, 'countries');
+
   // allHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag, 'hashtags');
   guideHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag, 'hastags');
   filteredHashtags: Observable<any[]>;
@@ -27,11 +34,14 @@ export class GuideEditViewComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private guideService: GuideService,
-    private hashtagService: HashtagService
+    private hashtagService: HashtagService,
+    private tripService: TripService,
+    private countryService: CountryService
   ) { }
 
   ngOnInit(): void {
     this.getRouteParam();
+    this.getCountries();
   }
 
   getRouteParam() {
@@ -50,6 +60,14 @@ export class GuideEditViewComponent implements OnInit {
     this.subscription.add(routerSubscription);
   }
 
+  getCountries() {
+    this.countryService.getCountries().subscribe(
+      countries => {
+        this.countries = countries;
+      }
+    );
+  }
+
   getOneGuide(id: number) {
     const getOneGuideSubscription = this.guideService.getById(id).subscribe((guide: RootObject<Guide>) => {
       if (guide) {
@@ -66,8 +84,6 @@ export class GuideEditViewComponent implements OnInit {
     const getGuideHastagsSubscription = this.guideService.getHashtagsByGuide(this.guideId).subscribe((data: RootObjectList<Hashtag>) => {
       if (data) {
         this.guideHashtags = data;
-        console.log(this.guideHashtags);
-
       }
     });
     this.subscription.add(getGuideHastagsSubscription);
@@ -77,8 +93,6 @@ export class GuideEditViewComponent implements OnInit {
     this.guideService.getPlacesByGuide(this.guideId).subscribe((places: RootObjectList<Place>) => {
       if (places) {
         this.places = places;
-        console.log(this.places);
-
       } else {
         this.places = new RootObjectList<Place>(Place, 'places');
       }
@@ -86,7 +100,6 @@ export class GuideEditViewComponent implements OnInit {
   }
   deletePlacesGuide(place) {
     this.places.data = this.places.data.filter((placeTofind) => place.id !== placeTofind.id);
-    console.log(this.guide);
 
     this.guideService.patchPlacesByGuide(this.guideId, this.places).subscribe(() => {
       this.getOneGuide(this.guideId);

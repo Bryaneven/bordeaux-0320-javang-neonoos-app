@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
+import { TripService } from '../../../services/trip/trip.service';
+import { Country } from 'src/app/shared/models/country';
+import { CountryService } from 'src/app/shared/services/country.service';
+import { Trip } from 'src/app/shared/models/trip';
+import { GuideService } from '../../../services/guide/guide.service';
+import { RootObject } from 'src/app/shared/models/root-object.model';
+import { Guide } from '../../../models/guide';
 
 @Component({
   selector: 'neo-guide-travel',
@@ -7,30 +15,64 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GuideTravelComponent implements OnInit {
 
-  trips: any[] = [
-    {id: 1, country: "Maroc"},
-    {id: 2, country: "France"}
-  ]
 
-  /** toggle start discover **/
+  // POURQUOI 3 LISTES DE TRIPS ?!?!
+  currentTrips: RootObjectList<Trip> = new RootObjectList<Trip>(Trip, 'trips');
+  trips?: RootObjectList<Trip>;
+  guideTrips: RootObjectList<Trip> = new RootObjectList<Trip>(Trip, 'trips');
+  country: Country;
+  countryId: number;
 
-  // step = 0;
+  @Input() guide: RootObject<Guide>;
+  @Input() guideId: number;
+  @Input() countries: RootObjectList<Country>;
 
-  // setStep(index: number) {
-  //   this.step = index;
-  // }
 
-  // nextStep() {
-  //   this.step++;
-  // }
+  constructor(
+    private tripService: TripService,
+    private countryService: CountryService,
+    private guideService: GuideService) {
 
-  // prevStep() {
-  //   this.step--;
-  // }
-
-  constructor() { }
-
-  ngOnInit(): void {
   }
 
+  ngOnInit(): void {
+    this.getTripsByGuide();
+  }
+
+  onSubmit() {
+    this.tripService.getTripsByCountryId(this.countryId).subscribe(
+      tripsByCountry => {
+        this.trips = tripsByCountry;
+      }
+    );
+  }
+
+  getTripsByGuide() {
+    this.tripService.getTripsByGuideId(this.guideId).subscribe((guideTrips: RootObjectList<Trip>) => {
+      if (guideTrips) {
+        this.guideTrips = guideTrips;
+      }
+    });
+  }
+
+  toggleTrip(trip, event) {
+    const isChecked = event.checked;
+
+    if (isChecked) {
+      this.guideTrips.data.push(trip);
+    } else {
+      const index = this.guideTrips.data.findIndex(
+        (value) => trip.id === value.id
+      );
+      this.guideTrips.data.splice(index, 1);
+    }
+
+    this.ckeckTrips();
+  }
+
+  ckeckTrips() {
+    this.guideService.patchTripsByGuide(this.guideId, this.guideTrips).subscribe(() => {
+      this.currentTrips = this.guideTrips;
+    });
+  }
 }

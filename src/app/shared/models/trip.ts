@@ -1,4 +1,5 @@
-import { Guide } from './guide';
+import { Guide } from 'src/app/pages/guide/models/guide';
+
 
 export class Trip {
   id: number;
@@ -25,6 +26,7 @@ export class Trip {
   stepList: any[];
   guides: Guide[];
   hashtags: any[];
+  isChecked: boolean;
 
   constructor(trip?: Trip){
     Object.assign(this, trip);
