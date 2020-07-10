@@ -1,12 +1,19 @@
 
-<div mat-dialog-content>
+<div id="dialog-new-hashtag" mat-dialog-content>
   <form (ngSubmit)="onSubmit()" #myForm="ngForm">
-    <input name="newSection" type="text" [(ngModel)]="hashtag.data.attributes.name"
-    #name="ngModel" placeholder="Nouvelle Section"/>
 
-    <button mat-button type="submit">Enregistrer</button>
-    <button mat-button (click)="onNoClick()">Quitter</button>
+    <div class="dialog-title">
+      <p>Enregistrer une nouvelle section </p>
+    </div>
 
+    <div class="dialog-input">
+      <input name="newSection" type="text" [(ngModel)]="hashtag.data.attributes.name" #name="ngModel"/>
+    </div>
+
+    <div class="dialog-btn">
+      <button mat-button type="submit">Enregistrer</button>
+      <button mat-button (click)="onNoClick()">Quitter</button>
+    </div>
   </form>
 </div>
 

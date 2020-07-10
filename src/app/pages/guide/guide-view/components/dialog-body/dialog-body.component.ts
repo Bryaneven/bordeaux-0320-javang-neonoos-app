@@ -15,16 +15,19 @@ export class DialogBodyComponent implements OnInit {
 
   constructor( public dialogRef: MatDialogRef<DialogBodyComponent>, private hashtagService: HashtagService ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   onSubmit() {
-    console.log(this.hashtag);
-    this.hashtagService.post(this.hashtag).subscribe();
+    if ( this.hashtag.data.attributes.name ) {
+      this.hashtagService.post(this.hashtag).subscribe( (hashtag) => {
+        if (hashtag) {
+          this.onNoClick();
+        }
+      });
+    }
   }
 
   onNoClick() {
     this.dialogRef.close();
   }
-
 }

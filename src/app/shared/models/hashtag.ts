@@ -3,6 +3,6 @@ export class Hashtag {
   name: string;
 
   constructor(hashtag?: Hashtag) {
-    Object.assign(this, hashtag)
+    Object.assign(this, hashtag);
   }
 }

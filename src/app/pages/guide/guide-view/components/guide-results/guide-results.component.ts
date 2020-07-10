@@ -1,6 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivityService } from 'src/app/shared/services/activity.service';
+import { HashtagService } from '../../../services/hashtag/hashtag.service';
+import { RootObject } from 'src/app/shared/models/root-object.model';
+import { Guide } from '../../../models/guide';
+import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
+import { forkJoin, Observable } from 'rxjs';
 import { Hashtag } from 'src/app/shared/models/hashtag';
+import { Data } from 'src/app/shared/models/data.model';
 
 @Component({
   selector: 'neo-guide-results',
@@ -9,20 +14,57 @@ import { Hashtag } from 'src/app/shared/models/hashtag';
 })
 export class GuideResultsComponent implements OnInit {
 
-  _hashtags: Hashtag[] = [];
+hashtag?: RootObject<Hashtag> = new RootObject<Hashtag>(Hashtag, 'hashtags');
+guides: RootObjectList<Guide>;
+guideSections: RootObjectList<Guide>[] = [];
+
+guideSections$: Observable<RootObjectList<Guide>[]>;
+_hashtags: Data<Hashtag>[] = [];
+show = true;
+titleHashtag = 'Edite';
+hashtagId: number;
 
   @Input()
-  set hashtags(hashtags: Hashtag[]) {
-    this._hashtags = hashtags;
+  set hashtags(hashtags: Data<Hashtag>[]) {
+    if (hashtags.length > 0) {
+      this.forkGuide(hashtags).subscribe((results: RootObjectList<Guide>[]) => {
+        this.guideSections = results;
+        this._hashtags = hashtags;
+      });
+    }
   }
 
-  activities: any[] = [
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-    ('https://via.placeholder.com/150'),
-  ];
+  constructor(private hashtagService: HashtagService) { }
 
-  constructor(private activityService: ActivityService) { }
+  ngOnInit(): void {  }
 
-  ngOnInit(): void { }
+  forkGuide(hashtags: Data<Hashtag>[]){
+
+    const getGuides$ = hashtags.map((h) => this.hashtagService.getGuidesByHashtag(h['id']));
+
+    return forkJoin(getGuides$);
+  }
+
+  updateHashtagName(id: number, name: string) {
+
+    if (this.show === true ) {
+      this.show = false;
+      this.hashtagId = id;
+    } else {
+
+      if (this.hashtagId === id) {
+        this.hashtagService.getById(id).subscribe((hashtag) => {
+          this.hashtag = hashtag;
+          if ( this.hashtag.data.id === this.hashtagId) {
+            this.hashtag.data.attributes.name = name;
+            this.hashtagService.patch(hashtag, id).subscribe();
+            this.show = true;
+            this.hashtagId = null;
+          }
+        });
+      } else {
+        this.hashtagId = id;
+      }
+    }
+  }
 }
