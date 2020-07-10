@@ -5,7 +5,6 @@ import { AuthService } from './services/auth.service';
 import { User } from './models/user';
 import { RootObject } from 'src/app/shared/models/root-object.model';
 import { Router } from '@angular/router';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -37,9 +36,18 @@ export class LoginComponent implements OnInit {
 
 
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    this.isAlreadyLog();
+  }
+
+  isAlreadyLog() {
+    const currentToken = localStorage.getItem('token');
+    if (!this.authService.tokenExpired(currentToken) && currentToken) {
+      this.router.navigate(['/guide']);
+    }
   }
 
   /* submit du formulaire */
