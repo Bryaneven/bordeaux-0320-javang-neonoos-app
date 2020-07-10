@@ -28,6 +28,7 @@ import { GuidePoiComponent } from './guide-edit-view/components/guide-poi/guide-
 import { GuidePoiSearchSectionComponent } from './guide-edit-view/components/guide-poi-search-section/guide-poi-search-section.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogBodyComponent } from './guide-view/components/dialog-body/dialog-body.component';
+import { QuillModule } from 'ngx-quill';
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import { DialogBodyComponent } from './guide-view/components/dialog-body/dialog-
     MatAutocompleteModule,
     ReactiveFormsModule,
     MatDialogModule,
+    QuillModule.forRoot()
   ]
 })
 export class GuideModule { }

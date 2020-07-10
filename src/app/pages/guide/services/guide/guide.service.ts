@@ -9,6 +9,8 @@ import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
 import { Hashtag } from 'src/app/shared/models/hashtag';
 import { Place } from 'src/app/shared/models/place.model';
 import { Trip } from 'src/app/shared/models/trip';
+import { Picture } from 'src/app/shared/models/picture.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +30,10 @@ export class GuideService {
 
   getPlacesByGuide(id: number): Observable<RootObjectList<Place>> {
     return this.http.get<RootObjectList<Place>>(`${environment.APIURI}guides/${id}/places`);
+  }
+
+  getPictureGuide(id: number): Observable<RootObjectList<Picture>> {
+    return this.http.get<RootObjectList<Picture>>(`${environment.APIURI}places/${id}/pictures`);
   }
   getHashtagsByGuide(id: number): Observable<RootObjectList<Hashtag>> {
     return this.http.get<RootObjectList<Hashtag>>(`${environment.APIURI}guides/${id}/hashtags`);

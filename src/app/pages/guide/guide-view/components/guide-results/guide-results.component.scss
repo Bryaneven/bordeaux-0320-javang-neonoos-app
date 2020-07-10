@@ -68,6 +68,7 @@
     max-width: 150px;
     border-radius: 15px;
     margin: 10px;
+    transition-duration: 0.3s;
   }
   & img:hover {
     transform: scale(1.15);
@@ -100,4 +101,27 @@
 .title-card-section {
   color: #67758D;
   font-size: 20px;
+}
+
+.overlay-image {
+  position: relative;
+  width: 100%;
+}
+
+.overlay-image .image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay-image .text {
+  color: #fff;
+  font-size: 30px;
+  line-height: 1.5em;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
 }
