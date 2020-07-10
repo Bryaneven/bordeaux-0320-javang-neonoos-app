@@ -51,24 +51,27 @@ export class GuideTravelComponent implements OnInit {
     this.tripService.getTripsByGuideId(this.guideId).subscribe((guideTrips: RootObjectList<Trip>) => {
       if (guideTrips) {
         this.guideTrips = guideTrips;
+        this.guideTrips.data.map(
+          trips => trips.attributes.isChecked = true
+        );
       }
     });
   }
 
-  toggleTrip(trip, event) {
-    const isChecked = event.checked;
+  toggleTrip(trip) {
 
-    if (isChecked) {
+    if (!trip.attributes.isChecked) {
       this.guideTrips.data.push(trip);
+      trip.attributes.isChecked = true;
     } else {
       const index = this.guideTrips.data.findIndex(
         (value) => trip.id === value.id
       );
       this.guideTrips.data.splice(index, 1);
+      trip.attributes.isChecked = false;
     }
-
-    this.ckeckTrips();
   }
+
 
   ckeckTrips() {
     this.guideService.patchTripsByGuide(this.guideId, this.guideTrips).subscribe(() => {
