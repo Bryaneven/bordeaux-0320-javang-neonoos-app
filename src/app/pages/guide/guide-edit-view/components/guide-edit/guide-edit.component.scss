@@ -53,13 +53,7 @@ width: 60%;
   .guide-right {
 
     .guide-right-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-
-      button:last-child {
-        margin-left: 1rem;
-      }
+     text-align: right;
     }
 
     h3 {
