@@ -19,6 +19,10 @@ import { ElideInterceptor } from './core/http-interceptors/elide.interceptor';
 import { ProgbarComponent } from './shared/components/progbar/progbar.component';
 import { LoaderService } from './shared/services/loader.service';
 import { LoaderInterceptor } from './core/http-interceptors/loader-interceptor.interceptor';
+import { DialogSaveComponent } from './shared/components/dialog-save/dialog-save.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
@@ -26,6 +30,8 @@ import { LoaderInterceptor } from './core/http-interceptors/loader-interceptor.i
     NavbarComponent,
     HeaderComponent,
     ProgbarComponent,
+    DialogSaveComponent,
+
   ],
 
   imports: [
@@ -39,6 +45,8 @@ import { LoaderInterceptor } from './core/http-interceptors/loader-interceptor.i
     FormsModule,
     QuillModule.forRoot(),
     MatProgressBarModule
+    MatButtonModule,
+    MatDialogModule,
   ],
   providers: [
     LoaderService,
