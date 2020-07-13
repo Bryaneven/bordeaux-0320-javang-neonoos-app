@@ -18,6 +18,7 @@ export class MapboxComponent implements OnInit, OnChanges {
   ngOnInit(): void {
 
     mapboxgl.accessToken = 'pk.eyJ1IjoicHJhbGluZTQwIiwiYSI6ImNrYmh5aTNqOTBhM2Yyem81NnI3a2hyMzAifQ.-Jq7YUy1fTIbegOvvl-4sA';
+    
     if (this.places.data[0].attributes.lat){
       this.initMap(this.places.data[0].attributes.lng, this.places.data[0].attributes.lat);
       this.places.data.map((place) => {
@@ -41,7 +42,7 @@ export class MapboxComponent implements OnInit, OnChanges {
 
   addMarker(lng: number, lat: number, name, description){
     const popup = new mapboxgl.Popup({ offset: 25 })
-      .setHTML('<h3>' + name + '</h3><p>' + description + '</p>');
+    .setHTML('<h3>' + name + '</h3><p>' + description + '</p>');
     const marker = new mapboxgl.Marker({
       draggable: false
       })
@@ -51,6 +52,8 @@ export class MapboxComponent implements OnInit, OnChanges {
 
     this.markers.push(marker);
   }
+
+
   ngOnChanges() {
 
     if (this.markers.length > 0){

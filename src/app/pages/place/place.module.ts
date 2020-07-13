@@ -17,6 +17,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import { PlaceRoutingModule } from './place-routing.module';
 import { PlaceViewComponent } from './place-view/place-view.component';
@@ -47,6 +48,7 @@ import { PlaceFilterComponent } from './place-view/components/place-filter/place
     MatSelectModule,
     MatSliderModule,
     MatDividerModule,
+    MatTabsModule,
     FormsModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
