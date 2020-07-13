@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'neo-starsbox',
@@ -8,15 +9,33 @@ import { Component, OnInit, Input } from '@angular/core';
 export class StarsboxComponent implements OnInit {
 
 @Input() typeCheckbox: string;
+@Output() starsboxEventEmitter = new EventEmitter<any>();
+arrayChecks = [];
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   checkstars($event) {
-    const event = $event;
-    console.log(event);
-  }
 
+    const valueElement = $event.target.value;
+    const checked = $event.target.checked;
+
+    if (checked === true) {
+      if (this.typeCheckbox === 'radio') {
+          this.arrayChecks = [];
+      }
+      this.arrayChecks.push(valueElement);
+    } else {
+      for (let i = 0; i < this.arrayChecks.length; i++) {
+        if (this.arrayChecks[i] === valueElement) {
+          this.arrayChecks.splice(i, 1);
+        }
+      }
+    }
+
+    console.log(this.arrayChecks);
+
+    this.starsboxEventEmitter.emit(this.arrayChecks);
+  }
 }

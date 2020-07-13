@@ -12,10 +12,11 @@ import { logging } from 'protractor';
 })
 export class PlaceFilterComponent implements OnInit {
 
-  country: String; 
+  country: String;
   place: string;
   town: string
   starsCheck = [false, false, false, false];
+  arrayCheck = [];
 
   radiusMin: number;
   radiusMax: number;
@@ -35,10 +36,11 @@ export class PlaceFilterComponent implements OnInit {
   constructor(private hashtagservice: HashtagService) { }
 
   ngOnInit(): void {
+    console.log(this.arrayCheck);
   }
 
   onCountryChange(value: string): void {
-     
+
   }
 
   onPlaceChange(value: string): void {
@@ -50,7 +52,7 @@ export class PlaceFilterComponent implements OnInit {
   }
 
   onStarsChange(index: number){
-    this.starsCheck[index] = !this.starsCheck[index]; 
+    this.starsCheck[index] = !this.starsCheck[index];
     this.showHashtags;
   }
 
@@ -66,7 +68,7 @@ export class PlaceFilterComponent implements OnInit {
       this.clearHashtags();
     }
   }
-  
+
   showHashtags() {
     this.hashtagservice.getAll().subscribe((hashtags) => {
     this.hashtags = hashtags;
@@ -94,7 +96,10 @@ export class PlaceFilterComponent implements OnInit {
     // inisialise un nouveau tableau depuis tableau exitant :
     this.arrayHashtags = [...this.arrayHashtags];
     // Send CheckboxEvent
-    
+
   }
 
+  onStarsboxEvent(arrayChecks) {
+    console.log(arrayChecks);
+  }
 }
