@@ -5,7 +5,7 @@
             <!-- Pays, Place, ville -->
             <div id='block1-line1' class = 'line'>
 
-              <neo-starsbox typeCheckbox="checkbox"></neo-starsbox>
+              <neo-starsbox typeCheckbox="checkbox" (starsboxEventEmitter)="onStarsboxEvent($event)"></neo-starsbox>
 
                 <!--
                 <mat-form-field class="form-full-width">

@@ -11,12 +11,12 @@ import { Place } from 'src/app/shared/models/place.model';
   styleUrls: ['./place-view.component.scss']
 })
 export class PlaceViewComponent implements OnInit {
-  @Input('rating') rating: number;  
-  @Input('starCount') starCount: number; 
+  @Input('rating') rating: number;
+  @Input('starCount') starCount: number;
   constructor() { }
 
   ngOnInit(): void {
-     
+
   }
 
 }
