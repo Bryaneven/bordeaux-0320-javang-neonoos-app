@@ -41,18 +41,23 @@ export class GuideTravelComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.tripName);
-
-    if ( this.tripName === undefined ){
+    if (!this.tripName && this.countryId){
     this.tripService.getTripsByCountryId(this.countryId).subscribe(
       tripsByCountry => {
         this.trips = tripsByCountry;
-      }
-    );
+        this.CompareTripsChecked();
+      });
+
     } else if (!this.countryId && this.tripName){
-      this.tripService.getTripsByName(this.tripName).subscribe((trips) => this.trips = trips);
+      this.tripService.getTripsByName(this.tripName).subscribe((trips) => {
+        this.trips = trips;
+        this.CompareTripsChecked();
+      });
     }else {
-      this.tripService.getTripsByGuideIdAndName(this.guideId, this.tripName).subscribe((trips) => this.trips = trips);
+      this.tripService.getTripsByGuideIdAndName(this.guideId, this.tripName).subscribe((trips) => {
+        this.trips = trips;
+        this.CompareTripsChecked();
+      });
     }
   }
 
@@ -88,5 +93,13 @@ export class GuideTravelComponent implements OnInit {
     this.guideService.patchTripsByGuide(this.guideId, this.guideTrips).subscribe(() => {
       this.currentTrips = this.guideTrips;
     });
+  }
+
+  CompareTripsChecked(){
+    this.trips.data.map((trip) => this.guideTrips.data.map((tripToCompare) => {
+      if (tripToCompare.id === trip.id){
+        trip.attributes.isChecked = true;
+      }
+    }));
   }
 }

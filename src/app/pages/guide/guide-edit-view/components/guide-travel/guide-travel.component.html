@@ -27,6 +27,7 @@
         <h3>Pays</h3>
         <mat-form-field>
           <mat-select [(value)]="countryId">
+            <mat-option>Aucun</mat-option>
             <mat-option *ngFor="let country of countries.data" value="{{country.id}}">
               {{country.attributes.name}}
             </mat-option>
@@ -63,7 +64,10 @@
           </div>
           <div class="trip-content">
             <h4>{{trip.attributes.title}}</h4>
-            <mat-slide-toggle [checked]="trip.attributes.isChecked"  (change)="toggleTrip(trip)">Ajouter</mat-slide-toggle>
+            <mat-slide-toggle [checked]="trip.attributes.isChecked"  (change)="toggleTrip(trip)">
+             <div *ngIf="!trip.attributes.isChecked">Ajouter</div>
+             <div *ngIf="trip.attributes.isChecked" >Supprimer</div>
+            </mat-slide-toggle>
           </div>
         </div>
       </div>
