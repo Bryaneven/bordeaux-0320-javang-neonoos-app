@@ -24,7 +24,7 @@ export class HashtagService {
   }
 
   getByName(name: string): Observable<RootObjectList<Hashtag>> {
-    return this.httpClient.get<RootObjectList<Hashtag>>(`${environment.APIURI}hashtags?filter=name==*` + name + `*`);
+    return this.httpClient.get<RootObjectList<Hashtag>>(`${environment.APIURI}hashtags?filter=name==*${name}*`);
   }
 
   getGuidesByHashtag(id: number): Observable<RootObjectList<Guide>> {

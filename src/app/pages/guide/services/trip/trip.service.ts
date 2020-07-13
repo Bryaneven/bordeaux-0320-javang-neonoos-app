@@ -23,4 +23,11 @@ export class TripService {
   getTripsByGuideId(guideId: number) {
     return this.httpClient.get<RootObjectList<Trip>>(`${environment.APIURI}guides/${guideId}/trips`);
   }
+  getTripsByName(name: string){
+    return this.httpClient.get<RootObjectList<Trip>>(`${environment.APIURI}trips?filter=title==*${name}*`);
+  }
+  getTripsByGuideIdAndName(countryId: number, name: string){
+    return this.httpClient.get<RootObjectList<Trip>>
+    (`${environment.APIURI}countries/${countryId}/trips?filter%5Btrips%5D=title==*${name}*`);
+  }
 }
