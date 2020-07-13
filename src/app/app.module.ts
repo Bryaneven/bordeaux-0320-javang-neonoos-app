@@ -44,7 +44,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     FormsModule,
     QuillModule.forRoot(),
-    MatProgressBarModule
+    MatProgressBarModule,
     MatButtonModule,
     MatDialogModule,
   ],
