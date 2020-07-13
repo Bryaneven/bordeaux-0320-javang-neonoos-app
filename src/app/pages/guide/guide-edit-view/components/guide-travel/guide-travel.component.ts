@@ -16,7 +16,7 @@ import { Guide } from '../../../models/guide';
 export class GuideTravelComponent implements OnInit {
 
 
-  // POURQUOI 3 LISTES DE TRIPS ?!?!
+
   currentTrips: RootObjectList<Trip> = new RootObjectList<Trip>(Trip, 'trips');
   trips?: RootObjectList<Trip>;
   guideTrips: RootObjectList<Trip> = new RootObjectList<Trip>(Trip, 'trips');
@@ -63,17 +63,19 @@ export class GuideTravelComponent implements OnInit {
     if (!trip.attributes.isChecked) {
       this.guideTrips.data.push(trip);
       trip.attributes.isChecked = true;
+      this.checkTrips();
     } else {
       const index = this.guideTrips.data.findIndex(
         (value) => trip.id === value.id
       );
       this.guideTrips.data.splice(index, 1);
       trip.attributes.isChecked = false;
+      this.checkTrips();
     }
   }
 
 
-  ckeckTrips() {
+  checkTrips() {
     this.guideService.patchTripsByGuide(this.guideId, this.guideTrips).subscribe(() => {
       this.currentTrips = this.guideTrips;
     });
