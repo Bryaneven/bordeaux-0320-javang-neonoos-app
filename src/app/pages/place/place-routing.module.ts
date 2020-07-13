@@ -12,6 +12,7 @@ const routes: Routes = [
   {
     path: 'view',
     component: PlaceViewComponent
+     
   },
   {
     path: 'new',

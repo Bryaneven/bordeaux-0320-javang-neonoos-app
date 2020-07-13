@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 
+
 // Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,7 +21,7 @@ import { ElideInterceptor } from './core/http-interceptors/elide.interceptor';
   declarations: [
     AppComponent,
     NavbarComponent,
-    HeaderComponent,
+    HeaderComponent
   ],
 
   imports: [

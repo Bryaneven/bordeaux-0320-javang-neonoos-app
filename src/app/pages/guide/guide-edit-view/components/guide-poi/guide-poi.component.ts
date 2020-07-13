@@ -19,6 +19,7 @@ export class GuidePoiComponent implements OnInit {
   @Input() guide: RootObject<Guide>;
   @Input() places: RootObjectList<Place>;
   @Output() deletePlacesGuide = new EventEmitter();
+
   PicturesUrl$: Observable<string>[] = [] ;
   constructor(private guideService: GuideService) {
    }

@@ -1,5 +1,137 @@
 <div class="place-filter">
-  <div class="block">
-      <neo-starsbox typeCheckbox="checkbox"></neo-starsbox>
-  </div>
+    <div class="block">
+        <!-- Pays, Place, ville, starsRate, rayon-->
+        <div id="block1">
+            <!-- Pays, Place, ville -->
+            <div id='block1-line1' class = 'line'>
+
+              <neo-starsbox typeCheckbox="checkbox"></neo-starsbox>
+
+                <!--
+                <mat-form-field class="form-full-width">
+                    <mat-label>Pays: </mat-label>
+                    <mat-select multiple formControlName="countrySelection">
+                    <mat-option *ngFor="let country of countries" [value]="selectedCountry">
+                        {{country.name}}
+                    </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="countrySelect.hasError('required')">
+                    Country is required.
+                    </mat-error>
+                </mat-form-field>
+                -->
+                <mat-form-field id='country-form-field' class='form-field'>
+                    <mat-label>Pays:</mat-label>
+                    <mat-select [(ngModel)]="country" (selectionChange)="onCountryChange($event)">
+                        <mat-option value="Maroc">Maroc</mat-option>
+                        <mat-option value="Tunisie">Tunisie</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field id='place-form-field' class='form-field'>
+                    <mat-icon matPrefix>search</mat-icon>
+                    <input type="text" matInput placeholder="Rechercher une place" [(ngModel)]="place" (input)="onPlaceChange($event)">
+                </mat-form-field>
+
+                <mat-form-field id='town-form-field' class='form-field'>
+                    <mat-icon matPrefix>place</mat-icon>
+                    <input type="text" matInput placeholder="Saisissez une ville" [(ngModel)]="town" (input)="onTownChange($event)">
+                </mat-form-field>
+            </div>
+            <!-- Stars et Rayon-->
+            <div id='block1-line2' class = 'line'>
+                <!-- Stars -->
+                <div id='stars-form-field' class='form-field'>
+                    <div id='stars-label' class='stars-brick'>
+                        <p id='form-label'> Stars: </p>
+                    </div>
+                    <div id='three_stars' class='stars-brick' [style.color]="starsCheck[3] ? '#62c3e2' : 'blue'" (click)="onStarsChange(3)">
+                        <div class='stars-sub-brick'>
+                            <mat-icon class='star-icon'>star</mat-icon>
+                        </div>
+                        <div class='stars-sub-brick'>
+                            <mat-icon class='star-icon'>star</mat-icon>
+                            <mat-icon class='star-icon'>star</mat-icon>
+                        </div>
+                    </div>
+                    <div id='two_stars' class='stars-brick' [style.color]="starsCheck[2] ? '#62c3e2' : 'blue'" (click)="onStarsChange(2)">
+                        <div class='stars-sub-brick'>
+                            <mat-icon class='star-icon'>star</mat-icon>
+                            <mat-icon class='star-icon'>star</mat-icon>
+                        </div>
+                    </div>
+                    <div id='one_star' class='stars-brick' [style.color]="starsCheck[1] ? '#62c3e2' : 'blue'" (click)="onStarsChange(1)">
+                        <div class='stars-sub-brick'>
+                            <mat-icon class='star-icon'>star</mat-icon>
+                        </div>
+                    </div>
+                    <div id='zero_star' class='stars-brick' [style.color]="starsCheck[0] ? '#62c3e2' : 'blue'" (click)="onStarsChange(0)">
+                        <div class='stars-sub-brick'>
+                            <mat-icon class='star-icon'>radio_button_unchecked</mat-icon>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Rayon -->
+                <div id='radius-form-field' class='form-field'>
+                    <div id='radius-label' class='radius-brick'>
+                        <p class="form-label">Rayon:</p>
+                    </div>
+                    <div id='radius' class='radius-brick'>
+                        <mat-card>
+                            <mat-card-content>
+                                <mat-slider
+                                    [max]="radiusMin"
+                                    [min]="radiusMax"
+                                    [step]="radiusStep"
+                                    [(ngModel)]="radius"
+                                    (change)="onRadiusChange($event)"
+                                    >
+                                </mat-slider>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+<!---
+<mat-tab-group>
+  <mat-tab label="First"> Content 1 </mat-tab>
+  <mat-tab label="Second"> Content 2 </mat-tab>
+  <mat-tab label="Third"> Content 3 </mat-tab>
+</mat-tab-group>
+-->
+
+        <!-- Categories et leurs tags-->
+        <div id='block2'>
+            <!-- Categories -->
+            <div id='block2-categories'>
+                <mat-tab-group [selectedIndex]="category"
+                (selectedIndexChange)="onCategoryChange($event)">
+                    <mat-tab *ngFor="let category of categories; let index = index" label='{{category}}'>
+                        Contents for {{category}}
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+            <!-- tags de la catégorie choisie -->
+            <div id='block2-tags'>
+                <div *ngIf="!hashtags" class="warning">{{ message }}</div>
+                    <div *ngIf="hashtags" class="checkbox">
+                    <div *ngFor="let tag of hashtags.data">
+                        <div>
+                            <input id="{{tag.attributes.name }}" type="checkbox" (change)="checkbox($event, tag)">
+                            <label for="{{tag.attributes.name}}">{{tag.attributes.name}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
 </div>

@@ -43,7 +43,6 @@ export class GuideService {
     return this.http.patch<RootObjectList<Place>>(`${environment.APIURI}guides/${id}/relationships/places`, place);
   }
 
-
   patchHashtagsByGuide(id: number, hashtag: RootObjectList<Hashtag>): Observable<RootObjectList<Hashtag>> {
     return this.http.patch<RootObjectList<Hashtag>>(`${environment.APIURI}guides/${id}/relationships/hashtags`, hashtag);
   }

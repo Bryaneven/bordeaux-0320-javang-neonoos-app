@@ -1,5 +1,8 @@
+import { MapboxComponent } from './../../shared/components/mapbox/mapbox.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 
 // Material
 import {MatCardModule} from '@angular/material/card';
@@ -12,8 +15,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDividerModule} from '@angular/material/divider';
-import {FormsModule} from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import { PlaceRoutingModule } from './place-routing.module';
 import { PlaceViewComponent } from './place-view/place-view.component';
@@ -30,6 +34,7 @@ import { StarsboxComponent } from '../../shared/components/starsbox/starsbox.com
     PlaceResultsComponent,
     PlaceFilterComponent,
     StarsboxComponent
+
   ],
   imports: [
     CommonModule,
@@ -43,9 +48,12 @@ import { StarsboxComponent } from '../../shared/components/starsbox/starsbox.com
     MatSlideToggleModule,
     MatExpansionModule,
     MatSelectModule,
+    MatSliderModule,
     MatDividerModule,
+    MatTabsModule,
     FormsModule,
     MatAutocompleteModule,
+    ReactiveFormsModule,
   ]
 })
 export class PlaceModule { }

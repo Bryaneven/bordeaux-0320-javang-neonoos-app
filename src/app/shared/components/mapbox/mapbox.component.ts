@@ -41,7 +41,7 @@ export class MapboxComponent implements OnInit, OnChanges {
 
   addMarker(lng: number, lat: number, name, description){
     const popup = new mapboxgl.Popup({ offset: 25 })
-      .setHTML('<h3>' + name + '</h3><p>' + description + '</p>');
+    .setHTML('<h3>' + name + '</h3><p>' + description + '</p>');
     const marker = new mapboxgl.Marker({
       draggable: false
       })
@@ -51,6 +51,8 @@ export class MapboxComponent implements OnInit, OnChanges {
 
     this.markers.push(marker);
   }
+
+
   ngOnChanges() {
 
     if (this.markers.length > 0){
