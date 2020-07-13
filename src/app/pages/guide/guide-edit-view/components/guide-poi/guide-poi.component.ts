@@ -1,13 +1,13 @@
-import { Picture } from './../../../../../shared/models/picture.model';
+
 import { Observable } from 'rxjs';
 import { GuideService } from 'src/app/pages/guide/services/guide/guide.service';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
 import { Component, OnInit, ViewChild, ElementRef, Input, EventEmitter, Output } from '@angular/core';
-import { Map } from 'mapbox-gl/dist/mapbox-gl';
+
 import { RootObject } from 'src/app/shared/models/root-object.model';
 import { Guide } from '../../../models/guide';
 import { Place } from 'src/app/shared/models/place.model';
-import { map } from 'rxjs/operators';
+
 
 
 @Component({
