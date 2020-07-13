@@ -22,6 +22,7 @@ export class GuideTravelComponent implements OnInit {
   guideTrips: RootObjectList<Trip> = new RootObjectList<Trip>(Trip, 'trips');
   country: Country;
   countryId: number;
+  tripName: string;
 
   @Input() guide: RootObject<Guide>;
   @Input() guideId: number;
@@ -40,11 +41,19 @@ export class GuideTravelComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.tripName);
+
+    if ( this.tripName === undefined ){
     this.tripService.getTripsByCountryId(this.countryId).subscribe(
       tripsByCountry => {
         this.trips = tripsByCountry;
       }
     );
+    } else if (!this.countryId && this.tripName){
+      this.tripService.getTripsByName(this.tripName).subscribe((trips) => this.trips = trips);
+    }else {
+      this.tripService.getTripsByGuideIdAndName(this.guideId, this.tripName).subscribe((trips) => this.trips = trips);
+    }
   }
 
   getTripsByGuide() {
