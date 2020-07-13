@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PlaceViewComponent } from './place-view/place-view.component';
-import { PlaceEditComponent } from './place-edit/place-edit.component';
+import { PlaceEditViewComponent } from './place-edit-view/place-edit-view.component';
 
 
 const routes: Routes = [
@@ -16,11 +16,11 @@ const routes: Routes = [
   },
   {
     path: 'new',
-    component: PlaceEditComponent
+    component: PlaceEditViewComponent
   },
   {
     path: 'edit/:id',
-    component: PlaceEditComponent
+    component: PlaceEditViewComponent
   }
 ];
 
