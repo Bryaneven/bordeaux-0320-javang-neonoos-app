@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
 import { TripService } from '../../../services/trip/trip.service';
 import { Country } from 'src/app/shared/models/country';
@@ -16,10 +16,8 @@ import { Guide } from '../../../models/guide';
 export class GuideTravelComponent implements OnInit {
 
 
-
-  currentTrips: RootObjectList<Trip> = new RootObjectList<Trip>(Trip, 'trips');
-  trips?: RootObjectList<Trip>;
-  guideTrips: RootObjectList<Trip> = new RootObjectList<Trip>(Trip, 'trips');
+  @Input() guideTrips: RootObjectList<Trip> = new RootObjectList<Trip>(Trip, 'trips');
+  @Input() trips?: RootObjectList<Trip>;
   country: Country;
   countryId: number;
   tripName: string;
@@ -27,6 +25,8 @@ export class GuideTravelComponent implements OnInit {
   @Input() guide: RootObject<Guide>;
   @Input() guideId: number;
   @Input() countries: RootObjectList<Country>;
+  @Output() addOrRemoveTrip = new EventEmitter();
+  @Output() countriesFilter = new EventEmitter();
 
 
   constructor(
@@ -37,69 +37,18 @@ export class GuideTravelComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getTripsByGuide();
   }
 
   onSubmit() {
-    if (!this.tripName && this.countryId){
-    this.tripService.getTripsByCountryId(this.countryId).subscribe(
-      tripsByCountry => {
-        this.trips = tripsByCountry;
-        this.CompareTripsChecked();
-      });
-
-    } else if (!this.countryId && this.tripName){
-      this.tripService.getTripsByName(this.tripName).subscribe((trips) => {
-        this.trips = trips;
-        this.CompareTripsChecked();
-      });
-    }else {
-      this.tripService.getTripsByGuideIdAndName(this.guideId, this.tripName).subscribe((trips) => {
-        this.trips = trips;
-        this.CompareTripsChecked();
-      });
-    }
-  }
-
-  getTripsByGuide() {
-    this.tripService.getTripsByGuideId(this.guideId).subscribe((guideTrips: RootObjectList<Trip>) => {
-      if (guideTrips) {
-        this.guideTrips = guideTrips;
-        this.guideTrips.data.map(
-          trips => trips.attributes.isChecked = true
-        );
-      }
+    this.countriesFilter.emit({
+      tripname: this.tripName,
+      countryId: this.countryId
     });
+
   }
 
   toggleTrip(trip) {
-
-    if (!trip.attributes.isChecked) {
-      this.guideTrips.data.push(trip);
-      trip.attributes.isChecked = true;
-      this.checkTrips();
-    } else {
-      const index = this.guideTrips.data.findIndex(
-        (value) => trip.id === value.id
-      );
-      this.guideTrips.data.splice(index, 1);
-      trip.attributes.isChecked = false;
-      this.checkTrips();
-    }
+    this.addOrRemoveTrip.emit(trip);
   }
 
-
-  checkTrips() {
-    this.guideService.patchTripsByGuide(this.guideId, this.guideTrips).subscribe(() => {
-      this.currentTrips = this.guideTrips;
-    });
-  }
-
-  CompareTripsChecked(){
-    this.trips.data.map((trip) => this.guideTrips.data.map((tripToCompare) => {
-      if (tripToCompare.id === trip.id){
-        trip.attributes.isChecked = true;
-      }
-    }));
-  }
 }

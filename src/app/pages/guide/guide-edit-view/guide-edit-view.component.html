@@ -9,11 +9,19 @@
   </mat-card>
 
   <mat-card>
-    <neo-guide-travel [countries]="countries" [guide]="guide" [guideId]="guideId"></neo-guide-travel>
+    <neo-guide-travel
+     [countries]="countries"
+     [guide]="guide"
+     [guideId]="guideId"
+     [guideTrips]="guideTrips"
+     [trips]="trips"
+     (addOrRemoveTrip)="addOrRemoveTrips($event)"
+     (countriesFilter)="countriesFilter($event)"></neo-guide-travel>
   </mat-card>
 
   <mat-card>
-    <neo-guide-poi [guide]='guide' [places]='places' *ngIf="places"(deletePlacesGuide)="deletePlacesGuide($event)" [PicturesUrl$]="PicturesUrl$"></neo-guide-poi>
+    <neo-guide-poi
+    [guide]='guide' [places]='places' *ngIf="places"(deletePlacesGuide)="deletePlacesGuide($event)" [PicturesUrl$]="PicturesUrl$"></neo-guide-poi>
   </mat-card>
 </div>
 
