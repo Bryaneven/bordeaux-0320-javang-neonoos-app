@@ -35,12 +35,12 @@
       </div>
 
       <div>
-        <mat-form-field class="full-width">
-          <mat-label>Search a place</mat-label>
+        <mat-form-field class="full-width" >
+          <mat-label>Nom du Voyage</mat-label>
           <span matPrefix>
             <mat-icon>search</mat-icon>
           </span>
-          <input matInput>
+          <input matInput [(ngModel)]="tripName">
         </mat-form-field>
       </div>
 

@@ -12,6 +12,8 @@ import { Country } from 'src/app/shared/models/country';
 import { Trip } from 'src/app/shared/models/trip';
 import { TripService } from '../services/trip/trip.service';
 import { CountryService } from 'src/app/shared/services/country.service';
+import { Relationships } from 'src/app/shared/models/relationships.model';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'neo-guide-edit-view',
@@ -23,6 +25,7 @@ export class GuideEditViewComponent implements OnInit {
   subscription = new Subscription();
   guideId: number;
   guide?: RootObject<Guide>;
+  PicturesUrl$: Observable<string>[] = [] ;
 
   countries?: RootObjectList<Country> = new RootObjectList<Country>(Country, 'countries');
 
@@ -93,6 +96,7 @@ export class GuideEditViewComponent implements OnInit {
     this.guideService.getPlacesByGuide(this.guideId).subscribe((places: RootObjectList<Place>) => {
       if (places) {
         this.places = places;
+        this.places.data.map((place) => this.PicturesUrl$.push(this.getGuidePicture(place.id)));
       } else {
         this.places = new RootObjectList<Place>(Place, 'places');
       }
@@ -100,9 +104,10 @@ export class GuideEditViewComponent implements OnInit {
   }
   deletePlacesGuide(place) {
     this.places.data = this.places.data.filter((placeTofind) => place.id !== placeTofind.id);
-
-    this.guideService.patchPlacesByGuide(this.guideId, this.places).subscribe(() => {
-      this.getOneGuide(this.guideId);
-    });
+    this.guide.data.relationships.places.data = [];
+    this.places.data.map((placetodelete) => this.guide.data.relationships.places.data.push(new Relationships('places', placetodelete.id)));
   }
+  getGuidePicture(id: number): Observable<string>{
+    return this.guideService.getPictureGuide(id).pipe(map((picture) => picture.data[0].attributes.filename));
+   }
 }
