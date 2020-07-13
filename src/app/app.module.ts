@@ -15,12 +15,16 @@ import { MatSliderModule } from '@angular/material/slider';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
 import { ElideInterceptor } from './core/http-interceptors/elide.interceptor';
+import { DialogSaveComponent } from './shared/components/dialog-save/dialog-save.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HeaderComponent,
+    DialogSaveComponent,
   ],
 
   imports: [
@@ -32,6 +36,8 @@ import { ElideInterceptor } from './core/http-interceptors/elide.interceptor';
     MatIconModule,
     MatInputModule,
     FormsModule,
+    MatButtonModule,
+    MatDialogModule,
     QuillModule.forRoot()
   ],
   providers: [

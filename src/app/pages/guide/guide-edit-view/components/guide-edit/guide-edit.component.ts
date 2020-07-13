@@ -12,6 +12,8 @@ import { RootObject } from 'src/app/shared/models/root-object.model';
 import { HashtagService } from '../../../services/hashtag/hashtag.service';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
 import 'quill-emoji/dist/quill-emoji.js';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogSaveComponent } from 'src/app/shared/components/dialog-save/dialog-save.component';
 @Component({
   selector: 'neo-guide-edit',
   templateUrl: './guide-edit.component.html',
@@ -21,6 +23,7 @@ export class GuideEditComponent implements OnInit {
 
   subscription = new Subscription();
   show = true;
+  dialogTitle = 'Voulez-vous ajouter ce guide ?';
   @Input() guideId: number;
   updated = false;
   @Input() guide?: RootObject<Guide>;
@@ -39,10 +42,10 @@ export class GuideEditComponent implements OnInit {
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   constructor(
-    private router: Router,
     private guideService: GuideService,
-    private hashtagService: HashtagService
-    ) { }
+    private hashtagService: HashtagService,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.getHashtags();
@@ -116,29 +119,38 @@ export class GuideEditComponent implements OnInit {
     return this.allHashtags.data.filter(hashtag => hashtag.attributes.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  // Persistence
-  save() {
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogSaveComponent, {
+      data: {dialogTitle: this.dialogTitle}
+    });
 
-    if (this.guideId) {
-      this.guideService.patch(this.guide, this.guideId).subscribe();
-      console.log(this.guide);
-    } else {
-      this.guideService.post(this.guide).subscribe(response => {
-        this.guide = response;
-        if (this.guide.data.id) {
-          this.guideService.patchHashtagsByGuide(this.guide.data.id, this.guideHashtags).subscribe();
-        }
-      });
-    }
+    dialogRef.afterClosed().subscribe( result => {
+      this.save(result);
+    });
 
-    if (this.updated && this.guideId) {
-      this.guideService.patchHashtagsByGuide(this.guideId, this.guideHashtags).subscribe();
-      console.log(this.guideHashtags);
-    }
 
-    // this.router.navigate(['/guide/view']);
   }
 
+  // Persistence
+  save(result: boolean) {
 
-
+    if (result) {
+      if (this.guideId) {
+        this.guideService.patch(this.guide, this.guideId).subscribe();
+        console.log(this.guide);
+      } else {
+        this.guideService.post(this.guide).subscribe(response => {
+          this.guide = response;
+          if (this.guide.data.id) {
+            this.guideService.patchHashtagsByGuide(this.guide.data.id, this.guideHashtags).subscribe();
+          }
+        });
+      }
+      if (this.updated && this.guideId) {
+        this.guideService.patchHashtagsByGuide(this.guideId, this.guideHashtags).subscribe();
+        console.log(this.guideHashtags);
+      }
+    }
+  }
 }
+

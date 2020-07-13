@@ -50,7 +50,7 @@
     <div class="guide-right-header">
       <!-- <span>Supprimer la section</span>
       <button mat-button>Cancel</button> -->
-      <button mat-stroked-button (click)="save()">Terminé</button>
+      <button mat-stroked-button (click)="openDialog()">Terminé</button>
     </div>
     <h3>
       guide picture
@@ -72,6 +72,9 @@
                 [(ngModel)]="guide.data.attributes.description">
   </quill-editor>
 </div>
+
+
+<!-- Dialog -->
 
 
 
