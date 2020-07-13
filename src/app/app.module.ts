@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 
+
 // Material
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -31,7 +32,6 @@ import { MatButtonModule } from '@angular/material/button';
     HeaderComponent,
     ProgbarComponent,
     DialogSaveComponent,
-
   ],
 
   imports: [
