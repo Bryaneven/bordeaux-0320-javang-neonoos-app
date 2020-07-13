@@ -29,6 +29,7 @@ import { GuidePoiSearchSectionComponent } from './guide-edit-view/components/gui
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogBodyComponent } from './guide-view/components/dialog-body/dialog-body.component';
 import { QuillModule } from 'ngx-quill';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { QuillModule } from 'ngx-quill';
     MatAutocompleteModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatSnackBarModule,
     QuillModule.forRoot()
   ]
 })
