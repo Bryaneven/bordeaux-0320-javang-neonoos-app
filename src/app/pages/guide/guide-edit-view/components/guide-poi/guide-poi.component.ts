@@ -20,6 +20,7 @@ export class GuidePoiComponent implements OnInit {
   @Input() places: RootObjectList<Place>;
   @Output() deletePlacesGuide = new EventEmitter();
   @Input() PicturesUrl$: Observable<string>[] = [] ;
+
   constructor(private guideService: GuideService) {
    }
   ngOnInit() {

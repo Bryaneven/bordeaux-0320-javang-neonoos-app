@@ -48,8 +48,6 @@
   </div>
   <div class="guide-right">
     <div class="guide-right-header">
-      <!-- <span>Supprimer la section</span>
-      <button mat-button>Cancel</button> -->
       <button mat-stroked-button (click)="openDialog()">Terminé</button>
     </div>
     <h3>
@@ -59,14 +57,10 @@
   </div>
 </div>
 
-
-
-
-<!-- Form-->
+<!-- Quill-->
 <div class="forms">
   <h3>Description</h3>
   <br>
-
   <quill-editor *ngIf="guide"
                 [styles]="{height: '200px'}"
                 [(ngModel)]="guide.data.attributes.description">
@@ -74,7 +68,6 @@
 </div>
 
 
-<!-- Dialog -->
 
 
 

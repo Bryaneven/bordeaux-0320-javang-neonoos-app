@@ -25,7 +25,7 @@ export class GuideEditComponent implements OnInit {
 
   subscription = new Subscription();
   show = true;
-  dialogTitle = 'Voulez-vous ajouter ce guide ?';
+  dialogTitle: string;
   @Input() guideId: number;
   updated = false;
   @Input() guide?: RootObject<Guide>;
@@ -123,6 +123,11 @@ export class GuideEditComponent implements OnInit {
   }
 
   openDialog() {
+    if (this.guideId) {
+      this.dialogTitle = 'Voulez-vous modifier ce guide ?';
+    } else {
+      this.dialogTitle = 'Voulez-vous ajouter ce guide ?';
+    }
     const dialogRef = this.dialog.open(DialogSaveComponent, {
       data: {dialogTitle: this.dialogTitle}
     });
@@ -140,7 +145,7 @@ export class GuideEditComponent implements OnInit {
     if (result) {
       if (this.guideId) {
         this.guideService.patch(this.guide, this.guideId).subscribe();
-        this.snackBar.open(`${this.guide.data.attributes.title} a bien été modifié !`, '👍', {
+        this.snackBar.open(`"${this.guide.data.attributes.title}" a bien été modifié !`, '👍', {
           duration: 2000
         });
       } else {
@@ -150,15 +155,12 @@ export class GuideEditComponent implements OnInit {
             this.guideService.patchHashtagsByGuide(this.guide.data.id, this.guideHashtags).subscribe();
           }
         });
-        this.snackBar.open(`${this.guide.data.attributes.title} a bien été ajouté !`, '👍', {
+        this.snackBar.open(`"${this.guide.data.attributes.title}" a bien été ajouté !`, '👍', {
           duration: 2000
         });
       }
       if (this.updated && this.guideId) {
         this.guideService.patchHashtagsByGuide(this.guideId, this.guideHashtags).subscribe();
-        this.snackBar.open(`Les hashtags de ${this.guide.data.attributes.title} ont bien été modifié !`, '👍', {
-          duration: 2000
-        });
       }
 
     }
