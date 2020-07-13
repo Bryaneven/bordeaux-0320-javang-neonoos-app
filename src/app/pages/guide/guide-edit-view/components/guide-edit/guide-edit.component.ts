@@ -13,6 +13,8 @@ import { HashtagService } from '../../../services/hashtag/hashtag.service';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
 import 'quill-emoji/dist/quill-emoji.js';
 import { MatDialog } from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 import { DialogSaveComponent } from 'src/app/shared/components/dialog-save/dialog-save.component';
 @Component({
   selector: 'neo-guide-edit',
@@ -44,7 +46,8 @@ export class GuideEditComponent implements OnInit {
   constructor(
     private guideService: GuideService,
     private hashtagService: HashtagService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -137,7 +140,9 @@ export class GuideEditComponent implements OnInit {
     if (result) {
       if (this.guideId) {
         this.guideService.patch(this.guide, this.guideId).subscribe();
-        console.log(this.guide);
+        this.snackBar.open(`${this.guide.data.attributes.title} a bien été modifié !`, '👍', {
+          duration: 2000
+        });
       } else {
         this.guideService.post(this.guide).subscribe(response => {
           this.guide = response;
@@ -145,11 +150,17 @@ export class GuideEditComponent implements OnInit {
             this.guideService.patchHashtagsByGuide(this.guide.data.id, this.guideHashtags).subscribe();
           }
         });
+        this.snackBar.open(`${this.guide.data.attributes.title} a bien été ajouté !`, '👍', {
+          duration: 2000
+        });
       }
       if (this.updated && this.guideId) {
         this.guideService.patchHashtagsByGuide(this.guideId, this.guideHashtags).subscribe();
-        console.log(this.guideHashtags);
+        this.snackBar.open(`Les hashtags de ${this.guide.data.attributes.title} ont bien été modifié !`, '👍', {
+          duration: 2000
+        });
       }
+
     }
   }
 }
