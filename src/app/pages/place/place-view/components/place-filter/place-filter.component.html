@@ -42,36 +42,8 @@
             <!-- Stars et Rayon-->
             <div id='block1-line2' class = 'line'>
                 <!-- Stars -->
-                <div id='stars-form-field' class='form-field'>
-                    <div id='stars-label' class='stars-brick'>
-                        <p id='form-label'> Stars: </p>
-                    </div>
-                    <div id='three_stars' class='stars-brick' [style.color]="starsCheck[3] ? '#62c3e2' : 'blue'" (click)="onStarsChange(3)">
-                        <div class='stars-sub-brick'>
-                            <mat-icon class='star-icon'>star</mat-icon>
-                        </div>
-                        <div class='stars-sub-brick'>
-                            <mat-icon class='star-icon'>star</mat-icon>
-                            <mat-icon class='star-icon'>star</mat-icon>
-                        </div>
-                    </div>
-                    <div id='two_stars' class='stars-brick' [style.color]="starsCheck[2] ? '#62c3e2' : 'blue'" (click)="onStarsChange(2)">
-                        <div class='stars-sub-brick'>
-                            <mat-icon class='star-icon'>star</mat-icon>
-                            <mat-icon class='star-icon'>star</mat-icon>
-                        </div>
-                    </div>
-                    <div id='one_star' class='stars-brick' [style.color]="starsCheck[1] ? '#62c3e2' : 'blue'" (click)="onStarsChange(1)">
-                        <div class='stars-sub-brick'>
-                            <mat-icon class='star-icon'>star</mat-icon>
-                        </div>
-                    </div>
-                    <div id='zero_star' class='stars-brick' [style.color]="starsCheck[0] ? '#62c3e2' : 'blue'" (click)="onStarsChange(0)">
-                        <div class='stars-sub-brick'>
-                            <mat-icon class='star-icon'>radio_button_unchecked</mat-icon>
-                        </div>
-                    </div>
-                </div>
+                <neo-starsbox typeCheckbox="checkbox"></neo-starsbox>
+               
                  <!-- Rayon -->
                 <div id='radius-form-field' class='form-field'>
                     <div id='radius-label' class='radius-brick'>
