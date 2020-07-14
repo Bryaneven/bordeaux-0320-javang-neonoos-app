@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-
+import { Place } from '../../models/place.model';
+import { RootObject } from '../../models/root-object.model';
 
 @Component({
   selector: 'neo-starsbox',
@@ -9,19 +10,43 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class StarsboxComponent implements OnInit {
 
 @Input() typeCheckbox: string;
+@Input() place?: RootObject<Place>;
+
 @Output() starsboxEventEmitter = new EventEmitter<any>();
+
 arrayChecks = [];
+valueCheckPlace = [
+  { id: 0, value: false },
+  { id: 1, value: false },
+  { id: 2, value: false },
+  { id: 3, value: false },
+];
 
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { this.checkedValue();  }
+
+  checkedValue() {
+
+    if (this.place) {
+
+       const valueStar = this.place.data.attributes.genius_stars;
+
+       for (let i = 0; this.valueCheckPlace.length > i; i++ ) {
+        if (valueStar === this.valueCheckPlace[i].id) {
+          this.valueCheckPlace[i].value = true;
+          this.arrayChecks.push(this.valueCheckPlace[i].id);
+        }
+      }
+    }
+  }
 
   checkstars($event) {
 
-    const valueElement = $event.target.value;
-    const checked = $event.target.checked;
+    const valueElement = parseInt($event.target.value);
+    const checkedStar = $event.target.checked;
 
-    if (checked === true) {
+    if (checkedStar === true) {
       if (this.typeCheckbox === 'radio') {
           this.arrayChecks = [];
       }
@@ -33,8 +58,6 @@ arrayChecks = [];
         }
       }
     }
-
-    console.log(this.arrayChecks);
 
     this.starsboxEventEmitter.emit(this.arrayChecks);
   }

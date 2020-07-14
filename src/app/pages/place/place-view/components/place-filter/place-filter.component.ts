@@ -3,7 +3,9 @@ import {FormControl} from '@angular/forms';
 import { Hashtag } from 'src/app/shared/models/hashtag';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
 import { HashtagService } from 'src/app/pages/guide/services/hashtag/hashtag.service';
-import { logging } from 'protractor';
+import { PlaceService } from '../../../services/place/place.service';
+import { RootObject } from 'src/app/shared/models/root-object.model';
+import { Place } from 'src/app/shared/models/place.model';
 
 @Component({
   selector: 'neo-place-filter',
@@ -14,9 +16,12 @@ export class PlaceFilterComponent implements OnInit {
 
   country: String;
   place: string;
-  town: string
+  town: string;
   starsCheck = [false, false, false, false];
   arrayCheck = [];
+  arrayCheckStars = [];
+
+  placeById: RootObject<Place>;
 
   radiusMin: number;
   radiusMax: number;
@@ -33,15 +38,23 @@ export class PlaceFilterComponent implements OnInit {
 
   message: string;
 
-  constructor(private hashtagservice: HashtagService) { }
+  constructor(private hashtagservice: HashtagService, private placeService: PlaceService) { }
 
   ngOnInit(): void {
-    console.log(this.arrayCheck);
+
+    /*
+    // Testing with getById to starbox (Insput on <neo-starsbox> )
+    this.placeService.getById(1).subscribe((place) => {
+      this.placeById = place;
+    });
+     */
+
   }
 
   onCountryChange(value: string): void {
 
   }
+
 
   onPlaceChange(value: string): void {
     this.showHashtags;
@@ -61,8 +74,8 @@ export class PlaceFilterComponent implements OnInit {
   }
 
   onCategoryChange(value: number): void{
-    console.log(value)
-    if (value%2===0){
+    console.log(value);
+    if (value % 2 === 0){
       this.showHashtags();
     }else{
       this.clearHashtags();
@@ -72,14 +85,12 @@ export class PlaceFilterComponent implements OnInit {
   showHashtags() {
     this.hashtagservice.getAll().subscribe((hashtags) => {
     this.hashtags = hashtags;
-    console.log('showwww')
-    })
+    });
   }
 
   clearHashtags() {
     this.hashtags = null;
     this.arrayHashtags.length = 0;
-    console.log('clearrrrrrrr')
   }
 
   checkbox($event: any, tag: Hashtag) {
@@ -99,7 +110,8 @@ export class PlaceFilterComponent implements OnInit {
 
   }
 
+  // Array of Star from Starbox component (Output on <neo-starsbox>).
   onStarsboxEvent(arrayChecks) {
-    console.log(arrayChecks);
+    this.arrayCheckStars = arrayChecks;
   }
 }

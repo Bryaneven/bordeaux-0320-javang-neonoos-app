@@ -1,6 +1,6 @@
 <div class="stars">
   <div class="checkbox-stars s-three">
-    <input id="3" [type]="typeCheckbox" name="stars" value="3" (change)="checkstars($event)">
+    <input id="3" [type]="typeCheckbox" [checked]="valueCheckPlace[3].value" name="stars" value="3" (change)="checkstars($event)">
     <label for="3">
       <div class="div-star"><mat-icon>star</mat-icon></div>
       <div class="div-star"><mat-icon>star</mat-icon></div>
@@ -8,20 +8,20 @@
     </label>
   </div>
   <div class="checkbox-stars s-two">
-    <input id="2" [type]="typeCheckbox" name="stars" value="2" (change)="checkstars($event)">
+    <input id="2" [type]="typeCheckbox" [checked]="valueCheckPlace[2].value" name="stars" value="2" (change)="checkstars($event)">
     <label for="2">
       <div class="div-star"><mat-icon>star</mat-icon></div>
       <div class="div-star"><mat-icon>star</mat-icon></div>
     </label>
   </div>
   <div class="checkbox-stars s-one">
-    <input id="1" [type]="typeCheckbox" name="stars" value="1" (change)="checkstars($event)">
+    <input id="1" [type]="typeCheckbox" [checked]="valueCheckPlace[1].value" name="stars" value="1" (change)="checkstars($event)">
     <label for="1">
       <div class="div-star"><mat-icon>star</mat-icon></div>
     </label>
   </div>
   <div class="checkbox-stars s-ring">
-    <input id="0" [type]="typeCheckbox" name="stars" value="0" (change)="checkstars($event)">
+    <input id="0" [type]="typeCheckbox" [checked]="valueCheckPlace[0].value" name="stars" value="0" (change)="checkstars($event)">
     <label for="0">
       <div class="div-star"><mat-icon>panorama_fish_eye</mat-icon></div>
     </label>
