@@ -1,4 +1,3 @@
-import { MapboxComponent } from './../../shared/components/mapbox/mapbox.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -30,11 +29,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DialogBodyComponent } from './guide-view/components/dialog-body/dialog-body.component';
 import { QuillModule } from 'ngx-quill';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MapboxComponent } from 'src/app/shared-module/mapbox/mapbox.component';
+import { SharedModuleModule } from 'src/app/shared-module/shared-module.module';
 
 
 @NgModule({
   declarations: [
-    MapboxComponent,
     GuideFilterComponent,
     GuideResultsComponent,
     GuideViewComponent,
@@ -63,6 +63,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ReactiveFormsModule,
     MatDialogModule,
     MatSnackBarModule,
+    SharedModuleModule,
     QuillModule.forRoot()
   ]
 })
