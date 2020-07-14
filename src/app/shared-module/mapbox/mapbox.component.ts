@@ -18,7 +18,7 @@ export class MapboxComponent implements OnInit, OnChanges {
   ngOnInit(): void {
 
     mapboxgl.accessToken = 'pk.eyJ1IjoicHJhbGluZTQwIiwiYSI6ImNrYmh5aTNqOTBhM2Yyem81NnI3a2hyMzAifQ.-Jq7YUy1fTIbegOvvl-4sA';
-    if (this.places.data.length > 0){
+    if (this.places?.data.length > 0){
       this.initMap(this.places.data[0].attributes.lng, this.places.data[0].attributes.lat);
       this.places.data.map((place) => {
         this.addMarker(place.attributes.lng, place.attributes.lat, place.attributes.name, place.attributes.description);
