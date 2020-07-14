@@ -25,14 +25,15 @@ export class GuideEditViewComponent implements OnInit {
   subscription = new Subscription();
   guideId: number;
   guide?: RootObject<Guide>;
-  PicturesUrl$: Observable<string>[] = [] ;
-
+  PicturesUrl$: Observable<string>[] = [];
   countries?: RootObjectList<Country> = new RootObjectList<Country>(Country, 'countries');
-
-  // allHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag, 'hashtags');
   guideHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag, 'hastags');
   filteredHashtags: Observable<any[]>;
   places: RootObjectList<Place>;
+  trips: RootObjectList<Trip>;
+  guideTrips: RootObjectList<Trip> = new RootObjectList<Trip>(Trip, 'trips');
+
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -45,6 +46,7 @@ export class GuideEditViewComponent implements OnInit {
   ngOnInit(): void {
     this.getRouteParam();
     this.getCountries();
+
   }
 
   getRouteParam() {
@@ -57,6 +59,7 @@ export class GuideEditViewComponent implements OnInit {
         this.guide = new RootObject<Guide>(Guide, 'guides');
         this.places = new RootObjectList<Place>(Place, 'places');
         this.places.data = [];
+        this.guideTrips.data = [];
 
       }
     });
@@ -76,6 +79,7 @@ export class GuideEditViewComponent implements OnInit {
       if (guide) {
         this.guide = guide;
         this.getGuidePlaces();
+        this.getTripsByGuide();
       } else {
         this.guide = new RootObject<Guide>(Guide, 'guides');
       }
@@ -91,7 +95,7 @@ export class GuideEditViewComponent implements OnInit {
     });
     this.subscription.add(getGuideHastagsSubscription);
   }
-
+  // Methodes for GuidePOI Component
   getGuidePlaces() {
     this.guideService.getPlacesByGuide(this.guideId).subscribe((places: RootObjectList<Place>) => {
       if (places) {
@@ -107,7 +111,77 @@ export class GuideEditViewComponent implements OnInit {
     this.guide.data.relationships.places.data = [];
     this.places.data.map((placetodelete) => this.guide.data.relationships.places.data.push(new Relationships('places', placetodelete.id)));
   }
-  getGuidePicture(id: number): Observable<string>{
+  getGuidePicture(id: number): Observable<string> {
     return this.guideService.getPictureGuide(id).pipe(map((picture) => picture.data[0].attributes.filename));
-   }
+  }
+
+  // Methodes for GuideTravel Component
+  addOrRemoveTrips(trip) {
+
+    if (!trip.attributes.isChecked) {
+      this.guideTrips.data.push(trip);
+      if (!this.guide.data.relationships){
+        this.guide.data.relationships = {};
+        this.guide.data.relationships.trips = {};
+      }
+      this.guide.data.relationships.trips.data = [];
+      this.guideTrips.data.map((tripToAdd) => this.guide.data.relationships.trips.data.push(new Relationships('trips', tripToAdd.id)));
+      trip.attributes.isChecked = true;
+    } else {
+      const index = this.guideTrips.data.findIndex(
+        (value) => trip.id === value.id
+      );
+      this.guideTrips.data.splice(index, 1);
+      trip.attributes.isChecked = false;
+      if (!this.guide.data.relationships){
+        this.guide.data.relationships = {};
+        this.guide.data.relationships.trips = {};
+      }
+      this.guide.data.relationships.trips.data = [];
+      this.guideTrips.data.map
+      ((tripToDelete) => this.guide.data.relationships.trips.data.push(new Relationships('trips', tripToDelete.id)));
+
+    }
+  }
+
+  getTripsByGuide() {
+    this.tripService.getTripsByGuideId(this.guideId).subscribe((guideTrips: RootObjectList<Trip>) => {
+      if (guideTrips) {
+        this.guideTrips = guideTrips;
+        this.guideTrips.data.map(
+          trips => trips.attributes.isChecked = true
+        );
+      }
+    });
+  }
+
+  countriesFilter(filter) {
+    if (!filter.tripname && filter.countryId) {
+      this.tripService.getTripsByCountryId(filter.countryId).subscribe(
+        tripsByCountry => {
+          this.trips = tripsByCountry;
+          this.CompareTripsChecked();
+        });
+
+    } else if (!filter.countryId && filter.tripname) {
+      this.tripService.getTripsByName(filter.tripname).subscribe((trips) => {
+        this.trips = trips;
+        this.CompareTripsChecked();
+      });
+    } else {
+      this.tripService.getTripsByGuideIdAndName(this.guideId, filter.tripname).subscribe((trips) => {
+        this.trips = trips;
+        this.CompareTripsChecked();
+      });
+    }
+  }
+
+  CompareTripsChecked() {
+    this.trips.data.map((trip) => this.guideTrips.data.map((tripToCompare) => {
+      if (tripToCompare.id === trip.id) {
+        trip.attributes.isChecked = true;
+      }
+    }));
+  }
+
 }
