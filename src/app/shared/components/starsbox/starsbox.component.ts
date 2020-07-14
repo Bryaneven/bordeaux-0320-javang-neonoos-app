@@ -62,3 +62,32 @@ valueCheckPlace = [
     this.starsboxEventEmitter.emit(this.arrayChecks);
   }
 }
+
+// Insert starsbox component:
+
+// parent.component.html
+
+// if wiew Edit:
+// - change typeCheckbox="checkbox" par typeCheckbox="radio"
+
+// if not view Edit:
+// - Remove ngIf and input [place]=placeById
+//   (Attention: "placeById" attribute parent, return of the methode getplaceByID)
+
+/*
+  <neo-starsbox *ngIf="placeById"
+    typeCheckbox="checkbox"
+    (starsboxEventEmitter)="onStarsboxEvent($event)"
+    [place]="placeById">
+  </neo-starsbox>
+*/
+
+// parent.component.ts
+// Array[Init] of Star from Starbox component (Output on <neo-starsbox>).
+
+
+/*
+  onStarsboxEvent(arrayChecks) {
+    this.arrayCheckStars = arrayChecks;
+  }
+*/
