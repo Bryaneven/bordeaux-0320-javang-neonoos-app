@@ -18,6 +18,7 @@ import { ElideInterceptor } from './core/http-interceptors/elide.interceptor';
 import { DialogSaveComponent } from './shared/components/dialog-save/dialog-save.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MapboxComponent } from './shared/components/mapbox/mapbox.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,6 @@ import { MatButtonModule } from '@angular/material/button';
     HeaderComponent,
     DialogSaveComponent,
   ],
-
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -1,1 +1,140 @@
-<p>place-edit works!</p>
+<div class="place-container">
+  <div class="place-left">
+    <div class="place-title">
+      <h2 *ngIf="show">Place 1</h2>
+      <mat-form-field *ngIf="!show">
+        <input matInput type="text">
+      </mat-form-field>
+      <button (click)="show = !show" mat-button>Editer</button>
+    </div>
+    <div class="row">
+      <div class="stars">
+        <h3>etoiles</h3>
+      </div>
+      <div class="sections">
+        <h3>sections du guide</h3>
+        <mat-form-field appearance="outline">
+          <mat-label>Sections</mat-label>
+         <mat-select>
+            <mat-option>
+
+            </mat-option>
+         </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <h3>adresse complete</h3>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Adresse</mat-label>
+        <input matInput type="text">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>City</mat-label>
+        <mat-icon matPrefix>pin_drop</mat-icon>
+        <input matInput type="text">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Country</mat-label>
+       <mat-select>
+          <mat-option>
+
+          </mat-option>
+       </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="place-right">
+    <div class="btn-save">
+      <button mat-stroked-button>Terminé</button>
+    </div>
+      <h3>main picture</h3>
+      <img src="https://picsum.photos/300/150" alt="">
+  </div>
+
+</div>
+
+<mat-divider></mat-divider>
+
+<div class="place-container second-part">
+  <div class="place-left">
+    <h3>infos additionnelles</h3>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Type</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>OSM ID</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Date of Creation</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Last updated</mat-label>
+        <input matInput>
+      </mat-form-field>
+    </div>
+    <h3>wikipedia</h3>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Wiki Code</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="larger">
+        <mat-label >Lien Wikipédia</mat-label>
+        <input matInput>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="place-right map">
+    <h3>location</h3>
+      <div class="location">
+        <mat-form-field appearance="outline">
+          <mat-label>Location box</mat-label>
+          <input matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Location box</mat-label>
+          <input matInput>
+        </mat-form-field>
+      </div>
+      <div class="location-with-map">
+        <div class="column">
+          <mat-form-field appearance="outline">
+            <mat-label>Location box</mat-label>
+            <input matInput>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Location box</mat-label>
+            <input matInput>
+          </mat-form-field>
+        </div>
+        <!-- <img src="https://picsum.photos/300/150" alt=""> -->
+        <!-- <neo-mapbox></neo-mapbox> -->
+      </div>
+      <div class="location">
+        <mat-form-field appearance="outline">
+          <mat-label>GPS coordinate</mat-label>
+          <input matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>GPS coordinate</mat-label>
+          <input matInput>
+        </mat-form-field>
+      </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+

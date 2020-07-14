@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlaceEditComponent implements OnInit {
 
+  show = true;
   constructor() { }
 
   ngOnInit(): void {
