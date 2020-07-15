@@ -30,6 +30,7 @@ import { PlaceEditComponent } from './place-edit-view/components/place-edit/plac
 import { PlaceDescriptionComponent } from './place-edit-view/components/place-description/place-description.component';
 import { PlacePictureComponent } from './place-edit-view/components/place-picture/place-picture.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { QuillModule } from 'ngx-quill';
 
 
 @NgModule({
@@ -64,6 +65,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
+    QuillModule,
   ]
 })
 export class PlaceModule { }
