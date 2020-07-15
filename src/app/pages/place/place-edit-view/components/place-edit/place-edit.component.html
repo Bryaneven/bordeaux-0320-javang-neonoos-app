@@ -1,4 +1,4 @@
-<div class="place-container" *ngIf="place">
+<div class="place-container" *ngIf="place && countries">
   <div class="place-left">
     <div class="place-title">
       <h2 *ngIf="show && place">{{place.data.attributes.name}}</h2>
@@ -36,10 +36,10 @@
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Country</mat-label>
-       <mat-select>
-          <mat-option>
-
-          </mat-option>
+       <mat-select [compareWith]="compareObjects" [(ngModel)]="country.data[0]">
+        <mat-option *ngFor="let country of countries.data" [value]="country">
+          {{country.attributes.name}}
+        </mat-option>
        </mat-select>
       </mat-form-field>
     </div>
@@ -47,7 +47,7 @@
 
   <div class="place-right">
     <div class="btn-save">
-      <button mat-stroked-button>Terminé</button>
+      <button mat-stroked-button (click)="test()">Terminé</button>
     </div>
       <h3>main picture</h3>
       <img src="https://picsum.photos/300/150" alt="">
@@ -57,7 +57,7 @@
 
 <mat-divider></mat-divider>
 
-<div class="place-container second-part" *ngIf="place">
+<div class="place-container second-part" *ngIf="place && countries">
   <div class="place-left">
     <h3>infos additionnelles</h3>
     <div>
