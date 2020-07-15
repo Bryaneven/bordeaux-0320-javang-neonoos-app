@@ -23,6 +23,7 @@ import { LoaderInterceptor } from './core/http-interceptors/loader-interceptor.i
 import { DialogSaveComponent } from './shared/components/dialog-save/dialog-save.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -33,7 +34,6 @@ import { MatButtonModule } from '@angular/material/button';
     ProgbarComponent,
     DialogSaveComponent,
   ],
-
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -47,6 +47,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatProgressBarModule,
     MatButtonModule,
     MatDialogModule,
+    QuillModule.forRoot(),
+    SharedModule,
+
   ],
   providers: [
     LoaderService,
