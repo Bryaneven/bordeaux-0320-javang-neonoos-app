@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {FormsModule} from '@angular/forms';
 
 // Material
+import {MatRadioModule} from '@angular/material/radio';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
@@ -64,6 +65,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
+    MatRadioModule,
   ]
 })
 export class PlaceModule { }
