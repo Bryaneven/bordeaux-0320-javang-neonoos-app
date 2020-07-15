@@ -19,9 +19,13 @@ export class PlaceFilterComponent implements OnInit {
   town: string;
   starsCheck = [false, false, false, false];
   arrayCheck = [];
+<<<<<<< HEAD
   arrayCheckStars = [];
 
   placeById: RootObject<Place>;
+=======
+  isNonGenius: boolean;
+>>>>>>> place-filter ad
 
   radiusMin: number;
   radiusMax: number;
@@ -52,7 +56,6 @@ export class PlaceFilterComponent implements OnInit {
   }
 
   onCountryChange(value: string): void {
-
   }
 
 
@@ -61,11 +64,6 @@ export class PlaceFilterComponent implements OnInit {
   }
 
   onTownChange(value: string): void {
-    this.showHashtags;
-  }
-
-  onStarsChange(index: number){
-    this.starsCheck[index] = !this.starsCheck[index];
     this.showHashtags;
   }
 
@@ -80,6 +78,10 @@ export class PlaceFilterComponent implements OnInit {
     }else{
       this.clearHashtags();
     }
+  }
+
+  onIsNonGeniusChange(value:boolean): void{
+    console.log(this.isNonGenius)
   }
 
   showHashtags() {

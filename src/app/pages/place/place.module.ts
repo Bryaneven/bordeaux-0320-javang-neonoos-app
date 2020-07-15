@@ -18,6 +18,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { PlaceRoutingModule } from './place-routing.module';
 import { PlaceViewComponent } from './place-view/place-view.component';
@@ -63,6 +64,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     MatTabsModule,
     FormsModule,
     MatAutocompleteModule,
+    MatCheckboxModule,
     ReactiveFormsModule,
   ]
 })

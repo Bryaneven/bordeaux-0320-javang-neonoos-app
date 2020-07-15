@@ -1,9 +1,9 @@
 <div class="place-filter">
-    <div class="block">
+    <div id="block">
         <!-- Pays, Place, ville, starsRate, rayon-->
         <div id="block1">
             <!-- Pays, Place, ville -->
-            <div id='block1-line1' class = 'line'>
+            <div id= 'block1-line1' class = 'line'>
 
               <!-- insert starsbox component with input placeByID -->
               <!--
@@ -44,31 +44,34 @@
                 <!-- Stars -->
                 <neo-starsbox typeCheckbox="checkbox"></neo-starsbox>
                
+                <!--
+                <div id='stars-form-field' class='form-field'>
+                    <neo-starsbox typeCheckbox="checkbox" (starsboxEventEmitter)="onStarsboxEvent($event)"></neo-starsbox>
+                </div>-->
+                
                  <!-- Rayon -->
                 <div id='radius-form-field' class='form-field'>
-                    <div id='radius-label' class='radius-brick'>
-                        <p class="form-label">Rayon:</p>
-                    </div>
-                    <div id='radius' class='radius-brick'>
-                        <mat-card>
-                            <mat-card-content>
-                                <mat-slider
-                                    [max]="radiusMin"
-                                    [min]="radiusMax"
-                                    [step]="radiusStep"
-                                    [(ngModel)]="radius"
-                                    (change)="onRadiusChange($event)"
-                                    >
-                                </mat-slider>
-                            </mat-card-content>
-                        </mat-card>
-                    </div>
+                    <mat-card>
+                    <mat-card-title class='form-field-label'> Rayon:</mat-card-title>
+                        <mat-card-content>
+                            <mat-slider
+                                thumbLabel tickInterval="1"
+                                    
+                                [max]="radiusMin"
+                                [min]="radiusMax"
+                                [step]="radiusStep"
+                                [(ngModel)]="radius"
+                                (change)="onRadiusChange($event)"
+                                >
+                            </mat-slider>
+                        </mat-card-content>
+                        <mat-card-subtitle> {{radius}} 
+                            km </mat-card-subtitle>
+                    </mat-card>
 
+                    
                 </div>
-
-
             </div>
-
         </div>
 
 <!---
