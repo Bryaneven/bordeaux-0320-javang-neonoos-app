@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./guide-poi-search-section.component.scss']
 })
 export class GuidePoiSearchSectionComponent implements OnInit {
-
+country: any;
+rayon: any;
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  onStarsboxEvent(event){}
 }

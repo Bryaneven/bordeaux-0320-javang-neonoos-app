@@ -14,6 +14,7 @@ import { TripService } from '../services/trip/trip.service';
 import { CountryService } from 'src/app/shared/services/country.service';
 import { Relationships } from 'src/app/shared/models/relationships.model';
 import { map } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'neo-guide-edit-view',
@@ -40,7 +41,8 @@ export class GuideEditViewComponent implements OnInit {
     private guideService: GuideService,
     private hashtagService: HashtagService,
     private tripService: TripService,
-    private countryService: CountryService
+    private countryService: CountryService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -168,7 +170,13 @@ export class GuideEditViewComponent implements OnInit {
         this.trips = trips;
         this.CompareTripsChecked();
       });
-    } else {
+    }else if (!filter.tripname && !filter.countryId) {
+      this.snackBar.open(`Sélectionnez au moins un filtre`, '🤚', {
+        duration: 2000,
+        verticalPosition: 'top'
+      });
+    }
+    else {
       this.tripService.getTripsByGuideIdAndName(this.guideId, filter.tripname).subscribe((trips) => {
         this.trips = trips;
         this.CompareTripsChecked();

@@ -37,7 +37,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     PlaceViewComponent,
     PlaceResultsComponent,
     PlaceFilterComponent,
-    StarsboxComponent,
     PlaceEditViewComponent,
     PlaceEditComponent,
     PlaceDescriptionComponent,

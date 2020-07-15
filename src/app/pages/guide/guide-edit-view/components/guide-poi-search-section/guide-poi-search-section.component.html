@@ -1,24 +1,89 @@
-<h3 class="filter-title">Ajouter un voyage</h3>
-<div class="filter-bar">
-  <div class="filter-country">
-    <h3 class="country">Pays</h3>
-    <mat-form-field class="country-input">
-      <mat-select>
-        <mat-option >
-        Maroc
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field class="place-input">
-      <mat-label>Chercher un lieu</mat-label>
-      <span matPrefix><mat-icon>search</mat-icon></span>
-      <input matInput>
-    </mat-form-field>
-    <mat-form-field class="city-input">
-      <mat-label>Saisisser une ville</mat-label>
-      <span matPrefix><mat-icon> add_location</mat-icon></span>
-      <input matInput>
-    </mat-form-field>
-    </div>
+<div class="place-filter">
+  <div class="block">
+
+      <div id="block1">
+
+          <div id='block1-line1' class = 'line'>
+
+
+
+              <mat-form-field id='country-form-field' class='form-field'>
+                  <mat-label>Pays:</mat-label>
+                  <mat-select [(ngModel)]="country" >
+                      <mat-option value="Maroc">Maroc</mat-option>
+                      <mat-option value="Tunisie">Tunisie</mat-option>
+                  </mat-select>
+              </mat-form-field>
+
+              <mat-form-field id='place-form-field' class='form-field'>
+                  <mat-icon matPrefix>search</mat-icon>
+                  <input type="text" matInput placeholder="Rechercher une place">
+              </mat-form-field>
+
+              <mat-form-field id='town-form-field' class='form-field'>
+                  <mat-icon matPrefix>place</mat-icon>
+                  <input type="text" matInput placeholder="Saisissez une ville">
+              </mat-form-field>
+          </div>
+
+          <neo-starsbox
+          typeCheckbox="checkbox"
+          (starsboxEventEmitter)="onStarsboxEvent($event)">
+        </neo-starsbox>
+
+
+              <div id='radius-form-field' class='form-field'>
+                  <div id='radius-label' class='radius-brick'>
+                      <p class="form-label">Rayon:</p>
+                  </div>
+                  <div id='radius' class='radius-brick'>
+                      <mat-card>
+                          <mat-card-content>
+                              <mat-slider
+                                  max="radiusMin"
+                                  min="radiusMax"
+                                  step="radiusStep"
+                                  [(ngModel)]="rayon"
+                                  >
+                              </mat-slider>
+                          </mat-card-content>
+                      </mat-card>
+                  </div>
+
+              </div>
+
+
+          </div>
+
+      </div>
+
+
+      <div id='block2'>
+
+          <div id='block2-categories'>
+              <mat-tab-group >
+                  <mat-tab >
+                      Contents for
+                  </mat-tab>
+              </mat-tab-group>
+          </div>
+
+          <div id='block2-tags'>
+              <div class="warning"></div>
+                  <div  class="checkbox">
+                  <div *>
+                      <div>
+                          <input  type="checkbox" >
+                          <label ></label>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+
+
   </div>
+
+
 
