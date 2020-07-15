@@ -1,9 +1,9 @@
-<div class="place-container">
+<div class="place-container" *ngIf="place">
   <div class="place-left">
     <div class="place-title">
-      <h2 *ngIf="show">Place 1</h2>
+      <h2 *ngIf="show && place">{{place.data.attributes.name}}</h2>
       <mat-form-field *ngIf="!show">
-        <input matInput type="text">
+        <input matInput type="text" [(ngModel)]="place.data.attributes.name">
       </mat-form-field>
       <button (click)="show = !show" mat-button>Editer</button>
     </div>
@@ -27,12 +27,12 @@
     <div class="row">
       <mat-form-field appearance="outline">
         <mat-label>Adresse</mat-label>
-        <input matInput type="text">
+        <input matInput type="text" [(ngModel)]="place.data.attributes.address">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>City</mat-label>
         <mat-icon matPrefix>pin_drop</mat-icon>
-        <input matInput type="text">
+        <input matInput type="text" [(ngModel)]="place.data.attributes.city">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Country</mat-label>
@@ -57,25 +57,25 @@
 
 <mat-divider></mat-divider>
 
-<div class="place-container second-part">
+<div class="place-container second-part" *ngIf="place">
   <div class="place-left">
     <h3>infos additionnelles</h3>
     <div>
       <mat-form-field appearance="outline">
         <mat-label>Type</mat-label>
-        <input matInput>
+        <input matInput [(ngModel)]="place.data.attributes.type">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>OSM ID</mat-label>
-        <input matInput>
+        <input matInput [(ngModel)]="place.data.attributes.osm">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Date of Creation</mat-label>
-        <input matInput>
+        <input matInput [(ngModel)]="place.data.attributes.created">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Last updated</mat-label>
-        <input matInput>
+        <input matInput [(ngModel)]="place.data.attributes.updated">
       </mat-form-field>
     </div>
     <h3>wikipedia</h3>
@@ -96,22 +96,22 @@
       <div class="location">
         <mat-form-field appearance="outline">
           <mat-label>Location box</mat-label>
-          <input matInput>
+          <input matInput [(ngModel)]="place.data.attributes.lng_min">
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Location box</mat-label>
-          <input matInput>
+          <input matInput [(ngModel)]="place.data.attributes.lng_max">
         </mat-form-field>
       </div>
       <div class="location-with-map">
         <div class="column">
           <mat-form-field appearance="outline">
             <mat-label>Location box</mat-label>
-            <input matInput>
+            <input matInput [(ngModel)]="place.data.attributes.lat_max">
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Location box</mat-label>
-            <input matInput>
+            <input matInput [(ngModel)]="place.data.attributes.lat_min">
           </mat-form-field>
         </div>
         <!-- <img src="https://picsum.photos/300/150" alt=""> -->
@@ -120,16 +120,16 @@
       <div class="location gps">
         <mat-form-field appearance="outline">
           <mat-label>GPS coordinate</mat-label>
-          <input matInput>
+          <input matInput [(ngModel)]="place.data.attributes.lat">
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>GPS coordinate</mat-label>
-          <input matInput>
+          <input matInput [(ngModel)]="place.data.attributes.lng">
         </mat-form-field>
       </div>
     </div>
 
-  </div>
+</div>
 
 
 
