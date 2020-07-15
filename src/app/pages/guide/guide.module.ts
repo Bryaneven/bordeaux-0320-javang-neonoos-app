@@ -29,8 +29,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DialogBodyComponent } from './guide-view/components/dialog-body/dialog-body.component';
 import { QuillModule } from 'ngx-quill';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MapboxComponent } from 'src/app/shared-module/mapbox/mapbox.component';
-import { SharedModuleModule } from 'src/app/shared-module/shared-module.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -63,7 +62,7 @@ import { SharedModuleModule } from 'src/app/shared-module/shared-module.module';
     ReactiveFormsModule,
     MatDialogModule,
     MatSnackBarModule,
-    SharedModuleModule,
+    SharedModule,
     QuillModule.forRoot()
   ]
 })

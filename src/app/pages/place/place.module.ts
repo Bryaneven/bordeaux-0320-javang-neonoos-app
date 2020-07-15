@@ -18,8 +18,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
-import { MapboxComponent } from 'src/app/shared-module/mapbox/mapbox.component';
-import { SharedModuleModule } from 'src/app/shared-module/shared-module.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -42,10 +41,9 @@ import { SharedModuleModule } from 'src/app/shared-module/shared-module.module';
     FormsModule,
     MatDividerModule,
     MatSelectModule,
-    SharedModuleModule,
     MatIconModule,
     MatExpansionModule,
-
+    SharedModule
   ]
 })
 export class PlaceModule { }

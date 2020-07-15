@@ -18,7 +18,7 @@ import { ElideInterceptor } from './core/http-interceptors/elide.interceptor';
 import { DialogSaveComponent } from './shared/components/dialog-save/dialog-save.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { SharedModuleModule } from './shared-module/shared-module.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +39,7 @@ import { SharedModuleModule } from './shared-module/shared-module.module';
     MatButtonModule,
     MatDialogModule,
     QuillModule.forRoot(),
+    SharedModule,
   ],
   providers: [
     {
