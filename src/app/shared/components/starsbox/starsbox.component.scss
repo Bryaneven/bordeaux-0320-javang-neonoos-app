@@ -1,0 +1,54 @@
+@import '../../../../assets/scss/variables';
+@import '../../../../assets/scss/btn';
+@import '../../../../assets/scss/checkbox';
+
+.stars {
+
+  display: flex;
+
+  input[type="checkbox"], .checked { display: none; }
+  input[type="radio"], .checked { display: none; }
+
+  input:checked + label {
+
+    .div-star mat-icon {
+      color: #0098ff;
+    }
+  }
+
+  .checkbox-stars {
+
+    label {
+      border: 1px solid gray;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+
+      .div-star {
+        width: 15px;
+        height: 15px;
+
+        mat-icon {
+          font-size: 15px;
+          color: gray;
+          max-width: 15px;
+          max-height: 15px;
+        }
+      }
+    }
+  }
+
+  .s-ring label { border-radius: 0px 10px 10px 0; border-left: 0.5px; }
+  .s-two label { border-left: 0.5px; }
+  .s-one label { border-left: 0.5px; }
+  .s-three label{
+    border-radius: 10px 0px 0px 10px;
+    .div-star mat-icon { position: relative; top: 3px; }
+    .div-star:nth-child(3) { position: relative; top: -5px; }
+  }
+
+}
