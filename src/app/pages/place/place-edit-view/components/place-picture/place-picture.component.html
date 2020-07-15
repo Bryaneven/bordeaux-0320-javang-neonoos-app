@@ -7,7 +7,7 @@
         <h2>Pictures</h2>
       </div>
       <div class="addButton">
-        <button mat-raised-button color=primary>Add new picture</button>
+        <button mat-raised-button color=primary (click)="openDialog()">Add new picture</button>
       </div>
     </div>
 
@@ -18,16 +18,16 @@
       <p>Picture</p>
       <p>Header picture</p>
     </div>
-    <div class="card">
+    <div class="card" *ngFor="let picture of addedPictures.data; index as i">
       <img mat-card-image src="https://via.placeholder.com/150" alt="nothingHere">
       <div class="pictureLinkAndTitle">
         <div class="pictureLink">
           <p>URL Picture</p>
-          <h3>http://jnflibqsldhfbqlshdblbqfqsgdfsd.com</h3>
+          <h3>{{picture.attributes.filename}}</h3>
         </div>
         <div class="pictureTitle">
           <p>Picture title</p>
-          <h3>http://jnflibqsldhfbqlshdblbgfgsdhdfj.com</h3>
+          <h3>{{picture.attributes.name}}</h3>
         </div>
       </div>
       <div class="IsExtAndAuthor">
@@ -43,16 +43,16 @@
       <div class="dates">
         <div class="creationDate">
           <p>Date of creation</p>
-          <h3>17 / 02 / 2019</h3>
+          <h3>{{picture.attributes.created | date:'dd-MM-yyyy'}}</h3>
         </div>
         <div class="updateDate">
           <p>Last Update</p>
-          <h3>19 / 03 / 2020</h3>
+          <h3>{{picture.attributes.created | date:'dd-MM-yyyy'}}</h3>
         </div>
       </div>
       <mat-radio-button value="1"></mat-radio-button>
 
-      <button mat-icon-button color="warn">
+      <button mat-icon-button color="warn" (click)="deletePicture(i)">
         <mat-icon>remove_circle_outline</mat-icon>
       </button>
 
