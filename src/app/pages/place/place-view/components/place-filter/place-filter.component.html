@@ -5,21 +5,22 @@
             <!-- Pays, Place, ville -->
             <div id='block1-line1' class = 'line'>
 
-              <neo-starsbox typeCheckbox="checkbox" (starsboxEventEmitter)="onStarsboxEvent($event)"></neo-starsbox>
-
-                <!--
-                <mat-form-field class="form-full-width">
-                    <mat-label>Pays: </mat-label>
-                    <mat-select multiple formControlName="countrySelection">
-                    <mat-option *ngFor="let country of countries" [value]="selectedCountry">
-                        {{country.name}}
-                    </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="countrySelect.hasError('required')">
-                    Country is required.
-                    </mat-error>
-                </mat-form-field>
+              <!-- insert starsbox component with input placeByID -->
+              <!--
+              <neo-starsbox *ngIf="placeById"
+                typeCheckbox="checkbox"
+                (starsboxEventEmitter)="onStarsboxEvent($event)"
+                [place]="placeById">
+              </neo-starsbox>
                 -->
+
+              <!-- insert starsbox component without input placeByID -->
+              <neo-starsbox
+                typeCheckbox="checkbox"
+                (starsboxEventEmitter)="onStarsboxEvent($event)">
+              </neo-starsbox>
+
+
                 <mat-form-field id='country-form-field' class='form-field'>
                     <mat-label>Pays:</mat-label>
                     <mat-select [(ngModel)]="country" (selectionChange)="onCountryChange($event)">
