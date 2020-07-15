@@ -22,6 +22,7 @@ export class GuideFilterComponent implements OnInit {
   hashtagsSearch: RootObjectList<Hashtag>;
 
   searchValue: string;
+  _searchValue: string;
 
   arrayHashtags = [];
   message: string;
@@ -31,7 +32,9 @@ export class GuideFilterComponent implements OnInit {
 
   onSearchChange(searchValue: string): void {
 
-    this.hashtagservice.getByName(searchValue).subscribe((hashtags) => {
+    this._searchValue = searchValue.replace(/[&\/\\#, +()$~%.'":;!*?<>{}]/gi, '_');
+
+    this.hashtagservice.getByName(this._searchValue).subscribe((hashtags) => {
 
       this.hashtags = null;
       this.arrayHashtags.length = 0;
