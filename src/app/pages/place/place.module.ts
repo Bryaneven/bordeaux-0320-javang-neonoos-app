@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {FormsModule} from '@angular/forms';
 
 // Material
+import {MatRadioModule} from '@angular/material/radio';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
@@ -66,6 +67,7 @@ import { QuillModule } from 'ngx-quill';
     MatAutocompleteModule,
     ReactiveFormsModule,
     QuillModule,
+    MatRadioModule,
   ]
 })
 export class PlaceModule { }
