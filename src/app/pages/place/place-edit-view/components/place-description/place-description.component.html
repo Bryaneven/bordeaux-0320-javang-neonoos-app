@@ -9,7 +9,6 @@
 
     <quill-editor *ngIf="place"
       [(ngModel)]="place.data.attributes.description"
-      (onEditorChanged)="changedEditor($event)"
       [styles]="{height: '200px'}">
     </quill-editor>
 
