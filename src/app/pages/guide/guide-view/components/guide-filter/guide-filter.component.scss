@@ -1,0 +1,76 @@
+@import '../../../../../../assets/scss/variables';
+@import '../../../../../../assets/scss/btn';
+@import '../../../../../../assets/scss/checkbox';
+
+
+.guide-filter {
+  display: flex;
+  justify-content: center;
+
+  .block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
+    margin: 50px 0 50px 0;
+    width: 90%;
+    border-radius: 5px;
+    background: white;
+    padding: 15px 50px;
+  }
+
+  .block-1 {
+
+    display: flex;
+    justify-content: space-between;
+
+    .form {
+      width: 300px;
+      color: $neonoos-color;
+
+      .form-full-width {
+        width: 100%;
+      }
+
+      mat-icon {
+        margin-right: 20px;
+      }
+
+      input {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .block-2 {
+    margin-top: 50px;
+
+    .header-title {
+      display: flex;
+    }
+
+    .title {
+      font-size: 20px;
+      color: #9b9b9b;
+      padding-bottom: 30px;
+      margin-right: 15px;
+    }
+
+    .smallTitle {
+      font-size: 15px;
+      color: #9b9b9b;
+      padding-top: 2px;
+      cursor: pointer;
+    }
+
+    .warning {
+      font-size: 20px;
+      color: #67758D;
+      margin-left: 20px;
+    }
+  }
+}
+
+
+
+

@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  APIURI:"https://bordeaux-java-0320-pj3-neonoos-api.javarover.wilders.dev/api/v1/",
+  //APIURI:"http://localhost:8080/api/v1/"
 };
 
 /*
@@ -14,3 +16,4 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+

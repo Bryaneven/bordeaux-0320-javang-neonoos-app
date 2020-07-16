@@ -1,0 +1,43 @@
+@import 'src/assets/scss/_variables.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+.sideNav {
+  position: fixed;
+  left: 0;
+  width: 210px;
+  height: 100%;
+  background: $background-color;
+}
+
+.sideNav ul {
+  margin-top: 50px;
+}
+
+.sideNav ul a {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  line-height: 65px;
+  font-size: 20px;
+  color: #9b9b9b;
+  padding-left: 40px;
+  transition: .5s;
+}
+
+.sideNav ul li a:hover{
+  padding-left: 50px;
+  color: $neonoos-color;
+}
+
+.sideNav ul a mat-icon {
+  margin-right: 16px;
+  vertical-align: middle;
+  margin-bottom: 15px;
+  font-size: 30px;
+}
