@@ -23,7 +23,7 @@ export class PlaceEditViewComponent implements OnInit {
   countries?: RootObjectList<Country> = new RootObjectList<Country>(Country, 'countries');
   country?: RootObjectList<Country> = new RootObjectList<Country>(Country, 'countries');
 
-  picturesByPlace: RootObjectList<Picture> = new RootObjectList<Picture>(Picture, 'pictures');
+  placePictures: RootObjectList<Picture> = new RootObjectList<Picture>(Picture, 'pictures');
 
   constructor(
     private placeService: PlaceService,
@@ -43,7 +43,7 @@ export class PlaceEditViewComponent implements OnInit {
         const routePlaceId = Number(params.get('id'));
         this.placeId = routePlaceId;
         this.getOnePlace(this.placeId);
-        this.getPicturesByPlace(this.placeId);
+        this.getPicturesByPlace();
       } else {
         this.place = new RootObject<Place>(Place, 'places');
       }
@@ -64,10 +64,12 @@ export class PlaceEditViewComponent implements OnInit {
     this.getCountry(id);
   }
 
-  getPicturesByPlace(id: number) {
-    this.activityService.getPicturesByPlace(id).subscribe(
-      pictures => this.picturesByPlace = pictures
-    );
+  getPicturesByPlace() {
+    this.activityService.getPicturesByPlace(this.placeId).subscribe((placePictures: RootObjectList<Picture>) => {
+      if (placePictures) {
+        this.placePictures = placePictures;
+      }
+    });
   }
 
   getCountries() {
