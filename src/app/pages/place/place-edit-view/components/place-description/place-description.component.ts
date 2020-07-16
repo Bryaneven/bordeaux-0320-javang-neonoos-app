@@ -3,6 +3,7 @@ import 'quill-emoji/dist/quill-emoji.js';
 import { Place } from 'src/app/shared/models/place.model';
 import { RootObject } from 'src/app/shared/models/root-object.model';
 import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'neo-place-description',
@@ -11,14 +12,8 @@ import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 })
 export class PlaceDescriptionComponent implements OnInit {
 
-  @Output() place?: RootObject<Place> = new RootObject<Place>(Place, 'places');
+  @Input() place?: RootObject<Place> = new RootObject<Place>(Place, 'places');
 
   constructor() { }
-
   ngOnInit(): void { }
-
-  changedEditor(event: EditorChangeContent | EditorChangeSelection) {
-    console.log('editor-change', event);
-  }
-
 }
