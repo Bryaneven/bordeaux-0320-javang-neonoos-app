@@ -15,6 +15,7 @@ import { CountryService } from 'src/app/shared/services/country.service';
 import { Relationships } from 'src/app/shared/models/relationships.model';
 import { map } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { PlaceService } from '../../place/services/place/place.service';
 
 @Component({
   selector: 'neo-guide-edit-view',
@@ -31,6 +32,8 @@ export class GuideEditViewComponent implements OnInit {
   guideHashtags: RootObjectList<Hashtag> = new RootObjectList<Hashtag>(Hashtag, 'hastags');
   filteredHashtags: Observable<any[]>;
   places: RootObjectList<Place>;
+  placeResults: RootObjectList<Place>;
+  PicturesPlaceResults$: Observable<string>[] = [];
   trips: RootObjectList<Trip>;
   guideTrips: RootObjectList<Trip> = new RootObjectList<Trip>(Trip, 'trips');
 
@@ -42,7 +45,8 @@ export class GuideEditViewComponent implements OnInit {
     private hashtagService: HashtagService,
     private tripService: TripService,
     private countryService: CountryService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private placeService: PlaceService
   ) { }
 
   ngOnInit(): void {
@@ -110,8 +114,9 @@ export class GuideEditViewComponent implements OnInit {
   }
   deletePlacesGuide(place) {
     this.places.data = this.places.data.filter((placeTofind) => place.id !== placeTofind.id);
+    this.placeResults.data.find((placeToFind) => placeToFind.id === place.id).attributes.ischecked = false;
     this.guide.data.relationships.places.data = [];
-    this.places.data.map((placetodelete) => this.guide.data.relationships.places.data.push(new Relationships('places', placetodelete.id)));
+    this.places.data.map((placetoKeep) => this.guide.data.relationships.places.data.push(new Relationships('places', placetoKeep.id)));
   }
   getGuidePicture(id: number): Observable<string> {
     return this.guideService.getPictureGuide(id).pipe(map((picture) => picture.data[0].attributes.filename));
@@ -191,5 +196,31 @@ export class GuideEditViewComponent implements OnInit {
       }
     }));
   }
+// Methode for Poi Search component
+refreshPlaces(event){
+this.placeService.getAll().subscribe((places) => {
+  this.placeResults = places;
+  this.placeResults.data.map((place ) => this.places.data.map((placeToCompare) => {
+    if (place.id === placeToCompare.id){
+      place.attributes.ischecked = true;
+    }
+  }));
+});
+}
+addPlace(event){
 
+  if (event.attributes.ischecked){
+  this.places.data.push(event);
+  console.log(this.places);
+
+  if (!this.guide.data.relationships){
+    this.guide.data.relationships = {};
+    this.guide.data.relationships.places = {};
+  }
+  this.guide.data.relationships.places.data = [];
+  this.places.data.map((placeToAdd) => this.guide.data.relationships.places.data.push(new Relationships('places', placeToAdd.id)));
+}else {
+  this.deletePlacesGuide(event);
+}
+}
 }

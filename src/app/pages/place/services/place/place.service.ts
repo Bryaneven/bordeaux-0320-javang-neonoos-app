@@ -15,7 +15,8 @@ export class PlaceService {
   constructor(private httpClient: HttpClient) { }
 
   getAll(): Observable<RootObjectList<Place>> {
-    return this.httpClient.get<RootObjectList<Place>>(`${environment.APIURI}places`);
+    return this.httpClient.get<RootObjectList<Place>>(`${environment.APIURI}places`)
+    .pipe(map((places) => places = new RootObjectList<Place>(Place, 'places', places)));
   }
 
   getById(id: number): Observable<RootObject<Place>>{
