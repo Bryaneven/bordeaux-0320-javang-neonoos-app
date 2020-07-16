@@ -30,7 +30,7 @@
           <div *ngFor="let tag of hashtags.data">
             <div>
               <input id="{{tag.attributes.name }}" type="checkbox" (change)="checkbox($event, tag)">
-              <label for="{{tag.attributes.name}}">{{tag.attributes.name}}</label>
+              <label for="{{tag.attributes.name}}">{{tag.attributes.name | uppercase}}</label>
             </div>
           </div>
         </div>
