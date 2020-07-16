@@ -15,11 +15,11 @@
         <h3>sections du guide</h3>
         <mat-form-field appearance="outline">
           <mat-label>Sections</mat-label>
-         <mat-select>
+          <mat-select>
             <mat-option>
 
             </mat-option>
-         </mat-select>
+          </mat-select>
         </mat-form-field>
       </div>
     </div>
@@ -49,8 +49,8 @@
     <div class="btn-save">
       <button mat-stroked-button (click)="save()">Terminé</button>
     </div>
-      <h3>main picture</h3>
-      <img src="https://picsum.photos/300/150" alt="">
+    <h3>main picture</h3>
+    <img src="https://picsum.photos/300/150" alt="">
   </div>
 
 </div>
@@ -85,7 +85,7 @@
         <input matInput>
       </mat-form-field>
       <mat-form-field appearance="outline" class="larger">
-        <mat-label >Lien Wikipédia</mat-label>
+        <mat-label>Lien Wikipédia</mat-label>
         <input matInput>
       </mat-form-field>
     </div>
@@ -93,7 +93,18 @@
 
   <div class="place-right map">
     <h3>location</h3>
-      <div class="location">
+    <div class="location">
+      <mat-form-field appearance="outline">
+        <mat-label>Location box</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Location box</mat-label>
+        <input matInput>
+      </mat-form-field>
+    </div>
+    <div class="location-with-map">
+      <div class="column">
         <mat-form-field appearance="outline">
           <mat-label>Longitude min</mat-label>
           <input matInput [(ngModel)]="place.data.attributes.lng_min">
@@ -128,13 +139,16 @@
         </mat-form-field>
       </div>
     </div>
+    <div class="location gps">
+      <mat-form-field appearance="outline">
+        <mat-label>GPS coordinate</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>GPS coordinate</mat-label>
+        <input matInput>
+      </mat-form-field>
+    </div>
+  </div>
 
 </div>
-
-
-
-
-
-
-
-
