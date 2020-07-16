@@ -30,7 +30,6 @@ export class PlaceEditViewComponent implements OnInit {
   ngOnInit(): void {
     this.getRouteParam();
     this.getCountries();
-    this.getCountry(this.placeId);
   }
 
   getRouteParam() {
@@ -56,6 +55,7 @@ export class PlaceEditViewComponent implements OnInit {
       }
     });
     this.subscription.add(getOnePlaceSubscription);
+    this.getCountry(id);
   }
 
   getCountries() {
@@ -66,12 +66,18 @@ export class PlaceEditViewComponent implements OnInit {
     );
   }
 
-  getCountry(placeId: number) {
-    this.placeService.getCountryByPlace(placeId).subscribe(
+  getCountry(id: number) {
+    this.placeService.getCountryByPlace(id).subscribe(
       country => {
         this.country = country;
       }
     );
+  }
+
+  // Persistence
+
+  patchPlace(place) {
+    this.placeService.patch(place, this.placeId).subscribe();
   }
 
 

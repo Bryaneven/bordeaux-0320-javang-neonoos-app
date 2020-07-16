@@ -3,7 +3,8 @@
     <neo-place-edit [placeId]="placeId"
                     [place]="place"
                     [countries]="countries"
-                    [country]="country">
+                    [country]="country"
+                    (patchPlace)="patchPlace($event)">
     </neo-place-edit>
   </mat-card>
   <mat-card>

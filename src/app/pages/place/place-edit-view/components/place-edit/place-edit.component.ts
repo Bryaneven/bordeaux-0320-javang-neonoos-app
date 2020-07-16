@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { RootObject } from 'src/app/shared/models/root-object.model';
 import { Place } from 'src/app/shared/models/place.model';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
@@ -16,6 +16,8 @@ export class PlaceEditComponent implements OnInit {
   @Input() countries: RootObjectList<Country>;
   @Input() country: RootObjectList<Country>;
 
+  @Output() patchPlace = new EventEmitter();
+
   show = true;
   constructor() { }
 
@@ -31,4 +33,9 @@ export class PlaceEditComponent implements OnInit {
   compareObjects(country1: any, country2: any) {
     return country1.id === country2.id;
   }
+
+  save() {
+    this.patchPlace.emit(this.place);
+  }
+
 }
