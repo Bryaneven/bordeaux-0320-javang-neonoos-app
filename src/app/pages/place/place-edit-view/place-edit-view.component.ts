@@ -76,7 +76,8 @@ export class PlaceEditViewComponent implements OnInit {
 
   // Persistence
 
-  patchPlace(place) {
+  patchPlace({place, countryId}) {
+    this.place.data.relationships.countries.data[0].id = countryId;
     this.placeService.patch(place, this.placeId).subscribe();
   }
 
