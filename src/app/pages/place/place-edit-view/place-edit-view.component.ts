@@ -88,8 +88,6 @@ export class PlaceEditViewComponent implements OnInit {
   }
 
 
-
-
   getPicturesByPlace(id: number) {
     this.activityService.getPicturesByPlace(id).subscribe(
       pictures => this.picturesByPlace = pictures
