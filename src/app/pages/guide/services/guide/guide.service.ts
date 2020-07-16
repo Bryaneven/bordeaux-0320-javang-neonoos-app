@@ -24,6 +24,10 @@ export class GuideService {
     .map((guide) => this.createInstance(guide))));
   }
 
+  getAllGuides(): Observable<RootObjectList<Guide>> {
+    return this.http.get<RootObjectList<Guide>>(`${environment.APIURI}guides`);
+  }
+
   getById(id: number): Observable<RootObject<Guide>>{
     return this.http.get<RootObject<Guide>>(`${environment.APIURI}guides/` + id).pipe(map((guide) => this.createInstance(guide)));
   }

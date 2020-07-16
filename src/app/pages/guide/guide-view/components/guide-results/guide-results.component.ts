@@ -24,19 +24,22 @@ show = true;
 titleHashtag = 'Edite';
 hashtagId: number;
 
+  @Input() allGuides: RootObjectList<Guide>;
+
   @Input()
   set hashtags(hashtags: Data<Hashtag>[]) {
     if (hashtags.length > 0) {
       this.forkGuide(hashtags).subscribe((results: RootObjectList<Guide>[]) => {
         this.guideSections = results;
         this._hashtags = hashtags;
+        console.log(this._hashtags);
       });
     }
   }
 
   constructor(private hashtagService: HashtagService) { }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void { }
 
   forkGuide(hashtags: Data<Hashtag>[]){
 
