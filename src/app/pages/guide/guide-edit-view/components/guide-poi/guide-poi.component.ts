@@ -7,6 +7,7 @@ import { Component, OnInit, ViewChild, ElementRef, Input, EventEmitter, Output }
 import { RootObject } from 'src/app/shared/models/root-object.model';
 import { Guide } from '../../../models/guide';
 import { Place } from 'src/app/shared/models/place.model';
+import { Country } from 'src/app/shared/models/country';
 
 
 
@@ -16,6 +17,7 @@ import { Place } from 'src/app/shared/models/place.model';
   styleUrls: ['./guide-poi.component.scss']
 })
 export class GuidePoiComponent implements OnInit {
+  @Input() countries: RootObjectList<Country>;
   @Input() guide: RootObject<Guide>;
   @Input() places: RootObjectList<Place>;
   @Input() PicturesUrl$: Observable<string>[] = [] ;

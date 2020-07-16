@@ -4,20 +4,24 @@ import { Place } from 'src/app/shared/models/place.model';
 import { Observable } from 'rxjs';
 import * as mapboxgl from 'mapbox-gl/dist/mapbox-gl';
 import { debugOutputAstAsTypeScript } from '@angular/compiler';
+import { Country } from 'src/app/shared/models/country';
 @Component({
   selector: 'neo-guide-poi-search-section',
   templateUrl: './guide-poi-search-section.component.html',
   styleUrls: ['./guide-poi-search-section.component.scss']
 })
 export class GuidePoiSearchSectionComponent implements OnInit, OnChanges {
+  @Input() countries: RootObjectList<Country>;
  @Input() places: RootObjectList<Place>;
  @Input() PicturesUrl$: Observable<string>[] = [] ;
  @Output() refreshPlaces = new EventEmitter();
  @Output() sendPlaceToadd = new EventEmitter();
  markers = [];
  map: mapboxgl.Map;
-country: any;
-rayon: any;
+ countryId: number;
+ placeName: string;
+ city: string;
+ rayon: any;
   constructor() { }
 
   ngOnInit(): void {
