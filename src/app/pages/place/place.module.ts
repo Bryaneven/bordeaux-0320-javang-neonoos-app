@@ -41,7 +41,6 @@ import { AddPictureDialogComponent } from './place-edit-view/components/add-pict
     PlaceViewComponent,
     PlaceResultsComponent,
     PlaceFilterComponent,
-    StarsboxComponent,
     PlaceEditViewComponent,
     PlaceEditComponent,
     PlaceDescriptionComponent,
