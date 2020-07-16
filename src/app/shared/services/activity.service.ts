@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class ActivityService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getImgActivites() {
-    return this.httpClient.get<any>('http://localhost:8080/activities');
+  getPicturesByPlace(id: number) {
+    return this.httpClient.get<any>(`${environment.APIURI}places/${id}/pictures`);
   }
 }
