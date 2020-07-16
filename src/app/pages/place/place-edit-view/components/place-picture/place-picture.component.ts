@@ -12,17 +12,14 @@ import { RootObject } from 'src/app/shared/models/root-object.model';
 })
 export class PlacePictureComponent implements OnInit {
 
-  @Input() picturesByPlace: RootObjectList<Picture> = new RootObjectList<Picture>(Picture, 'pictures');
+  @Input() placePictures: RootObjectList<Picture> = new RootObjectList<Picture>(Picture, 'pictures');
   addedPictures: RootObjectList<Picture> = new RootObjectList<Picture>(Picture, 'pictures');
 
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    if (this.picturesByPlace) {
-      this.addedPictures.data = this.picturesByPlace.data;
-    } else {
-      this.addedPictures.data = [];
-    }
+    this.addedPictures.data = [];
+    this.placePictures.data = [];
   }
 
   openDialog(): void {
@@ -42,16 +39,17 @@ export class PlacePictureComponent implements OnInit {
     });
   }
 
+  // Do delete
   deletePicture(id: number) {
-    for (const picture of this.addedPictures.data) {
+    /* for (const picture of this.addedPictures.data) {
       if (id === picture.id) {
         this.addedPictures.data.splice(picture.id, 1);
       }
-    }
+    } */
   }
 
   isExt(picture: Picture) {
-    picture.isExt = ! picture.isExt;
+    picture.isExt = !picture.isExt;
   }
 
 }
