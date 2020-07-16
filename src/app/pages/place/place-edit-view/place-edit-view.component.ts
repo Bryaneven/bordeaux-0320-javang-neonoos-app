@@ -9,6 +9,8 @@ import { Country } from 'src/app/shared/models/country';
 import { CountryService } from 'src/app/shared/services/country.service';
 import { Picture } from 'src/app/shared/models/picture.model';
 import { ActivityService } from 'src/app/shared/services/activity.service';
+import { Data } from 'src/app/shared/models/data.model';
+import { Relationships } from 'src/app/shared/models/relationships.model';
 
 @Component({
   selector: 'neo-place-edit-view',
@@ -64,6 +66,7 @@ export class PlaceEditViewComponent implements OnInit {
     this.getCountry(id);
   }
 
+  // PICTURES BEGIN
   getPicturesByPlace() {
     this.activityService.getPicturesByPlace(this.placeId).subscribe((placePictures: RootObjectList<Picture>) => {
       if (placePictures) {
@@ -71,6 +74,18 @@ export class PlaceEditViewComponent implements OnInit {
       }
     });
   }
+
+  addOnePicture(picture: Data<Picture>) {
+    this.placePictures.data.push(picture);
+    if (!this.place.data.relationships) {
+      this.place.data.relationships = {};
+      this.place.data.relationships.pictures = {};
+    }
+    this.place.data.relationships.pictures.data = [];
+    this.placePictures.data.map((pictureToAdd) => this.place.data.relationships.pictures.data.push(new Relationships('pictures', pictureToAdd.id)));
+  }
+  // PICTURES END
+
 
   getCountries() {
     this.countryService.getCountries().subscribe(

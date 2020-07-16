@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPictureDialogComponent } from '../add-picture-dialog/add-picture-dialog.component';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
@@ -14,6 +14,8 @@ export class PlacePictureComponent implements OnInit {
 
   @Input() placePictures: RootObjectList<Picture> = new RootObjectList<Picture>(Picture, 'pictures');
   addedPictures: RootObjectList<Picture> = new RootObjectList<Picture>(Picture, 'pictures');
+
+  @Output() pictureAdded = new EventEmitter();
 
   constructor(public dialog: MatDialog) { }
 
@@ -35,7 +37,8 @@ export class PlacePictureComponent implements OnInit {
       currentAddedPicture.data.attributes.created = new Date();
       currentAddedPicture.data.id = this.addedPictures.data.length;
 
-      this.addedPictures.data.push(currentAddedPicture.data);
+      // this.addedPictures.data.push(currentAddedPicture.data);
+      this.pictureAdded.emit(currentAddedPicture);
     });
   }
 
