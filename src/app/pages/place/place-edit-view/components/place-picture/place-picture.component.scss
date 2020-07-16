@@ -21,7 +21,7 @@
   .subtitles {
     display: flex;
     justify-content: space-between;
-    margin: 0 15px;
+    //margin-right: 130px;
 
     p {
       text-transform: uppercase;
@@ -63,6 +63,7 @@
     height: 180px;
 
     .pictureLink, .pictureTitle {
+      max-width: 400px;
       border: 1px solid rgb(184, 176, 176);
       border-radius: 5px;
       padding: 5px;
