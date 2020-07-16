@@ -47,7 +47,7 @@
 
   <div class="place-right">
     <div class="btn-save">
-      <button mat-stroked-button (click)="test()">Terminé</button>
+      <button mat-stroked-button (click)="save()">Terminé</button>
     </div>
       <h3>main picture</h3>
       <img src="https://picsum.photos/300/150" alt="">
@@ -95,22 +95,22 @@
     <h3>location</h3>
       <div class="location">
         <mat-form-field appearance="outline">
-          <mat-label>Location box</mat-label>
+          <mat-label>Longitude min</mat-label>
           <input matInput [(ngModel)]="place.data.attributes.lng_min">
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Location box</mat-label>
+          <mat-label>Longitude max</mat-label>
           <input matInput [(ngModel)]="place.data.attributes.lng_max">
         </mat-form-field>
       </div>
       <div class="location-with-map">
         <div class="column">
           <mat-form-field appearance="outline">
-            <mat-label>Location box</mat-label>
+            <mat-label>Latitude max</mat-label>
             <input matInput [(ngModel)]="place.data.attributes.lat_max">
           </mat-form-field>
           <mat-form-field appearance="outline">
-            <mat-label>Location box</mat-label>
+            <mat-label>Latitude min</mat-label>
             <input matInput [(ngModel)]="place.data.attributes.lat_min">
           </mat-form-field>
         </div>
