@@ -7,6 +7,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
 import { Country } from 'src/app/shared/models/country';
 import { CountryService } from 'src/app/shared/services/country.service';
+import { Picture } from 'src/app/shared/models/picture.model';
+import { ActivityService } from 'src/app/shared/services/activity.service';
 
 @Component({
   selector: 'neo-place-edit-view',
@@ -21,10 +23,13 @@ export class PlaceEditViewComponent implements OnInit {
   countries?: RootObjectList<Country> = new RootObjectList<Country>(Country, 'countries');
   country?: RootObjectList<Country> = new RootObjectList<Country>(Country, 'countries');
 
+  picturesByPlace: RootObjectList<Picture> = new RootObjectList<Picture>(Picture, 'pictures');
+
   constructor(
     private placeService: PlaceService,
     private countryService: CountryService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private activityService: ActivityService,
   ) { }
 
   ngOnInit(): void {
@@ -38,6 +43,7 @@ export class PlaceEditViewComponent implements OnInit {
         const routePlaceId = Number(params.get('id'));
         this.placeId = routePlaceId;
         this.getOnePlace(this.placeId);
+        this.getPicturesByPlace(this.placeId);
       } else {
         this.place = new RootObject<Place>(Place, 'places');
       }
@@ -82,5 +88,11 @@ export class PlaceEditViewComponent implements OnInit {
 
 
 
+
+  getPicturesByPlace(id: number) {
+    this.activityService.getPicturesByPlace(id).subscribe(
+      pictures => this.picturesByPlace = pictures
+    );
+  }
 
 }
