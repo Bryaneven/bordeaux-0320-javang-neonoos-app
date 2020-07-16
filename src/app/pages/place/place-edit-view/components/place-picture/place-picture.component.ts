@@ -45,4 +45,8 @@ export class PlacePictureComponent implements OnInit {
     }
   }
 
+  isExt(picture: Picture) {
+    picture.isExt = ! picture.isExt;
+  }
+
 }
