@@ -4,7 +4,7 @@
   <mat-card class="block" *ngIf="i < _hashtags.length" >
     <div class="resultHeader">
       <form class="hearder-title" (ngSubmit)="updateHashtagName(_hashtags[i].id, _hashtags[i].attributes.name)" #myForm="ngForm">
-        <h2 class="title-card-section" *ngIf= "_hashtags[i] && show || hashtagId != _hashtags[i].id">{{ _hashtags[i].attributes.name }}</h2>
+        <h2 class="title-card-section" *ngIf= "_hashtags[i] && show || hashtagId != _hashtags[i].id">{{ _hashtags[i].attributes.name | uppercase }}</h2>
         <div *ngIf= "_hashtags[i] && !show && hashtagId === _hashtags[i].id">
           <input name="hashtagName" type="text" [(ngModel)]="_hashtags[i].attributes.name" #hashtagName="ngModel"/>
         </div>
