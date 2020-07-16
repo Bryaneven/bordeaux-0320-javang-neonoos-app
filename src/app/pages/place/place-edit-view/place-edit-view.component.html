@@ -1,10 +1,7 @@
 <div class="container">
   <mat-card>
-    <neo-place-edit [placeId]="placeId"
-                    [place]="place"
-                    [countries]="countries"
-                    [country]="country"
-                    (patchPlace)="patchPlace($event)">
+    <neo-place-edit [placeId]="placeId" [place]="place" [countries]="countries" [country]="country"
+      (patchPlace)="patchPlace($event)">
     </neo-place-edit>
   </mat-card>
   <mat-card>
@@ -14,5 +11,3 @@
     <neo-place-picture [picturesByPlace]="picturesByPlace"></neo-place-picture>
   </mat-card>
 </div>
-
-

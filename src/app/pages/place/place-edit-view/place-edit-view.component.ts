@@ -5,8 +5,6 @@ import { Place } from 'src/app/shared/models/place.model';
 import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
-import { Picture } from 'src/app/shared/models/picture.model';
-import { ActivityService } from 'src/app/shared/services/activity.service';
 import { Country } from 'src/app/shared/models/country';
 import { CountryService } from 'src/app/shared/services/country.service';
 import { Picture } from 'src/app/shared/models/picture.model';
