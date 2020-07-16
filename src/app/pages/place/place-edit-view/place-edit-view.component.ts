@@ -7,6 +7,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
 import { Picture } from 'src/app/shared/models/picture.model';
 import { ActivityService } from 'src/app/shared/services/activity.service';
+import { Country } from 'src/app/shared/models/country';
+import { CountryService } from 'src/app/shared/services/country.service';
 
 @Component({
   selector: 'neo-place-edit-view',
@@ -18,6 +20,8 @@ export class PlaceEditViewComponent implements OnInit {
   subscription = new Subscription();
   place?: RootObject<Place>;
   placeId: number;
+  countries?: RootObjectList<Country> = new RootObjectList<Country>(Country, 'countries');
+  country?: RootObjectList<Country> = new RootObjectList<Country>(Country, 'countries');
 
   picturesByPlace: RootObjectList<Picture> = new RootObjectList<Picture>(Picture, 'pictures');
 
@@ -25,10 +29,12 @@ export class PlaceEditViewComponent implements OnInit {
     private placeService: PlaceService,
     private route: ActivatedRoute,
     private activityService: ActivityService,
+    private countryService: CountryService,
   ) { }
 
   ngOnInit(): void {
     this.getRouteParam();
+    this.getCountries();
   }
 
   getRouteParam() {
@@ -55,6 +61,7 @@ export class PlaceEditViewComponent implements OnInit {
       }
     });
     this.subscription.add(getOnePlaceSubscription);
+    this.getCountry(id);
   }
 
   getPicturesByPlace(id: number) {
@@ -62,5 +69,30 @@ export class PlaceEditViewComponent implements OnInit {
       pictures => this.picturesByPlace = pictures
     );
   }
+
+  getCountries() {
+    this.countryService.getCountries().subscribe(
+      countries => {
+        this.countries = countries;
+      }
+    );
+  }
+
+  getCountry(id: number) {
+    this.placeService.getCountryByPlace(id).subscribe(
+      country => {
+        this.country = country;
+      }
+    );
+  }
+
+  // Persistence
+
+  patchPlace(place) {
+    this.placeService.patch(place, this.placeId).subscribe();
+  }
+
+
+
 
 }

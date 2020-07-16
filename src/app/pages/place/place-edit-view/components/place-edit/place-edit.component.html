@@ -1,4 +1,4 @@
-<div class="place-container" *ngIf="place">
+<div class="place-container" *ngIf="place && countries">
   <div class="place-left">
     <div class="place-title">
       <h2 *ngIf="show && place">{{place.data.attributes.name}}</h2>
@@ -36,18 +36,18 @@
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Country</mat-label>
-        <mat-select>
-          <mat-option>
-
-          </mat-option>
-        </mat-select>
+       <mat-select [compareWith]="compareObjects" [(ngModel)]="country.data[0]">
+        <mat-option *ngFor="let country of countries.data" [value]="country">
+          {{country.attributes.name}}
+        </mat-option>
+       </mat-select>
       </mat-form-field>
     </div>
   </div>
 
   <div class="place-right">
     <div class="btn-save">
-      <button mat-stroked-button>Terminé</button>
+      <button mat-stroked-button (click)="save()">Terminé</button>
     </div>
     <h3>main picture</h3>
     <img src="https://picsum.photos/300/150" alt="">
@@ -57,7 +57,7 @@
 
 <mat-divider></mat-divider>
 
-<div class="place-container second-part" *ngIf="place">
+<div class="place-container second-part" *ngIf="place && countries">
   <div class="place-left">
     <h3>infos additionnelles</h3>
     <div>
@@ -106,16 +106,38 @@
     <div class="location-with-map">
       <div class="column">
         <mat-form-field appearance="outline">
-          <mat-label>Location box</mat-label>
+          <mat-label>Longitude min</mat-label>
           <input matInput [(ngModel)]="place.data.attributes.lng_min">
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Location box</mat-label>
+          <mat-label>Longitude max</mat-label>
           <input matInput [(ngModel)]="place.data.attributes.lng_max">
         </mat-form-field>
       </div>
-      <!-- <img src="https://picsum.photos/300/150" alt=""> -->
-      <neo-mapbox></neo-mapbox>
+      <div class="location-with-map">
+        <div class="column">
+          <mat-form-field appearance="outline">
+            <mat-label>Latitude max</mat-label>
+            <input matInput [(ngModel)]="place.data.attributes.lat_max">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Latitude min</mat-label>
+            <input matInput [(ngModel)]="place.data.attributes.lat_min">
+          </mat-form-field>
+        </div>
+        <!-- <img src="https://picsum.photos/300/150" alt=""> -->
+        <neo-mapbox></neo-mapbox>
+      </div>
+      <div class="location gps">
+        <mat-form-field appearance="outline">
+          <mat-label>GPS coordinate</mat-label>
+          <input matInput [(ngModel)]="place.data.attributes.lat">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>GPS coordinate</mat-label>
+          <input matInput [(ngModel)]="place.data.attributes.lng">
+        </mat-form-field>
+      </div>
     </div>
     <div class="location gps">
       <mat-form-field appearance="outline">
