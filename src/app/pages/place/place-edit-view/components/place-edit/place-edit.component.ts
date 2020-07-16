@@ -3,6 +3,7 @@ import { RootObject } from 'src/app/shared/models/root-object.model';
 import { Place } from 'src/app/shared/models/place.model';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
 import { Country } from 'src/app/shared/models/country';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'neo-place-edit',
@@ -16,7 +17,10 @@ export class PlaceEditComponent implements OnInit {
   @Input() countries: RootObjectList<Country>;
   @Input() country: RootObjectList<Country>;
 
+  countryToPatch: RootObject<Country>;
+
   @Output() patchPlace = new EventEmitter();
+  @Output() patchCountryInPlace = new EventEmitter();
 
   show = true;
   constructor() { }
@@ -25,17 +29,12 @@ export class PlaceEditComponent implements OnInit {
 
   }
 
-  test() {
-    console.log(this.country.data);
-
-  }
-
   compareObjects(country1: any, country2: any) {
     return country1.id === country2.id;
   }
 
   save() {
-    this.patchPlace.emit(this.place);
+    this.patchPlace.emit({ place: this.place, countryId: this.country.data[0].id});
   }
 
 }
