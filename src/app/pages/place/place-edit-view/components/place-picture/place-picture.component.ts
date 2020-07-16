@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPictureDialogComponent } from '../add-picture-dialog/add-picture-dialog.component';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
@@ -12,12 +12,17 @@ import { RootObject } from 'src/app/shared/models/root-object.model';
 })
 export class PlacePictureComponent implements OnInit {
 
+  @Input() picturesByPlace: RootObjectList<Picture> = new RootObjectList<Picture>(Picture, 'pictures');
   addedPictures: RootObjectList<Picture> = new RootObjectList<Picture>(Picture, 'pictures');
 
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.addedPictures.data = [];
+    if (this.picturesByPlace) {
+      this.addedPictures.data = this.picturesByPlace.data;
+    } else {
+      this.addedPictures.data = [];
+    }
   }
 
   openDialog(): void {
