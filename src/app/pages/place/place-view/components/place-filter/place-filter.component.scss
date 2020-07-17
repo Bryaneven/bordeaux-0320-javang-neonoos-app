@@ -23,20 +23,30 @@
     padding: 15px 50px;
 }
 
-#block1{
-}
-
 #block2{
     margin-top: 5%;
 }
 
-.line{
+.block1-line{
     display: flex;
     justify-content: space-between;
-    //margin-bottom: 1%;
-    height: 20%;
+    margin-bottom: 1%;
+    
     width: 100%;
 }
+
+#block1-line1{
+    height: 15%;
+}
+
+#block1-line2{
+    height: 100%;
+}
+
+#block1-line3{
+    height: 10%;
+    justify-content: right;
+} 
 
 .form-field{
     display: flex;
@@ -80,5 +90,8 @@ mat-card-content{
     cursor: pointer;
 }
 
-
- 
+#button-submit{
+    border-radius: 8%;
+    border-color: lightskyblue;
+    color : lightskyblue;
+}

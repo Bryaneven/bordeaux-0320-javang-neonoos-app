@@ -12,23 +12,26 @@ import { map } from 'rxjs/operators';
 })
 export class PlaceService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   getAll(): Observable<RootObjectList<Place>> {
-    return this.httpClient.get<RootObjectList<Place>>(`${environment.APIURI}places`);
+    return this.http.get<RootObjectList<Place>>(`${environment.APIURI}places`);
   }
 
   getById(id: number): Observable<RootObject<Place>>{
-    return this.httpClient.get<RootObject<Place>>(`${environment.APIURI}places/` + id);
+    return this.http.get<RootObject<Place>>(`${environment.APIURI}places/` + id);
   }
 
+  getPlacesOfCountry(id: number): Observable<RootObjectList<Place>> {
+    return this.http.get<RootObjectList<Place>>(`${environment.APIURI}countries/${id}/places`);
+  }
 
   post(place: RootObject<Place>): Observable<RootObject<Place>> {
-    return this.httpClient.post<RootObject<Place>>(`${environment.APIURI}places`, place);
+    return this.http.post<RootObject<Place>>(`${environment.APIURI}places`, place);
   }
 
   patch(place: RootObject<Place>, id: number): Observable<RootObject<Place>>{
-    return this.httpClient.patch<RootObject<Place>>(`${environment.APIURI}places/` + id, place)
+    return this.http.patch<RootObject<Place>>(`${environment.APIURI}places/` + id, place)
     .pipe(map((placefrmsrv) => this.createInstance(placefrmsrv)));
   }
 

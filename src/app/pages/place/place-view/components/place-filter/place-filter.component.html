@@ -3,35 +3,32 @@
         <!-- Pays, Place, ville, starsRate, rayon-->
         <div id="block1">
             <!-- Pays, Place, ville -->
-            <div id= 'block1-line1' class = 'line'>
+            <div id= 'block1-line1' class = 'block1-line'>
 
-              <!-- insert starsbox component with input placeByID -->
-              <!--
-              <neo-starsbox *ngIf="placeById"
-                typeCheckbox="checkbox"
-                (starsboxEventEmitter)="onStarsboxEvent($event)"
-                [place]="placeById">
-              </neo-starsbox>
-                -->
-
-              <!-- insert starsbox component without input placeByID -->
-              <neo-starsbox
-                typeCheckbox="checkbox"
-                (starsboxEventEmitter)="onStarsboxEvent($event)">
-              </neo-starsbox>
-
+        
 
                 <mat-form-field id='country-form-field' class='form-field'>
                     <mat-label>Pays:</mat-label>
-                    <mat-select [(ngModel)]="country" (selectionChange)="onCountryChange($event)">
-                        <mat-option value="Maroc">Maroc</mat-option>
-                        <mat-option value="Tunisie">Tunisie</mat-option>
+                    <mat-select [(value)]="country_id" name='countrySelection' (selectionChange)="onCountryChange()">
+                        <mat-option></mat-option>
+                        <mat-option *ngFor="let country of countries.data" value="{{country.id}}">{{country.attributes.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
 
                 <mat-form-field id='place-form-field' class='form-field'>
                     <mat-icon matPrefix>search</mat-icon>
-                    <input type="text" matInput placeholder="Rechercher une place" [(ngModel)]="place" (input)="onPlaceChange($event)">
+                    <input type="text" 
+                        placeholder="Rechercher une place"
+                        matInput 
+                        [formControl]="placeCtrl"
+                        [matAutocomplete]="auto"
+                        [(ngModel)]="place" 
+                        (input)="onPlaceChange($event)">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let place of filteredPlacesOptions | async" [value]="place.attributes.name">
+                                {{place.attributes.name}}
+                            </mat-option>
+                        </mat-autocomplete>
                 </mat-form-field>
 
                 <mat-form-field id='town-form-field' class='form-field'>
@@ -40,10 +37,26 @@
                 </mat-form-field>
             </div>
             <!-- Stars et Rayon-->
-            <div id='block1-line2' class = 'line'>
+            <div id='block1-line2' class = 'block1-line'>
+
                 <!-- Stars -->
-                <neo-starsbox typeCheckbox="checkbox"></neo-starsbox>
-               
+                <div id='stars-form-field' class='form-field'>
+                    <mat-card>
+                        <mat-card-title class='form-field-label'> Stars:</mat-card-title>
+                        <mat-card-content>
+                            <neo-starsbox 
+                                typeCheckbox="checkbox" 
+                                (starsboxEventEmitter)="onStarsboxEvent($event)"> 
+                            </neo-starsbox>
+                            <mat-checkbox 
+                                [(ngModel)]="isNonGenius" 
+                                (ngModelChange)="onIsNonGeniusChange($event)">
+                                Non-genius places
+                            </mat-checkbox>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                
                 <!--
                 <div id='stars-form-field' class='form-field'>
                     <neo-starsbox typeCheckbox="checkbox" (starsboxEventEmitter)="onStarsboxEvent($event)"></neo-starsbox>
@@ -68,10 +81,13 @@
                         <mat-card-subtitle> {{radius}} 
                             km </mat-card-subtitle>
                     </mat-card>
-
-                    
                 </div>
             </div>
+            <div id='block1-line3' class = 'block1-line'>
+                <button id='button-clear' mat-stroked-button (click)="onClear()">Refresh</button>
+                <button id='button-submit' mat-stroked-button (click)="onSubmit()">actualiser la liste</button>
+            </div>
+            
         </div>
 
 <!---

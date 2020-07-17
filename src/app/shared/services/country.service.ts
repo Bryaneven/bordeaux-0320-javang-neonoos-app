@@ -12,7 +12,7 @@ export class CountryService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getCountries(): Observable<RootObjectList<Country>> {
+  getAll(): Observable<RootObjectList<Country>> {
     return this.httpClient.get<RootObjectList<Country>>(`${environment.APIURI}countries`);
   }
 }

@@ -67,7 +67,7 @@ export class GuideEditViewComponent implements OnInit {
   }
 
   getCountries() {
-    this.countryService.getCountries().subscribe(
+    this.countryService.getAll().subscribe(
       countries => {
         this.countries = countries;
       }
