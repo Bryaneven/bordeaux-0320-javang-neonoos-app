@@ -29,9 +29,9 @@ export class PlaceEditViewComponent implements OnInit {
 
   constructor(
     private placeService: PlaceService,
-    private countryService: CountryService,
     private route: ActivatedRoute,
     private activityService: ActivityService,
+    private countryService: CountryService,
   ) { }
 
   ngOnInit(): void {
