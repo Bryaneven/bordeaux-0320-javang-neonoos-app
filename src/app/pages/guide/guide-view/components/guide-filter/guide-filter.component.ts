@@ -4,6 +4,7 @@ import { Hashtag } from 'src/app/shared/models/hashtag';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogBodyComponent } from '../dialog-body/dialog-body.component';
+import { Guide } from '../../../models/guide';
 
 
 @Component({
@@ -15,8 +16,9 @@ import { DialogBodyComponent } from '../dialog-body/dialog-body.component';
 export class GuideFilterComponent implements OnInit {
 
   @Output() checkboxEvent = new EventEmitter();
+  @Output() GuidesEventEmitter = new EventEmitter<any>();
 
-  constructor(private hashtagservice: HashtagService, public matDialog: MatDialog) { }
+  constructor(private hashtagservice: HashtagService, public matDialog: MatDialog, ) { }
 
   hashtags: RootObjectList<Hashtag>;
   hashtagsSearch: RootObjectList<Hashtag>;
@@ -27,6 +29,8 @@ export class GuideFilterComponent implements OnInit {
   arrayHashtags = [];
   message: string;
   showTitleHashtags = 'Tout voir';
+  showAllGuides = false;
+  iconBtnGuides = 'add';
 
   ngOnInit(): void { }
 
@@ -85,5 +89,16 @@ export class GuideFilterComponent implements OnInit {
   openDialog() {
     const dialogConfig = new MatDialogConfig();
     this.matDialog.open(DialogBodyComponent, dialogConfig);
+  }
+
+  searchAllGuides() {
+    if (this.showAllGuides === false) {
+      this.showAllGuides = true;
+      this.iconBtnGuides = 'remove';
+    } else {
+      this.showAllGuides = false;
+      this.iconBtnGuides = 'add';
+    }
+    this.GuidesEventEmitter.emit(this.showAllGuides);
   }
 }
