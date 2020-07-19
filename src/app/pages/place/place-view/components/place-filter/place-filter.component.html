@@ -1,4 +1,26 @@
 <div class="place-filter">
+  <div class="block">
+        <neo-starsbox
+          typeCheckbox="checkbox"
+          (starsboxEventEmitter)="onStarsboxEvent($event)">
+        </neo-starsbox>
+
+        <BR>
+
+        <mat-form-field id='place-form-field' class='form-field'>
+            <mat-icon matPrefix>search</mat-icon>
+            <input type="text" matInput placeholder="Rechercher une place" [(ngModel)]="placeFilter" name="placeFilter" (input)="onInputPlaceFilter($event.target.value)">
+        </mat-form-field>
+
+        <BR>
+
+        <button (click)="clickSearchFilter()">Rechercher</button>
+
+    </div>
+</div>
+
+
+<div class="place-filter">
     <div class="block">
         <!-- Pays, Place, ville, starsRate, rayon-->
         <div id="block1">
@@ -14,11 +36,8 @@
               </neo-starsbox>
                 -->
 
-              <!-- insert starsbox component without input placeByID -->
-              <neo-starsbox
-                typeCheckbox="checkbox"
-                (starsboxEventEmitter)="onStarsboxEvent($event)">
-              </neo-starsbox>
+
+
 
 
                 <mat-form-field id='country-form-field' class='form-field'>

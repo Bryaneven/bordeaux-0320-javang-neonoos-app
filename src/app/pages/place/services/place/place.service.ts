@@ -8,16 +8,22 @@ import { RootObject } from 'src/app/shared/models/root-object.model';
 import { map } from 'rxjs/operators';
 import { Country } from 'src/app/shared/models/country';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class PlaceService {
+  [x: string]: any;
 
   constructor(private httpClient: HttpClient) { }
 
   getAll(): Observable<RootObjectList<Place>> {
     return this.httpClient.get<RootObjectList<Place>>(`${environment.APIURI}places`)
     .pipe(map((places) => places = new RootObjectList<Place>(Place, 'places', places)));
+  }
+
+  getByfilters(data: string): Observable<RootObjectList<Place>> {
+    return this.httpClient.get<RootObjectList<Place>>(`${environment.APIURI}places?filter=${data}`);
   }
 
   getById(id: number): Observable<RootObject<Place>>{

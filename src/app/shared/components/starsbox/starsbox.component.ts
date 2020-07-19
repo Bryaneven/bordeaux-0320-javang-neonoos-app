@@ -43,22 +43,25 @@ valueCheckPlace = [
 
   checkstars($event) {
 
-    const valueElement = parseInt($event.target.value);
     const checkedStar = $event.target.checked;
+
+    const objStars = new Object();
+    objStars['key'] = 'genius_stars';
+    objStars['value'] = parseInt($event.target.value);
 
     if (checkedStar === true) {
       if (this.typeCheckbox === 'radio') {
           this.arrayChecks = [];
       }
-      this.arrayChecks.push(valueElement);
+      this.arrayChecks.unshift(objStars);
     } else {
       for (let i = 0; i < this.arrayChecks.length; i++) {
-        if (this.arrayChecks[i] === valueElement) {
+        if (this.arrayChecks[i].value === objStars['value']) {
           this.arrayChecks.splice(i, 1);
         }
       }
     }
-
+    // console.log(this.arrayChecks);
     this.starsboxEventEmitter.emit(this.arrayChecks);
   }
 }

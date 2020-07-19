@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import { Hashtag } from 'src/app/shared/models/hashtag';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
@@ -7,6 +7,7 @@ import { PlaceService } from '../../../services/place/place.service';
 import { RootObject } from 'src/app/shared/models/root-object.model';
 import { Place } from 'src/app/shared/models/place.model';
 
+
 @Component({
   selector: 'neo-place-filter',
   templateUrl: './place-filter.component.html',
@@ -14,14 +15,20 @@ import { Place } from 'src/app/shared/models/place.model';
 })
 export class PlaceFilterComponent implements OnInit {
 
+  @Output() searchFilterEventEmitter = new EventEmitter<any>();
+
   country: String;
   place: string;
   town: string;
   starsCheck = [false, false, false, false];
   arrayCheck = [];
   arrayCheckStars = [];
+  arrayInputPlaceFilter = [];
+  arrayPlaceFilter = [];
 
   placeById: RootObject<Place>;
+  placeFilter: string;
+  _inputPlaceFilter: string;
 
   radiusMin: number;
   radiusMax: number;
@@ -40,16 +47,7 @@ export class PlaceFilterComponent implements OnInit {
 
   constructor(private hashtagservice: HashtagService, private placeService: PlaceService) { }
 
-  ngOnInit(): void {
-
-    /*
-    // Testing with getById to starbox (Insput on <neo-starsbox> )
-    this.placeService.getById(1).subscribe((place) => {
-      this.placeById = place;
-    });
-     */
-
-  }
+  ngOnInit(): void { }
 
   onCountryChange(value: string): void {
 
@@ -113,5 +111,25 @@ export class PlaceFilterComponent implements OnInit {
   // Array of Star from Starbox component (Output on <neo-starsbox>).
   onStarsboxEvent(arrayChecks) {
     this.arrayCheckStars = arrayChecks;
+    // console.log(this.arrayCheckStars);
+  }
+
+  onInputPlaceFilter(placeFilter: string): void {
+    this.arrayInputPlaceFilter = [];
+    this._inputPlaceFilter = placeFilter.replace(/[&\/\\#, +()$~%.'":;!*?<>{}]/gi, '_');
+    const objPlaceFilter = new Object();
+    objPlaceFilter['key'] = 'name';
+    objPlaceFilter['value'] = this._inputPlaceFilter;
+    this.arrayInputPlaceFilter.push(objPlaceFilter);
+    // this.arrayInputPlaceFilter.unshift(objPlaceFilter);
+    // console.log(this.arrayInputPlaceFilter);
+  }
+
+  clickSearchFilter() {
+    this.arrayPlaceFilter = [];
+    this.arrayPlaceFilter = [...this.arrayCheckStars, ...this.arrayInputPlaceFilter];
+    // console.log(this.arrayPlaceFilter);
+    this.searchFilterEventEmitter.emit(this.arrayPlaceFilter);
   }
 }
+

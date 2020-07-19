@@ -1,4 +1,17 @@
 <div class="place-results">
-  <div class="block">
-  </div>
+  <mat-card class="block" >
+    <div class="resultHeader">
+      <h2 class="title-card-section">LES PLACES</h2>
+    </div>
+    <div  class="resultImg" >
+      <div *ngFor="let place of places.data">
+        <div class="overlay-image">
+          <a [routerLink]="['/place/edit/', place.id]">
+            <img class="image" mat-card-image src="https://picsum.photos/150">
+            <div class="text">{{ place.attributes.name}}</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </mat-card>
 </div>

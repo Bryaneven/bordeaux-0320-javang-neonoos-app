@@ -4,8 +4,6 @@ import { Hashtag } from 'src/app/shared/models/hashtag';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogBodyComponent } from '../dialog-body/dialog-body.component';
-import { Guide } from '../../../models/guide';
-
 
 @Component({
   selector: 'neo-guide-filter',
