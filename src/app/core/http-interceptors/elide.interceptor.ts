@@ -6,14 +6,15 @@ import { Observable } from 'rxjs';
 export class ElideInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
+    const ok = true;
     let headers;
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
 
-    if (token) {
+    if (ok) {
       headers = new HttpHeaders({
         'Content-Type': 'application/vnd.api+json',
-        'Authorization': localStorage.getItem('token')
+        // 'Authorization': localStorage.getItem('token'),
+        'Authorization': '2865267b9359ed75bb05eca01ba97bbd6dbd56e4'
       });
 
     } else {
