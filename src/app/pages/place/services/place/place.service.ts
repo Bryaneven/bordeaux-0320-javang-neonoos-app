@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { RootObject } from 'src/app/shared/models/root-object.model';
 import { map } from 'rxjs/operators';
 import { Country } from 'src/app/shared/models/country';
+import { PlaceData } from 'src/app/shared/models/place-data.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,10 @@ export class PlaceService {
 
   getCountryByPlace(id: number): Observable<RootObject<Country>> {
     return this.httpClient.get<RootObject<Country>>(`${environment.APIURI}places/${id}/country`);
+  }
+
+  getPlaceDataById(id: number): Observable<RootObject<PlaceData>> {
+    return this.httpClient.get<RootObject<PlaceData>>(`${environment.APIURI}places/${id}/data`);
   }
 
   post(place: RootObject<Place>): Observable<RootObject<Place>> {
