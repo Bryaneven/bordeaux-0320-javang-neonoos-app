@@ -11,14 +11,14 @@ const routes: Routes = [
   },
   {
     path: 'guide',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     loadChildren: () => import('../app/pages/guide/guide.module').then(
       m => m.GuideModule
     )
   },
   {
     path: 'place',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     loadChildren: () => import('../app/pages/place/place.module').then(
       m => m.PlaceModule
     )
