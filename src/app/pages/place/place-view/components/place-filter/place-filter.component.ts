@@ -25,10 +25,13 @@ export class PlaceFilterComponent implements OnInit {
   arrayCheckStars = [];
   arrayInputPlaceFilter = [];
   arrayPlaceFilter = [];
+  arrayInputCityFilter = [];
 
   placeById: RootObject<Place>;
   placeFilter: string;
   _inputPlaceFilter: string;
+  cityFilter: string;
+  _inputCityFilter: string;
 
   radiusMin: number;
   radiusMax: number;
@@ -111,7 +114,6 @@ export class PlaceFilterComponent implements OnInit {
   // Array of Star from Starbox component (Output on <neo-starsbox>).
   onStarsboxEvent(arrayChecks) {
     this.arrayCheckStars = arrayChecks;
-    // console.log(this.arrayCheckStars);
   }
 
   onInputPlaceFilter(placeFilter: string): void {
@@ -121,14 +123,20 @@ export class PlaceFilterComponent implements OnInit {
     objPlaceFilter['key'] = 'name';
     objPlaceFilter['value'] = this._inputPlaceFilter;
     this.arrayInputPlaceFilter.push(objPlaceFilter);
-    // this.arrayInputPlaceFilter.unshift(objPlaceFilter);
-    // console.log(this.arrayInputPlaceFilter);
+  }
+
+  onInputCityFilter(cityFilter: string): void {
+    this.arrayInputCityFilter = [];
+    this._inputCityFilter = cityFilter.replace(/[&\/\\#, +()$~%.'":;!*?<>{}]/gi, '_');
+    const objCityFilter = new Object();
+    objCityFilter['key'] = 'city';
+    objCityFilter['value'] = this._inputCityFilter;
+    this.arrayInputCityFilter.push(objCityFilter);
   }
 
   clickSearchFilter() {
     this.arrayPlaceFilter = [];
-    this.arrayPlaceFilter = [...this.arrayCheckStars, ...this.arrayInputPlaceFilter];
-    // console.log(this.arrayPlaceFilter);
+    this.arrayPlaceFilter = [...this.arrayInputPlaceFilter, ...this.arrayInputCityFilter, ...this.arrayCheckStars];
     this.searchFilterEventEmitter.emit(this.arrayPlaceFilter);
   }
 }

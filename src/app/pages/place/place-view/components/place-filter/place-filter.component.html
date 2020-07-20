@@ -8,11 +8,16 @@
         <BR>
 
         <mat-form-field id='place-form-field' class='form-field'>
-            <mat-icon matPrefix>search</mat-icon>
-            <input type="text" matInput placeholder="Rechercher une place" [(ngModel)]="placeFilter" name="placeFilter" (input)="onInputPlaceFilter($event.target.value)">
+          <mat-icon matPrefix>search</mat-icon>
+          <input type="text" matInput placeholder="Rechercher une place" [(ngModel)]="placeFilter" name="placeFilter" (input)="onInputPlaceFilter($event.target.value)">
         </mat-form-field>
 
         <BR>
+
+        <mat-form-field id='town-form-field' class='form-field'>
+          <mat-icon matPrefix>place</mat-icon>
+          <input type="text" matInput placeholder="Saisissez une ville" [(ngModel)]="cityFilter" name="cityFilter" (input)="onInputCityFilter($event.target.value)">
+        </mat-form-field>
 
         <button (click)="clickSearchFilter()">Rechercher</button>
 
