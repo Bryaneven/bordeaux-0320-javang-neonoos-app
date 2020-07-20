@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { User } from '../models/user';
 import { RootObject } from 'src/app/shared/models/root-object.model';
 import { tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
   constructor(private httpClient: HttpClient) { }
 
   loginUser(email: string, password: string): Observable<HttpResponse<RootObject<User>>> {
-    return this.httpClient.post<RootObject<User>>('https://bordeaux-java-0320-pj3-neonoos-api.javarover.wilders.dev/login',
+    return this.httpClient.post<RootObject<User>>(`${environment.APIURI}`,
       { email, password },
       { observe: 'response' }
     ).pipe(tap(
