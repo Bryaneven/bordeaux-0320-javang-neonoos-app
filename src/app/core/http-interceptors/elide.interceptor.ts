@@ -10,7 +10,7 @@ export class ElideInterceptor implements HttpInterceptor {
     let headers;
     const token = localStorage.getItem('token');
     if (req.url !== 'https://api2.neonoos.com/api/login') {
-    if (token) {
+      if (token) {
       headers = new HttpHeaders({
         'Content-Type': 'application/vnd.api+json',
         Authorization: localStorage.getItem('token')
