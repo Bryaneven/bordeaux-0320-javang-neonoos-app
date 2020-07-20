@@ -19,7 +19,7 @@ export class PlaceEditViewComponent implements OnInit {
   place?: RootObject<Place>;
   placeId: number;
   countries?: RootObjectList<Country> = new RootObjectList<Country>(Country, 'countries');
-  country?: RootObjectList<Country> = new RootObjectList<Country>(Country, 'countries');
+  country?: RootObject<Country> = new RootObject<Country>(Country, 'countries');
 
   constructor(
     private placeService: PlaceService,

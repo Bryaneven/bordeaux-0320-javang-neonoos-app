@@ -24,8 +24,8 @@ export class PlaceService {
     return this.httpClient.get<RootObject<Place>>(`${environment.APIURI}places/` + id);
   }
 
-  getCountryByPlace(id: number): Observable<RootObjectList<Country>> {
-    return this.httpClient.get<RootObjectList<Country>>(`${environment.APIURI}places/${id}/countries`);
+  getCountryByPlace(id: number): Observable<RootObject<Country>> {
+    return this.httpClient.get<RootObject<Country>>(`${environment.APIURI}places/${id}/country`);
   }
 
   post(place: RootObject<Place>): Observable<RootObject<Place>> {

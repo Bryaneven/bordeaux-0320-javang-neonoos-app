@@ -37,7 +37,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Country</mat-label>
        <mat-select [compareWith]="compareObjects"
-                   [(ngModel)]="country.data[0]">
+                   [(ngModel)]="country.data">
         <mat-option *ngFor="let country of countries.data" [value]="country">
           {{country.attributes.name}}
         </mat-option>
