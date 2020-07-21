@@ -60,7 +60,7 @@ refreshToken() {
 
     private startRefreshTokenTimer() {
         const timeout = this.userValue.expires_in;
-        this.refreshTokenTimeout = setTimeout(() => this.refreshToken().subscribe(), timeout);
+        this.refreshTokenTimeout = setTimeout(() => this.refreshToken().subscribe(), timeout - 600);
     }
 
     private stopRefreshTokenTimer() {
