@@ -34,6 +34,7 @@ import { PlacePictureComponent } from './place-edit-view/components/place-pictur
 import { SharedModule } from 'src/app/shared/shared.module';
 import { QuillModule } from 'ngx-quill';
 import { AddPictureDialogComponent } from './place-edit-view/components/add-picture-dialog/add-picture-dialog.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import { AddPictureDialogComponent } from './place-edit-view/components/add-pict
     QuillModule,
     MatRadioModule,
     MatDialogModule,
+    MatSnackBarModule
   ]
 })
 export class PlaceModule { }

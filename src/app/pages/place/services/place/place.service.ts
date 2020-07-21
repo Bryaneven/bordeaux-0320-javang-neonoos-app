@@ -30,7 +30,8 @@ export class PlaceService {
   }
 
   getPlaceDataById(id: number): Observable<RootObject<PlaceData>> {
-    return this.httpClient.get<RootObject<PlaceData>>(`${environment.APIURI}places/${id}/data`);
+    return this.httpClient.get<RootObject<PlaceData>>(`${environment.APIURI}places/${id}/data`)
+      .pipe(map((placeData) => this.createPlaceDataInstance(placeData)));
   }
 
   post(place: RootObject<Place>): Observable<RootObject<Place>> {
@@ -44,5 +45,10 @@ export class PlaceService {
 
   createInstance(place: RootObject<Place>){
     return new RootObject<Place>(Place, 'places', place);
+  }
+
+  createPlaceDataInstance(placeData: RootObject<PlaceData>) {
+    return new RootObject<PlaceData>(PlaceData, 'placedatas', placeData);
+
   }
 }

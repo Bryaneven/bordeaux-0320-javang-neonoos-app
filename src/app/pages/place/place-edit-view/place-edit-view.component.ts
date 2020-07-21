@@ -3,7 +3,7 @@ import { PlaceService } from '../services/place/place.service';
 import { RootObject } from 'src/app/shared/models/root-object.model';
 import { Place } from 'src/app/shared/models/place.model';
 import { Subscription } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
 import { Country } from 'src/app/shared/models/country';
 import { CountryService } from 'src/app/shared/services/country.service';
@@ -79,7 +79,9 @@ export class PlaceEditViewComponent implements OnInit {
 
   getPlaceData(id: number) {
     this.placeService.getPlaceDataById(id).subscribe(placeData => {
-      this.placeData = placeData;
+      if (placeData) {
+        this.placeData = placeData;
+      }
     });
   }
 
