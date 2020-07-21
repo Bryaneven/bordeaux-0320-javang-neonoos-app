@@ -8,7 +8,7 @@ export class JsonApiInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     let headers;
-    if (req.url !== 'https://api2.neonoos.com/api/login') {
+    if (req.url !== 'https://api2.neonoos.com/api/login' && req.url !== 'https://api2.neonoos.com/api/refresh') {
       headers = new HttpHeaders({
         'Content-Type': 'application/vnd.api+json',
       });
