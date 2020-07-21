@@ -14,7 +14,7 @@ export class ElideInterceptor implements HttpInterceptor {
       headers = new HttpHeaders({
         'Content-Type': 'application/vnd.api+json',
         // 'Authorization': localStorage.getItem('token'),
-        'Authorization': '51b2a9527f3b4987cc9deb965ddcfdc577ed4155'
+        'Authorization': 'ef71e838f63d90c9dc950269908dbf5af91db8c0'
       });
 
     } else {

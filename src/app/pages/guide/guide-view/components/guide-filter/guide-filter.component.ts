@@ -39,7 +39,6 @@ export class GuideFilterComponent implements OnInit {
 
     tmphashtags = [];
     hashtags = [];
-    objHashtags = [];
 
 
 
@@ -58,28 +57,21 @@ export class GuideFilterComponent implements OnInit {
         ArrayOfArrayHashtag.push(hashtags.split(' '));
         for (let k = 0; ArrayOfArrayHashtag.length > k; k++) {
           for (let y = 0; ArrayOfArrayHashtag[k].length > y; y++) {
-
-            this.objHashtags['key'] = ArrayOfArrayHashtag[k][y];
-            this.objHashtags['value'] = ArrayOfArrayHashtag[k][y].replace(/[&\/\\#, +()$~%.'":;!*?<>{}]/gi, '');
-
-
-            if (!this.tmphashtags.includes(this.objHashtags)) {
-              this.tmphashtags.push(this.objHashtags);
-              y++;
+            ArrayOfArrayHashtag[k][y] = ArrayOfArrayHashtag[k][y].replace(/[&\/\\#, +()$~%.'":;!*?<>{}]/gi, '');
+            if (!this.tmphashtags.includes(ArrayOfArrayHashtag[k][y])) {
+              this.tmphashtags.push(ArrayOfArrayHashtag[k][y]);
             }
           }
         }
       }
     }
-
-    console.log(this.objHashtags);
   }
 
 
   // ==========================
 
   onSearchChange(searchValue: string): void {
-   /*  searchValue = searchValue.toLowerCase();
+    // searchValue = searchValue.toLowerCase();
     if ( searchValue != '') {
       this.hashtags = null;
       if (this.tmphashtags.length === 0) {
@@ -93,15 +85,14 @@ export class GuideFilterComponent implements OnInit {
         this.message = 'Aucun Résultat';
       }
       this.showTitleHashtags = 'Réinitialiser ';
-    } */
+    }
   }
 
   showHashtags() {
 
     this.getArrayHashtags(this.guides);
 
-
-/*     if (this.showTitleHashtags === 'Tout voir') {
+    if (this.showTitleHashtags === 'Tout voir') {
       this.getArrayHashtags(this.guides);
       this.hashtags = this.tmphashtags;
       this.showTitleHashtags = 'Réinitialiser ';
@@ -111,24 +102,16 @@ export class GuideFilterComponent implements OnInit {
       this.arrayHashtags.length = 0;
       this.searchValue = '';
       this.message = '';
-    } */
+    }
   }
 
   checkbox($event: any, tag: Hashtag) {
-
-  /*   console.log(tag);
-
-
-
-
-
-
     if ($event.target.checked === true) {
       this.arrayHashtags.push(tag);
     }
     if ($event.target.checked === false) {
       for (let i = 0; i < this.arrayHashtags.length; i++) {
-        if (this.arrayHashtags[i].id === tag.id) {
+        if (this.arrayHashtags[i] === tag) {
           this.arrayHashtags.splice(i, 1);
         }
       }
@@ -136,8 +119,7 @@ export class GuideFilterComponent implements OnInit {
     // inisialise un nouveau tableau depuis tableau exitant :
     this.arrayHashtags = [...this.arrayHashtags];
     // Send CheckboxEvent
-    // this.checkboxEvent.emit(this.arrayHashtags); */
-
+    this.checkboxEvent.emit(this.arrayHashtags);
   }
 
 /*   openDialog() {

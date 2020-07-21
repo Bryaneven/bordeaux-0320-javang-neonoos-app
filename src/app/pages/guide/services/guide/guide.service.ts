@@ -39,8 +39,9 @@ export class GuideService {
   getPictureGuide(id: number): Observable<RootObjectList<Picture>> {
     return this.http.get<RootObjectList<Picture>>(`${environment.APIURI}places/${id}/pictures`);
   }
-  getHashtagsByGuide(id: number): Observable<RootObjectList<Hashtag>> {
-    return this.http.get<RootObjectList<Hashtag>>(`${environment.APIURI}guides/${id}/hashtags`);
+
+  getGuidesByHashtag(data): Observable<RootObjectList<Guide>> {
+    return this.http.get<RootObjectList<Guide>>(`${environment.APIURI}guides?filter[search]=%23${data}`);
   }
 
   patchPlacesByGuide(id: number, place: RootObjectList<Place>): Observable<RootObjectList<Place>> {

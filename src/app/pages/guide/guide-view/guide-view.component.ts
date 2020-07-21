@@ -12,7 +12,7 @@ import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
 
 export class GuideViewComponent implements OnInit {
 
-  hashtags: Hashtag[] = [];
+  hashtags = [];
   allGuides?: RootObjectList<Guide>;
   guides: RootObjectList<Guide>;
 
@@ -24,6 +24,11 @@ export class GuideViewComponent implements OnInit {
     this.guidesService.getAllGuides().subscribe((guides) => {
       this.guides = guides;
     });
+  }
+
+  onHashtag($event) {
+    this.hashtags = $event;
+    console.log(this.hashtags);
   }
 
   getAllGuides(showAllGuides) {
