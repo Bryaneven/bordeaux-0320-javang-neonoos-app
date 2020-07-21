@@ -32,7 +32,6 @@ export class PlaceEditViewComponent implements OnInit {
   constructor(
     private placeService: PlaceService,
     private route: ActivatedRoute,
-    private activityService: ActivityService,
     private countryService: CountryService,
   ) { }
 
@@ -47,7 +46,6 @@ export class PlaceEditViewComponent implements OnInit {
         const routePlaceId = Number(params.get('id'));
         this.placeId = routePlaceId;
         this.getOnePlace(this.placeId);
-        this.getPicturesByPlace();
       } else {
         this.place = new RootObject<Place>(Place, 'places');
       }
@@ -68,26 +66,6 @@ export class PlaceEditViewComponent implements OnInit {
     this.getCountry(id);
     this.getPlaceData(id);
   }
-
-  // PICTURES BEGIN
-  getPicturesByPlace() {
-    this.activityService.getPicturesByPlace(this.placeId).subscribe((placePictures: RootObjectList<Picture>) => {
-      if (placePictures) {
-        this.placePictures = placePictures;
-      }
-    });
-  }
-
-  addOnePicture(picture: Data<Picture>) {
-    this.placePictures.data.push(picture);
-    if (!this.place.data.relationships) {
-      this.place.data.relationships = {};
-      this.place.data.relationships.pictures = {};
-    }
-    this.place.data.relationships.pictures.data = [];
-    this.placePictures.data.map((pictureToAdd) => this.place.data.relationships.pictures.data.push(new Relationships('pictures', pictureToAdd.id)));
-  }
-  // PICTURES END
 
 
   getCountries() {

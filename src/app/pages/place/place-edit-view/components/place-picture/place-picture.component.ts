@@ -4,6 +4,8 @@ import { AddPictureDialogComponent } from '../add-picture-dialog/add-picture-dia
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
 import { Picture } from 'src/app/shared/models/picture.model';
 import { RootObject } from 'src/app/shared/models/root-object.model';
+import { ActivityService } from 'src/app/shared/services/activity.service';
+import { Data } from 'src/app/shared/models/data.model';
 
 @Component({
   selector: 'neo-place-picture',
@@ -12,16 +14,28 @@ import { RootObject } from 'src/app/shared/models/root-object.model';
 })
 export class PlacePictureComponent implements OnInit {
 
-  @Input() placePictures: RootObjectList<Picture> = new RootObjectList<Picture>(Picture, 'pictures');
+  @Input() placeId: number;
+
+  placePictures: RootObjectList<Picture> = new RootObjectList<Picture>(Picture, 'pictures');
   addedPictures: RootObjectList<Picture> = new RootObjectList<Picture>(Picture, 'pictures');
 
-  @Output() pictureAdded = new EventEmitter();
-
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private picturesService: ActivityService) { }
 
   ngOnInit(): void {
     this.addedPictures.data = [];
     this.placePictures.data = [];
+
+    // PICTURES BEGIN
+    this.picturesService.getPicturesByPlace(this.placeId).subscribe((placePictures: RootObjectList<Picture>) => {
+        for (const index of placePictures.data) {
+          this.picturesService.getPictureById(index.id).subscribe(
+            (picture: Data<Picture>) => this.placePictures.data.push(picture)
+          );
+        }
+      }
+    );
+    // PICTURES END
+
   }
 
   openDialog(): void {
@@ -37,18 +51,11 @@ export class PlacePictureComponent implements OnInit {
       currentAddedPicture.data.attributes.created = new Date();
       currentAddedPicture.data.id = this.addedPictures.data.length;
 
-      // this.addedPictures.data.push(currentAddedPicture.data);
-      this.pictureAdded.emit(currentAddedPicture);
     });
   }
 
   // Do delete
   deletePicture(id: number) {
-    /* for (const picture of this.addedPictures.data) {
-      if (id === picture.id) {
-        this.addedPictures.data.splice(picture.id, 1);
-      }
-    } */
   }
 
   isExt(picture: Picture) {
