@@ -27,13 +27,13 @@ export class PlaceEditComponent implements OnInit {
 
   @Output() patchPlace = new EventEmitter();
   @Output() patchCountryInPlace = new EventEmitter();
+  @Output() postPlace = new EventEmitter();
 
 
   show = true;
 
   constructor(
     public dialog: MatDialog,
-    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -61,10 +61,12 @@ export class PlaceEditComponent implements OnInit {
 
   save(result: boolean) {
     if (result && this.placeId) {
-      this.patchPlace.emit({ place: this.place, countryId: this.country.data.id});
-      this.snackBar.open(`"${this.place.data.attributes.name}" a bien été modifié`, '👍', {
-        duration: 2000
-      });
+      this.patchPlace.emit({place: this.place, countryId: this.country.data.id});
+    }
+
+    if (result && !this.placeId) {
+      console.log(this.country.data.id);
+      this.postPlace.emit({place: this.place, countryId: this.country.data.id});
     }
   }
 

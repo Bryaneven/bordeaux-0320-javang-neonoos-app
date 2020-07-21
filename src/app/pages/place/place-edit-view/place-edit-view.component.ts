@@ -8,6 +8,7 @@ import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
 import { Country } from 'src/app/shared/models/country';
 import { CountryService } from 'src/app/shared/services/country.service';
 import { PlaceData } from 'src/app/shared/models/place-data.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'neo-place-edit-view',
@@ -26,7 +27,8 @@ export class PlaceEditViewComponent implements OnInit {
   constructor(
     private placeService: PlaceService,
     private countryService: CountryService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -90,9 +92,22 @@ export class PlaceEditViewComponent implements OnInit {
   patchPlace({place, countryId}) {
     this.place.data.relationships.country.data.id = countryId;
     this.placeService.patch(place, this.placeId).subscribe();
+    this.snackBar.open(`"${this.place.data.attributes.name}" a bien été modifié`, '👍', {
+      duration: 2000
+    });
   }
 
-
-
+  postPlace({place, countryId}) {
+    place.data.relationships = {};
+    place.data.relationships.country = {};
+    place.data.relationships.country.data = {};
+    place.data.relationships.country.data.type = 'country';
+    place.data.relationships.country.data.id = countryId;
+    this.placeService.post(place).subscribe();
+    this.snackBar.open(`"${this.place.data.attributes.name}" a bien été ajouté`, '👍', {
+      duration: 2000
+    });
+  }
 
 }
+
