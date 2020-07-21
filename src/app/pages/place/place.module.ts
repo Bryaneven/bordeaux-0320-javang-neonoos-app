@@ -1,4 +1,3 @@
-import { MapboxComponent } from './../../shared/components/mapbox/mapbox.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -11,7 +10,6 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
-import {MatChipsModule} from '@angular/material/chips';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -20,6 +18,9 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 import { PlaceRoutingModule } from './place-routing.module';
 import { PlaceViewComponent } from './place-view/place-view.component';
@@ -34,7 +35,6 @@ import { PlacePictureComponent } from './place-edit-view/components/place-pictur
 import { SharedModule } from 'src/app/shared/shared.module';
 import { QuillModule } from 'ngx-quill';
 import { AddPictureDialogComponent } from './place-edit-view/components/add-picture-dialog/add-picture-dialog.component';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -72,7 +72,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     QuillModule,
     MatRadioModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCheckboxModule,
+
   ]
 })
 export class PlaceModule { }

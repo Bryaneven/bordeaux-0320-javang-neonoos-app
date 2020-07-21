@@ -3,11 +3,9 @@ import { RootObject } from 'src/app/shared/models/root-object.model';
 import { Place } from 'src/app/shared/models/place.model';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
 import { Country } from 'src/app/shared/models/country';
-import { MatSelectChange } from '@angular/material/select';
 import { PlaceData } from 'src/app/shared/models/place-data.model';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogSaveComponent } from 'src/app/shared/components/dialog-save/dialog-save.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'neo-place-edit',
@@ -24,13 +22,12 @@ export class PlaceEditComponent implements OnInit {
 
   countryToPatch: RootObject<Country>;
   dialogTitle: string;
+  show = true;
+  arrayCheckStars: [];
 
   @Output() patchPlace = new EventEmitter();
   @Output() patchCountryInPlace = new EventEmitter();
   @Output() postPlace = new EventEmitter();
-
-
-  show = true;
 
   constructor(
     public dialog: MatDialog,
@@ -57,6 +54,10 @@ export class PlaceEditComponent implements OnInit {
     dialogRef.afterClosed().subscribe( result => {
       this.save(result);
     });
+  }
+
+  onStarsboxEvent(arrayChecks) {
+    this.arrayCheckStars = arrayChecks;
   }
 
   save(result: boolean) {
