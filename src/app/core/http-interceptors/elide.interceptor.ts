@@ -9,11 +9,11 @@ export class ElideInterceptor implements HttpInterceptor {
 
     let headers;
     const token = localStorage.getItem('token');
-
-    if (token) {
+    if (req.url !== 'https://api2.neonoos.com/api/login') {
+      if (token) {
       headers = new HttpHeaders({
         'Content-Type': 'application/vnd.api+json',
-        'Authorization': localStorage.getItem('token')
+        Authorization: localStorage.getItem('token')
       });
 
     } else {
@@ -27,5 +27,7 @@ export class ElideInterceptor implements HttpInterceptor {
 
     return next.handle(modified);
   }
+    return next.handle(req);
+}
 
 }

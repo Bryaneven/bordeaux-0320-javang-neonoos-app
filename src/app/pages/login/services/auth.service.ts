@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { User } from '../models/user';
-import { RootObject } from 'src/app/shared/models/root-object.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 
 @Injectable({
@@ -12,20 +9,19 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) { }
 
-  loginUser(email: string, password: string): Observable<HttpResponse<RootObject<User>>> {
-    return this.httpClient.post<RootObject<User>>('https://bordeaux-java-0320-pj3-neonoos-api.javarover.wilders.dev/login',
-      { email, password },
-      { observe: 'response' }
-    ).pipe(tap(
-      response => {
-        response.headers.get('Authorization');
-        const token = response.headers.get('Authorization');
-        localStorage.setItem('token', token);
-      }
-    ));
+  loginUser(formData){
+    const header = new HttpHeaders();
+    header.set('Content-Type', 'multipart/form-data');
+    return this.httpClient.post<any>('https://api2.neonoos.com/api/login',
+      formData).pipe(tap(
+        response => {
+          const token = 'Bearer ' + response.access_token;
+          localStorage.setItem('token', token);
+        }
+      ));
   }
 
-  tokenExpired(token: string) {
+tokenExpired(token: string) {
     const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
     return (Math.floor((new Date()).getTime() / 1000)) >= expiry;
   }

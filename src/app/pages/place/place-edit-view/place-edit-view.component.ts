@@ -11,6 +11,7 @@ import { Picture } from 'src/app/shared/models/picture.model';
 import { ActivityService } from 'src/app/shared/services/activity.service';
 import { Data } from 'src/app/shared/models/data.model';
 import { Relationships } from 'src/app/shared/models/relationships.model';
+import { PlaceData } from 'src/app/shared/models/place-data.model';
 
 @Component({
   selector: 'neo-place-edit-view',
@@ -23,7 +24,8 @@ export class PlaceEditViewComponent implements OnInit {
   place?: RootObject<Place>;
   placeId: number;
   countries?: RootObjectList<Country> = new RootObjectList<Country>(Country, 'countries');
-  country?: RootObjectList<Country> = new RootObjectList<Country>(Country, 'countries');
+  country?: RootObject<Country> = new RootObject<Country>(Country, 'countries');
+  placeData?: RootObject<PlaceData> = new RootObject<PlaceData>(PlaceData, 'placedatas');
 
   placePictures: RootObjectList<Picture> = new RootObjectList<Picture>(Picture, 'pictures');
 
@@ -64,6 +66,7 @@ export class PlaceEditViewComponent implements OnInit {
     });
     this.subscription.add(getOnePlaceSubscription);
     this.getCountry(id);
+    this.getPlaceData(id);
   }
 
   // PICTURES BEGIN
@@ -103,10 +106,16 @@ export class PlaceEditViewComponent implements OnInit {
     );
   }
 
+  getPlaceData(id: number) {
+    this.placeService.getPlaceDataById(id).subscribe(placeData => {
+      this.placeData = placeData;
+    });
+  }
+
   // Persistence
 
   patchPlace({place, countryId}) {
-    this.place.data.relationships.countries.data[0].id = countryId;
+    this.place.data.relationships.country.data.id = countryId;
     this.placeService.patch(place, this.placeId).subscribe();
   }
 

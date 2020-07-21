@@ -45,16 +45,21 @@ export class LoginComponent implements OnInit {
 
   isAlreadyLog() {
     const currentToken = localStorage.getItem('token');
-    if (!this.authService.tokenExpired(currentToken) && currentToken) {
+    if (currentToken) {
       this.router.navigate(['/guide']);
     }
   }
 
   /* submit du formulaire */
   OnSubmit(email: string, password: string) {
+    console.log(email);
+    console.log(password);
+    const formData = new FormData();
+    formData.append('username', email);
+    formData.append('password', password);
 
     if (email && password) {
-      this.authService.loginUser(email, password).subscribe(
+      this.authService.loginUser(formData).subscribe(
         () => {
           this.router.navigate(['/guide']);
         }, () => {
