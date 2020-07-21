@@ -41,7 +41,7 @@ public  setValue(user){
     this.httpClient.post<any>(`${environment.APIURI}logout`, {}).subscribe();
     this.stopRefreshTokenTimer();
     this.userSubject.next(null);
-    localStorage.removeItem('UserInfo');
+    localStorage.removeItem('userInfo');
     this.router.navigate(['/login']);
 }
 
@@ -53,6 +53,8 @@ refreshToken() {
   return this.httpClient.post<any>(`${environment.APIURI}refresh`, formdata )
       .pipe(map((user) => {
           this.userSubject.next(user);
+          localStorage.setItem('userInfo', JSON.stringify(user));
+          this.stopRefreshTokenTimer();
           this.startRefreshTokenTimer();
           return user;
       }));
@@ -60,7 +62,9 @@ refreshToken() {
 
     private startRefreshTokenTimer() {
         const timeout = this.userValue.expires_in;
-        this.refreshTokenTimeout = setTimeout(() => this.refreshToken().subscribe(), timeout - 600);
+        console.log(timeout);
+
+        this.refreshTokenTimeout = setTimeout(() => this.refreshToken().subscribe(), (timeout * 1000) - 60000);
     }
 
     private stopRefreshTokenTimer() {
