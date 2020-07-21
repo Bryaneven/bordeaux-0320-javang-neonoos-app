@@ -14,17 +14,21 @@ export class GuideViewComponent implements OnInit {
 
   hashtags: Hashtag[] = [];
   allGuides?: RootObjectList<Guide>;
+  guides: RootObjectList<Guide>;
 
-  constructor(private guideService: GuideService) { }
+  constructor(private guidesService: GuideService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { this.getGuides(); }
+
+  getGuides() {
+    this.guidesService.getAllGuides().subscribe((guides) => {
+      this.guides = guides;
+    });
+  }
 
   getAllGuides(showAllGuides) {
-
     if (showAllGuides === true) {
-      this.guideService.getAllGuides().subscribe((guides) => {
-      this.allGuides = guides;
-      });
+      this.allGuides = this.guides;
     } else {
       this.allGuides = null;
     }

@@ -1,10 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { HashtagService } from '../../../services/hashtag/hashtag.service';
 import { Hashtag } from 'src/app/shared/models/hashtag';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { DialogBodyComponent } from '../dialog-body/dialog-body.component';
+import { MatDialog } from '@angular/material/dialog';
 import { Guide } from '../../../models/guide';
+import { GuideService } from '../../../services/guide/guide.service';
+
 
 
 @Component({
@@ -18,10 +19,10 @@ export class GuideFilterComponent implements OnInit {
   @Output() checkboxEvent = new EventEmitter();
   @Output() GuidesEventEmitter = new EventEmitter<any>();
 
-  constructor(private hashtagservice: HashtagService, public matDialog: MatDialog, ) { }
+  constructor( private guidesService: GuideService ) { }
 
-  hashtags: RootObjectList<Hashtag>;
-  hashtagsSearch: RootObjectList<Hashtag>;
+  // hashtags: RootObjectList<Hashtag>;
+  // hashtagsSearch: RootObjectList<Hashtag>;
 
   searchValue: string;
   _searchValue: string;
@@ -32,44 +33,96 @@ export class GuideFilterComponent implements OnInit {
   showAllGuides = false;
   iconBtnGuides = 'add';
 
+  // == Connexion backClient ==
+
+    @Input() guides: RootObjectList<Guide>;
+
+    tmphashtags = [];
+    hashtags = [];
+    objHashtags = [];
+
+
+
+
+  // ==========================
+
   ngOnInit(): void { }
 
+  // === Methode backClient ===
+
+  getArrayHashtags(guides: RootObjectList<Guide>) {
+    for (let i = 0; guides.data.length > i; i++) {
+      const hashtags = guides.data[i].attributes.hashtags;
+      if ( hashtags != null ) {
+        const ArrayOfArrayHashtag = [];
+        ArrayOfArrayHashtag.push(hashtags.split(' '));
+        for (let k = 0; ArrayOfArrayHashtag.length > k; k++) {
+          for (let y = 0; ArrayOfArrayHashtag[k].length > y; y++) {
+
+            this.objHashtags['key'] = ArrayOfArrayHashtag[k][y];
+            this.objHashtags['value'] = ArrayOfArrayHashtag[k][y].replace(/[&\/\\#, +()$~%.'":;!*?<>{}]/gi, '');
+
+
+            if (!this.tmphashtags.includes(this.objHashtags)) {
+              this.tmphashtags.push(this.objHashtags);
+              y++;
+            }
+          }
+        }
+      }
+    }
+
+    console.log(this.objHashtags);
+  }
+
+
+  // ==========================
+
   onSearchChange(searchValue: string): void {
-
-    this._searchValue = searchValue.replace(/[&\/\\#, +()$~%.'":;!*?<>{}]/gi, '_');
-
-    this.hashtagservice.getByName(this._searchValue).subscribe((hashtags) => {
-
+   /*  searchValue = searchValue.toLowerCase();
+    if ( searchValue != '') {
       this.hashtags = null;
-      this.arrayHashtags.length = 0;
-
-      if (hashtags.data.length !== 0 ) {
-        this.hashtags = hashtags;
+      if (this.tmphashtags.length === 0) {
+        this.getArrayHashtags(this.guides);
+      }
+      if (this.tmphashtags.includes(searchValue)) {
+        this.hashtags = [];
+        this.hashtags.push(searchValue);
       } else {
         this.hashtags = null;
-        this.message = "Aucun Résultat";
+        this.message = 'Aucun Résultat';
       }
-
       this.showTitleHashtags = 'Réinitialiser ';
-    });
+    } */
   }
 
   showHashtags() {
-    if (this.showTitleHashtags === 'Tout voir') {
-       this.showTitleHashtags = 'Réinitialiser ';
-       this.hashtagservice.getAll().subscribe((hashtags) => {
-         this.hashtags = hashtags;
-      });
+
+    this.getArrayHashtags(this.guides);
+
+
+/*     if (this.showTitleHashtags === 'Tout voir') {
+      this.getArrayHashtags(this.guides);
+      this.hashtags = this.tmphashtags;
+      this.showTitleHashtags = 'Réinitialiser ';
     } else {
       this.showTitleHashtags = 'Tout voir';
       this.hashtags = null;
       this.arrayHashtags.length = 0;
       this.searchValue = '';
       this.message = '';
-    }
+    } */
   }
 
   checkbox($event: any, tag: Hashtag) {
+
+  /*   console.log(tag);
+
+
+
+
+
+
     if ($event.target.checked === true) {
       this.arrayHashtags.push(tag);
     }
@@ -83,22 +136,25 @@ export class GuideFilterComponent implements OnInit {
     // inisialise un nouveau tableau depuis tableau exitant :
     this.arrayHashtags = [...this.arrayHashtags];
     // Send CheckboxEvent
-    this.checkboxEvent.emit(this.arrayHashtags);
+    // this.checkboxEvent.emit(this.arrayHashtags); */
+
   }
 
-  openDialog() {
+/*   openDialog() {
     const dialogConfig = new MatDialogConfig();
     this.matDialog.open(DialogBodyComponent, dialogConfig);
-  }
+    }
+    */
+
 
   searchAllGuides() {
-    if (this.showAllGuides === false) {
+     if (this.showAllGuides === false) {
       this.showAllGuides = true;
       this.iconBtnGuides = 'remove';
     } else {
       this.showAllGuides = false;
       this.iconBtnGuides = 'add';
     }
-    this.GuidesEventEmitter.emit(this.showAllGuides);
+     this.GuidesEventEmitter.emit(this.showAllGuides);
   }
 }
