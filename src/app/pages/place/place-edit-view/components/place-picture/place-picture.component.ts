@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AddPictureDialogComponent } from '../add-picture-dialog/add-picture-dialog.component';
 import { RootObjectList } from 'src/app/shared/models/root-object-list.model';
 import { Picture } from 'src/app/shared/models/picture.model';
 import { RootObject } from 'src/app/shared/models/root-object.model';
 import { ActivityService } from 'src/app/shared/services/activity.service';
 import { Data } from 'src/app/shared/models/data.model';
+import { Relationships } from 'src/app/shared/models/relationships.model';
+import { Place } from 'src/app/shared/models/place.model';
 
 @Component({
   selector: 'neo-place-picture',
@@ -14,48 +15,56 @@ import { Data } from 'src/app/shared/models/data.model';
 })
 export class PlacePictureComponent implements OnInit {
 
+  @Input() place: RootObject<Place>;
   @Input() placeId: number;
 
-  placePictures: RootObjectList<Picture> = new RootObjectList<Picture>(Picture, 'pictures');
-  addedPictures: RootObjectList<Picture> = new RootObjectList<Picture>(Picture, 'pictures');
+  // picture Form Prop
+  pictureUrl = '';
+  pictureTitle = '';
+
+  placePictures: RootObject<Picture>[];
+
+  tempPlacePictures = new RootObjectList<Picture>(Picture, 'pictures');
 
   constructor(public dialog: MatDialog, private picturesService: ActivityService) { }
 
   ngOnInit(): void {
-    this.addedPictures.data = [];
-    this.placePictures.data = [];
+    this.tempPlacePictures.data = [];
+    this.placePictures = [];
 
     // PICTURES BEGIN
-    this.picturesService.getPicturesByPlace(this.placeId).subscribe((placePictures: RootObjectList<Picture>) => {
-        for (const index of placePictures.data) {
-          this.picturesService.getPictureById(index.id).subscribe(
-            (picture: Data<Picture>) => this.placePictures.data.push(picture)
-          );
-        }
+
+    this.picturesService.getPicturesByPlaceId(this.placeId).subscribe(
+      (data: RootObject<Picture>[]) => {
+        this.placePictures = data;
       }
     );
     // PICTURES END
 
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(AddPictureDialogComponent, {
-      width: '250px',
-    });
+  // add picture
+  addPicture(url: string, title: string) {
+    const currentPicture = new RootObject<Picture>(Picture);
 
-    dialogRef.afterClosed().subscribe(result => {
-      const currentAddedPicture: RootObject<Picture> = new RootObject<Picture>(Picture);
+    currentPicture.data.attributes.filename = this.pictureUrl;
+    currentPicture.data.attributes.name = this.pictureTitle;
+    currentPicture.data.type = 'pictures';
+    currentPicture.data.relationships = {
+      place: {
+        data: {
+          id: this.placeId
+        }
+      }
+    };
 
-      currentAddedPicture.data.attributes.name = result;
-      currentAddedPicture.data.attributes.filename = result;
-      currentAddedPicture.data.attributes.created = new Date();
-      currentAddedPicture.data.id = this.addedPictures.data.length;
-
-    });
+    this.picturesService.postPictures(currentPicture).subscribe(
+      (pictures) => this.placePictures = pictures
+    );
   }
 
-  // Do delete
-  deletePicture(id: number) {
+  deletePicture(picture: RootObject<Picture>) {
+    this.picturesService.deletePictures(picture.data.id).subscribe();
   }
 
   isExt(picture: Picture) {
