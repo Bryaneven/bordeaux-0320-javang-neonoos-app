@@ -14,7 +14,7 @@ export class AuthService {
   constructor(private httpClient: HttpClient) { }
 
   loginUser(email: string, password: string): Observable<HttpResponse<RootObject<User>>> {
-    return this.httpClient.post<RootObject<User>>('${environment.APIURI}',
+    return this.httpClient.post<RootObject<User>>(`${environment.APIURI}`,
       { email, password },
       { observe: 'response' }
     ).pipe(tap(
